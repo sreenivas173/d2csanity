@@ -54,4 +54,9 @@ test.describe('D2C Settins page validations', () => {
     await download.saveAs(savePath);
 
         });
+
+  test('Settings_Export button validation', async ({ page }) => {
+        // Locate the element
+       const exportButton = page.locator(':text("Export")');
+
 });
