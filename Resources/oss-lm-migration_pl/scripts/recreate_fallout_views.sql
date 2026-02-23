@@ -1,0 +1,1 @@
+call public.prc_recreate_fallout_views();
