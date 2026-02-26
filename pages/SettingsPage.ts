@@ -1,0 +1,377 @@
+import { Page, expect } from '@playwright/test';
+
+export class SettingsPage {
+  readonly page: Page;
+
+  constructor(page: Page) {
+    this.page = page;
+  }
+
+  // ========================================
+  // LOCATORS - Getter Methods
+  // ========================================
+
+  get settingsContainer() {
+    return this.page.locator('div.sc-cmEail.eFiMdx:visible');
+  }
+
+  get exportButton() {
+    return this.page.locator(':text("Export")');
+  }
+
+  get importButton() {
+    return this.page.locator(':text("Import")');
+  }
+
+  get revertAllButton() {
+    return this.page.locator('button:has-text("Revert All")');
+  }
+
+  get confirmationPopup() {
+    return this.page.locator('.ux-react-popup__header-content.taTitle');
+  }
+
+  get yesButton() {
+    return this.page.locator('button:has-text("Yes")');
+  }
+
+  get statusCells() {
+    return this.page.locator('.ux-react-chip__text');
+  }
+
+  get uploadDialog() {
+    return this.page.getByRole('dialog');
+  }
+
+  get uploadButton() {
+    return this.uploadDialog.getByRole('button', { name: 'Upload' });
+  }
+
+  get editButton() {
+    return this.page.getByRole('button', { name: /edit/i });
+  }
+
+  get saveButton() {
+    return this.uploadDialog.getByRole('button', { name: 'Save' });
+  }
+
+  get tables() {
+    return this.page.getByRole('table');
+  }
+
+  get mmTable() {
+    return this.tables.nth(0);
+  }
+
+  get dbTable() {
+    return this.tables.nth(1);
+  }
+
+  get dropdownTrigger() {
+    return this.page.locator('button.ux-react-dropdown__trigger');
+  }
+
+  get downloadOption() {
+    return this.page.locator('text=Download');
+  }
+
+  // ========================================
+  // Factory Methods - Section Locators
+  // ========================================
+
+  mmDesignSection() {
+    return this.page.getByText('MM Design Settings');
+  }
+
+  dbLevelDesignSection() {
+    return this.page.getByText('DB Level Design Settings', { exact: true });
+  }
+
+  uploadSettingsButton(section: 'MM' | 'DB') {
+    if (section === 'MM') {
+      return this.page.getByRole('button', { name: 'Upload Settings' }).first();
+    }
+    // For DB Level, scope to the specific section
+    const dbHeading = this.dbLevelDesignSection();
+    return dbHeading
+      .locator('xpath=ancestor::div[contains(@class,"card") or contains(@class,"section")]')
+      .first()
+      .getByRole('button', { name: 'Upload Settings' });
+  }
+
+  fileRow(fileName: string) {
+    return this.page.locator(`text=${fileName}`);
+  }
+
+  // ========================================
+  // Navigation Methods
+  // ========================================
+
+  async navigateToSettings() {
+    await this.page.click('text=Settings');
+    await this.page.waitForTimeout(2000);
+  }
+
+  async isPage404() {
+    return await this.page.locator('text=The page cannot be found').isVisible();
+  }
+
+  // ========================================
+  // Validation Methods
+  // ========================================
+
+  async isSettingsVisible(): Promise<boolean> {
+    try {
+      await expect(this.settingsContainer).toBeVisible();
+      await expect(this.settingsContainer).toContainText('Settings');
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async isExportButtonVisible(): Promise<boolean> {
+    try {
+      await expect(this.exportButton).toBeVisible();
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async isImportButtonVisible(): Promise<boolean> {
+    try {
+      await expect(this.importButton).toBeVisible();
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async isMMSectionVisible(): Promise<boolean> {
+    try {
+      await expect(this.page.getByText('MM Design Settings')).toBeVisible();
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async isDBLevelSectionVisible(): Promise<boolean> {
+    try {
+      await expect(this.page.getByText('DB Level Design Settings')).toBeVisible();
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // ========================================
+  // Action Methods - Export
+  // ========================================
+
+  async clickExport() {
+    const downloadPromise = this.page.waitForEvent('download');
+    await this.exportButton.click();
+    return await downloadPromise;
+  }
+
+  // ========================================
+  // Action Methods - Import
+  // ========================================
+
+  async clickImport(): Promise<void> {
+    await this.importButton.click();
+  }
+
+  // ========================================
+  // Action Methods - Revert All
+  // ========================================
+
+  async clickRevertAll(): Promise<void> {
+    await this.revertAllButton.click();
+  }
+
+  async confirmRevert(): Promise<void> {
+    await expect(this.confirmationPopup).toHaveText(
+      'Are you sure you want to revert all settings to the default?'
+    );
+    await this.yesButton.click();
+  }
+
+  async getAllStatusTexts(): Promise<string[]> {
+    const count = await this.statusCells.count();
+    const statuses: string[] = [];
+    for (let i = 0; i < count; i++) {
+      const text = await this.statusCells.nth(i).textContent();
+      if (text) {
+        statuses.push(text.trim());
+      }
+    }
+    return statuses;
+  }
+
+  async areAllStatusDefault(): Promise<boolean> {
+    const statuses = await this.getAllStatusTexts();
+    return statuses.every(status => status === 'Default');
+  }
+
+  // ========================================
+  // Upload Methods
+  // ========================================
+
+  async uploadSettings(section: 'MM' | 'DB', filePath: string): Promise<void> {
+    const uploadBtn = this.uploadSettingsButton(section);
+    await uploadBtn.click();
+
+    await expect(this.uploadDialog).toBeVisible();
+    await this.uploadDialog.locator('input[type="file"]').setInputFiles(filePath);
+    await expect(this.uploadButton).toBeEnabled();
+    await this.uploadButton.click();
+  }
+
+  async uploadMMSettings(filePath: string): Promise<void> {
+    await this.uploadSettings('MM', filePath);
+  }
+
+  async uploadDBLevelSettings(filePath: string): Promise<void> {
+    await this.uploadSettings('DB', filePath);
+  }
+
+  async isUploadSuccessMessageVisible(): Promise<boolean> {
+    try {
+      await expect(this.page.getByText(/uploaded/i)).toBeVisible();
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // ========================================
+  // Edit Common Parameters Methods
+  // ========================================
+
+  async clickEditCommonParams(): Promise<void> {
+    await this.editButton.click();
+    await expect(this.uploadDialog).toBeVisible();
+  }
+
+  async fillDivider(value: string): Promise<void> {
+    const dividerInput = this.uploadDialog.getByLabel('DIVIDER');
+    await dividerInput.fill(value);
+  }
+
+  async fillDatabaseType(value: string): Promise<void> {
+    const dbTypeInput = this.uploadDialog.getByLabel('DATABASE_TYPE');
+    await dbTypeInput.fill(value);
+  }
+
+  async togglePrefixForOutput(enable: boolean): Promise<void> {
+    const prefixSwitch = this.uploadDialog.getByRole('switch').nth(0);
+    const currentState = await prefixSwitch.getAttribute('aria-checked');
+    if ((currentState === 'false' && enable) || (currentState === 'true' && !enable)) {
+      await prefixSwitch.click();
+    }
+  }
+
+  async toggleExtraOutputFiles(enable: boolean): Promise<void> {
+    const extraSwitch = this.uploadDialog.getByRole('switch').nth(1);
+    const currentState = await extraSwitch.getAttribute('aria-checked');
+    if ((currentState === 'false' && enable) || (currentState === 'true' && !enable)) {
+      await extraSwitch.click();
+    }
+  }
+
+  async saveCommonParams(): Promise<void> {
+    await this.saveButton.click();
+    await expect(this.uploadDialog).toBeHidden();
+  }
+
+  async editAndSaveCommonParams(params: {
+    divider?: string;
+    databaseType?: string;
+    prefixForOutput?: boolean;
+    extraOutputFiles?: boolean;
+  }): Promise<void> {
+    await this.clickEditCommonParams();
+
+    if (params.divider !== undefined) {
+      await this.fillDivider(params.divider);
+    }
+    if (params.databaseType !== undefined) {
+      await this.fillDatabaseType(params.databaseType);
+    }
+    if (params.prefixForOutput !== undefined) {
+      await this.togglePrefixForOutput(params.prefixForOutput);
+    }
+    if (params.extraOutputFiles !== undefined) {
+      await this.toggleExtraOutputFiles(params.extraOutputFiles);
+    }
+
+    await this.saveCommonParams();
+  }
+
+  // ========================================
+  // File Table Validation Methods
+  // ========================================
+
+  async getTableFileNames(table: 'MM' | 'DB'): Promise<string[]> {
+    const tableElement = table === 'MM' ? this.mmTable : this.dbTable;
+    const rows = tableElement.getByRole('row');
+
+    const fileNames: string[] = [];
+    const count = await rows.count();
+
+    // Start from index 1 to skip header row
+    for (let i = 1; i < count; i++) {
+      const cells = rows.nth(i).getByRole('gridcell');
+      const cellCount = await cells.count();
+
+      if (cellCount >= 2) {
+        try {
+          const text = await cells.nth(1).innerText();
+          if (text && text.trim()) {
+            fileNames.push(text.trim());
+          }
+        } catch (e) {
+          console.log(`Skipping row ${i}: ${e}`);
+        }
+      }
+    }
+
+    return fileNames;
+  }
+
+  async getMMFiles(): Promise<string[]> {
+    return this.getTableFileNames('MM');
+  }
+
+  async getDBFiles(): Promise<string[]> {
+    return this.getTableFileNames('DB');
+  }
+
+  async validateMMFiles(expectedFiles: string[]): Promise<void> {
+    const actualFiles = await this.getMMFiles();
+    expect(actualFiles.sort()).toEqual(expectedFiles.sort());
+  }
+
+  async validateDBFiles(expectedFiles: string[]): Promise<void> {
+    const actualFiles = await this.getDBFiles();
+    expect(actualFiles.sort()).toEqual(expectedFiles.sort());
+  }
+
+  // ========================================
+  // Download Methods
+  // ========================================
+
+  async downloadFile(fileName: string) {
+    const fileRow = this.fileRow(fileName);
+    await fileRow.hover();
+    await this.dropdownTrigger.click();
+
+    const downloadPromise = this.page.waitForEvent('download');
+    await this.downloadOption.click();
+
+    return await downloadPromise;
+  }
+}

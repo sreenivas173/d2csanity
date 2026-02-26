@@ -20,6 +20,7 @@
 
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
+import { SettingsPage } from '../pages/SettingsPage';
 import path from 'path';
 import fs from 'fs';
 
@@ -39,6 +40,7 @@ import fs from 'fs';
  */
 test.describe('D2C Settings page validations', () => {
     let loginPage: LoginPage;
+    let settingsPage: SettingsPage;
 
     /**
      * beforeEach Hook - Runs before each test
@@ -54,18 +56,19 @@ test.describe('D2C Settings page validations', () => {
      */
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
+        settingsPage = new SettingsPage(page);
+        
         await loginPage.goto();
         await loginPage.login('cpq-admin@netcracker.com', 'MARket1234!');
         await expect(page).toHaveURL(/design2code\/migration-management-design/);
         
         // Skip test if page shows 404 error
-        if (await page.locator('text=The page cannot be found').isVisible()) {
+        if (await settingsPage.isPage404()) {
             test.skip(true, 'Page is showing 404 error');
         }
         
-        // Navigate to the D2C Settings page
-        await page.click('text=Settings');
-        await page.waitForTimeout(2000);
+        // Navigate to the Settings page
+        await settingsPage.navigateToSettings();
     });
 
 //================================================================================
@@ -80,22 +83,12 @@ test.describe('D2C Settings page validations', () => {
      * - The Settings page container element is visible on the page
      * - The Settings container contains the text "Settings"
      * 
-     * How it validates:
-     * 1. Locates the settings container using CSS selector (div.sc-cmEail.eFiMdx)
-     * 2. Asserts the element is visible using expect().toBeVisible()
-     * 3. Asserts the element contains "Settings" text using expect().toContainText()
-     * 
      * Expected Result: Settings container should be visible with "Settings" text
      */
     test('Settings page validation', async ({ page }) => {
-        // Locate the Settings container element using its CSS class
-        const settingsLocator = page.locator('div.sc-cmEail.eFiMdx:visible');
-        
-        // Ensure the Settings container is visible on the page
-        await expect(settingsLocator).toBeVisible();
-        
-        // Assert that the Settings container contains the text "Settings"
-        await expect(settingsLocator).toContainText('Settings');
+        // Use SettingsPage method to validate
+        const isVisible = await settingsPage.isSettingsVisible();
+        expect(isVisible).toBeTruthy();
     });
 
 //================================================================================
@@ -113,31 +106,15 @@ test.describe('D2C Settings page validations', () => {
      * - The downloaded file has a valid filename
      * - The file is successfully saved to the Resources directory
      * 
-     * How it validates:
-     * 1. Locates the Export button by its text
-     * 2. Sets up a download event listener using page.waitForEvent('download')
-     * 3. Clicks the Export button to trigger the download
-     * 4. Asserts the download has a valid suggested filename
-     * 5. Saves the downloaded file to Resources directory
-     * 
      * Expected Result: A JSON settings file should be downloaded with a valid name
      */
     test('Settings_Export button validation', async ({ page }) => {
-        // Locate the Export button by its visible text
-        const exportButton = page.locator(':text("Export")');
-        
-        // Ensure the Export button is visible
-        await expect(exportButton).toBeVisible();
+        // Verify Export button is visible
+        const isExportVisible = await settingsPage.isExportButtonVisible();
+        expect(isExportVisible).toBeTruthy();
 
-        // Set up a promise to wait for the download event to be triggered
-        // This must be done BEFORE clicking the button
-        const downloadPromise = page.waitForEvent('download');
-
-        // Click the Export button to initiate the download
-        await exportButton.click();
-
-        // Wait for the download to start and retrieve the download object
-        const download = await downloadPromise;
+        // Click Export and get download
+        const download = await settingsPage.clickExport();
 
         // Assert that the download has a valid suggested filename (not empty/null)
         expect(download.suggestedFilename()).toBeTruthy();
@@ -159,21 +136,15 @@ test.describe('D2C Settings page validations', () => {
      * What it validates:
      * - The Import button is visible on the Settings page
      * 
-     * How it validates:
-     * 1. Locates the Import button by its text
-     * 2. Asserts the button is visible using expect().toBeVisible()
-     * 
      * Note: This test only validates visibility, not the actual import functionality.
      * The import action requires a file to be selected and uploaded.
      * 
      * Expected Result: Import button should be visible on the Settings page
      */
     test('Settings_Import button validation', async ({ page }) => {
-        // Locate the Import button by its visible text
-        const Importbutton = page.locator(':text("Import")');
-        
-        // Ensure the Import button is visible
-        await expect(Importbutton).toBeVisible();
+        // Verify Import button is visible using SettingsPage method
+        const isImportVisible = await settingsPage.isImportButtonVisible();
+        expect(isImportVisible).toBeTruthy();
     });
 
 //================================================================================
@@ -191,36 +162,18 @@ test.describe('D2C Settings page validations', () => {
      * - Clicking "Yes" in the popup triggers the revert action
      * - All settings rows show "Default" status after revert
      * 
-     * How it validates:
-     * 1. Clicks the "Revert All" button
-     * 2. Waits for and validates the confirmation popup header text
-     * 3. Clicks the "Yes" button to confirm the action
-     * 4. Locates all status cells (.ux-react-chip__text) showing current status
-     * 5. Iterates through each status cell and asserts it shows "Default"
-     * 
      * Expected Result: All settings should display "Default" status after reverting
      */
     test('Revert All resets settings to Default', async ({ page }) => {
-        // Step 1: Click the Revert All button to open confirmation dialog
-        await page.click('button:has-text("Revert All")');
+        // Click Revert All button
+        await settingsPage.clickRevertAll();
 
-        // Step 2: Wait for the popup header text and validate the message
-        // This ensures the confirmation dialog appeared correctly
-        await expect(page.locator('.ux-react-popup__header-content.taTitle'))
-            .toHaveText('Are you sure you want to revert all settings to the default?');
+        // Confirm the revert action
+        await settingsPage.confirmRevert();
 
-        // Step 3: Click the "Yes" button to confirm the revert action
-        await page.click('button:has-text("Yes")');
-
-        // Step 4: Validate that all rows show "Default" status
-        // The status is displayed in elements with class .ux-react-chip__text
-        const statusCells = page.locator('.ux-react-chip__text');
-        const count = await statusCells.count();
-
-        // Loop through each status cell and verify it shows "Default"
-        for (let i = 0; i < count; i++) {
-            await expect(statusCells.nth(i)).toHaveText('Default');
-        }
+        // Validate that all rows show "Default" status
+        const areAllDefault = await settingsPage.areAllStatusDefault();
+        expect(areAllDefault).toBeTruthy();
     });
 
 //================================================================================
@@ -240,120 +193,46 @@ test.describe('D2C Settings page validations', () => {
      * - The upload completes successfully
      * - A success message is displayed after upload
      * 
-     * How it validates:
-     * 1. Locates the "MM Design Settings" section
-     * 2. Clicks the "Upload Settings" button (first occurrence)
-     * 3. Waits for the upload dialog to appear
-     * 4. Resolves the path to the test file (fallout-rules.json)
-     * 5. Sets the file as input using setInputFiles()
-     * 6. Waits for the Upload button to become enabled
-     * 7. Clicks the Upload button to submit
-     * 8. Validates success message appears using regex match for "uploaded"
-     * 
      * Test File: Resources/fallout-rules.json
      * 
      * Expected Result: File should upload successfully and show confirmation message
      */
     test('MM Design Settings--Upload Settings:', async ({ page }, testInfo) => {
-        // Locate the MM Design Settings section
-        const mmSection = page.getByText('MM Design Settings');
-
-        // Click the Upload Settings button inside MM Design section
-        // Using .first() to ensure we get the correct button
-        await page
-            .getByRole('button', { name: 'Upload Settings' })
-            .first()
-            .click();
-
-        // Wait for the upload dialog to appear
-        const dialog = page.getByRole('dialog');
-        await expect(dialog).toBeVisible();
-
         // Resolve the path to the test file
-        // Using testInfo.project.testDir to get the project root directory
         const filePath = path.resolve(
             testInfo.project.testDir,
             '../Resources/fallout-rules.json'
         );
 
-        // Set the file as input to the file picker
-        await dialog.locator('input[type="file"]').setInputFiles(filePath);
+        // Upload settings using SettingsPage method
+        await settingsPage.uploadMMSettings(filePath);
 
-        // Locate and wait for the Upload button to become enabled
-        const uploadBtn = dialog.getByRole('button', { name: 'Upload' });
-        await expect(uploadBtn).toBeEnabled();
-        
-        // Click the Upload button to submit the file
-        await uploadBtn.click();
-
-        // Validate that a success message appears
-        // Using regex /uploaded/i to match case-insensitive "uploaded" text
-        await expect(page.getByText(/uploaded/i)).toBeVisible();
+        // Validate success message appears
+        const isSuccessVisible = await settingsPage.isUploadSuccessMessageVisible();
+        expect(isSuccessVisible).toBeTruthy();
     });
 
 //================================================================================
 // TEST 6: DB Level Design Settings Upload
 //================================================================================
     /** 
-     * Test: DB LEVEL Design Settings--Upload Settings
-     * 
-     * Purpose: Validates the upload functionality for DB Level Design configuration files.
-     * This allows users to upload custom configuration files for Database Level Design.
-     * 
-     * What it validates:
-     * - The DB Level Design Settings section has an "Upload Settings" button
-     * - Clicking the button opens an upload dialog specific to DB Level Design
-     * - A file can be selected and uploaded
-     * - The upload completes successfully
-     * - A success message is displayed after upload
-     * 
-     * How it validates:
-     * 1. Locates the "DB Level Design Settings" heading using exact match
-     * 2. Finds the parent card/section container
-     * 3. Clicks the "Upload Settings" button within that specific section
-     * 4. Waits for the upload dialog to appear
-     * 5. Resolves the path to the test file (excel.json)
-     * 6. Sets the file as input using setInputFiles()
-     * 7. Clicks the Upload button to submit
-     * 8. Validates success message appears
-     * 
      * Test File: Resources/excel.json
-     * 
-     * Note: Uses XPath to scope the button click to the specific DB Level section
-     * to avoid clicking the wrong Upload Settings button (there are multiple sections)
      * 
      * Expected Result: File should upload successfully and show confirmation message
      */
     test('DB LEVEL Design Settings--Upload Settings:', async ({ page }) => {
-        // Step 1: Locate the exact heading "DB Level Design Settings"
-        // Using { exact: true } ensures we match exactly and not partial text
-        const dbHeading = page.getByText('DB Level Design Settings', { exact: true });
+        
+        // Resolve path to the test configuration file using process.cwd()
+        const resourcesDir = path.join(process.cwd(), 'Resources');
+        const excelFilePath = `${resourcesDir}/excel.json`;
 
-        // Step 2: Navigate to the closest parent container (card/section)
-        // This helps scope our search to only this specific section
-        const dbSection = dbHeading.locator('xpath=ancestor::div[contains(@class,"card") or contains(@class,"section")]').first();
-
-        // Step 3: Click Upload Settings inside THIS specific DB Level section
-        await dbSection
-            .getByRole('button', { name: 'Upload Settings' })
-            .click();
-
-        // Wait for the upload dialog to appear
-        const dialog = page.getByRole('dialog');
-        await expect(dialog).toBeVisible();
-
-        // Resolve path to the test configuration file
-        const filePath = path.resolve(
-            __dirname,
-            '../Resources/excel.json'
-        );
-
-        // Set the file as input and submit
-        await dialog.locator('input[type="file"]').setInputFiles(filePath);
-        await dialog.getByRole('button', { name: 'Upload' }).click();
+        
+        // Upload settings using SettingsPage method  
+        await settingsPage.uploadDBLevelSettings(excelFilePath);
 
         // Validate success message appears
-        await expect(page.getByText(/uploaded/i)).toBeVisible();
+        const isSuccessVisible = await settingsPage.isUploadSuccessMessageVisible();
+        expect(isSuccessVisible).toBeTruthy();
     });
 
 //================================================================================
@@ -374,16 +253,6 @@ test.describe('D2C Settings page validations', () => {
      * - The dialog closes after saving
      * - The updated values are displayed on the page
      * 
-     * How it validates:
-     * 1. Clicks the Edit button (matches button with "edit" in name)
-     * 2. Waits for dialog to appear
-     * 3. Locates and fills the DIVIDER text field with "|"
-     * 4. Locates and fills the DATABASE_TYPE text field with "postgres"
-     * 5. Finds toggle switches and toggles them if not already on
-     * 6. Clicks the Save button
-     * 7. Validates dialog closes (toBeHidden)
-     * 8. Validates new values appear on the page
-     * 
      * Parameters Edited:
      * - DIVIDER: Changes from default "," to "|"
      * - DATABASE_TYPE: Changes from default "oracle" to "postgres"
@@ -393,55 +262,16 @@ test.describe('D2C Settings page validations', () => {
      * Expected Result: All parameter changes should be saved and displayed
      */
     test('Validate Edit Common Parameters', async ({ page }) => {
-        // Step 1: Click Edit button in Common Parameters section
-        // Using regex /edit/i to match case-insensitive "Edit" text
-        await page.getByRole('button', { name: /edit/i }).click();
+        // Use the comprehensive method to edit and save all common parameters
+        await settingsPage.editAndSaveCommonParams({
+            divider: '|',
+            databaseType: 'postgres',
+            prefixForOutput: true,
+            extraOutputFiles: true
+        });
 
-        // Step 2: Validate popup/dialog appears
-        const dialog = page.getByRole('dialog');
-        await expect(dialog).toBeVisible();
-
-        // Step 3: Edit Text Fields
-
-        // Locate DIVIDER textbox and fill with new value "|"
-        const dividerInput = dialog.getByLabel('DIVIDER');
-        await dividerInput.fill('|');
-
-        // Locate DATABASE_TYPE textbox and fill with new value "postgres"
-        const dbTypeInput = dialog.getByLabel('DATABASE_TYPE');
-        await dbTypeInput.fill('postgres');
-
-        // Step 4: Toggle Switches
-        // Find the toggle switches in the dialog
-        // nth(0) = PREFIX_FOR_OUTPUT switch
-        // nth(1) = EXTRA_OUTPUT_FILES switch
-
-        const prefixSwitch = dialog.getByRole('switch').nth(0);
-        const extraSwitch = dialog.getByRole('switch').nth(1);
-
-        // Toggle PREFIX_FOR_OUTPUT if it's currently off (aria-checked="false")
-        const prefixState = await prefixSwitch.getAttribute('aria-checked');
-        if (prefixState === 'false') {
-            await prefixSwitch.click();
-        }
-
-        // Toggle EXTRA_OUTPUT_FILES if it's currently off
-        const extraState = await extraSwitch.getAttribute('aria-checked');
-        if (extraState === 'false') {
-            await extraSwitch.click();
-        }
-
-        // Step 5: Click Save to submit the changes
-        await dialog.getByRole('button', { name: 'Save' }).click();
-
-        // Step 6: Validate dialog closed (hidden from view)
-        await expect(dialog).toBeHidden();
-
-        // Step 7: Validate updated values are displayed on the page
-        // The new DIVIDER value "|" should be visible
+        // Validate updated values are displayed on the page
         await expect(page.getByText('|')).toBeVisible();
-        
-        // The new DATABASE_TYPE value "postgres" should be visible
         await expect(page.getByText('postgres')).toBeVisible();
     });
 
@@ -463,21 +293,6 @@ test.describe('D2C Settings page validations', () => {
      * - DB Level Design table contains exactly 4 expected files
      * - The file names match the expected configuration files
      * 
-     * How it validates:
-     * 1. Asserts both MM Design Settings and DB Level Design Settings are visible
-     * 2. Locates all tables on the page (should be 2)
-     * 3. Gets the first table (index 0) as MM table
-     * 4. Gets the second table (index 1) as DB table
-     * 5. Defines a helper function getFileNames() to extract file names:
-     *    - Gets all rows from the table
-     *    - Starts from index 1 to skip the header row
-     *    - Validates each row has at least 2 cells (data row)
-     *    - Extracts the file name from the second cell (index 1)
-     *    - Filters out empty values
-     * 6. Compares extracted MM file names against expected list
-     * 7. Compares extracted DB file names against expected list
-     * 8. Uses .sort() on both arrays for order-independent comparison
-     * 
      * Expected MM Design Files (5 files):
      * - excel-migration-dictionary.json
      * - generate.toml
@@ -494,125 +309,61 @@ test.describe('D2C Settings page validations', () => {
      * Expected Result: All default configuration files should be present and match expected list
      */
     test('Validate MM and DB Level Design config files', async ({ page }) => {
-        // Validate that both Settings sections are visible on the page
-        await expect(page.getByText('MM Design Settings')).toBeVisible();
-        await expect(page.getByText('DB Level Design Settings')).toBeVisible();
+        // Validate both sections are visible
+        const isMMVisible = await settingsPage.isMMSectionVisible();
+        const isDBVisible = await settingsPage.isDBLevelSectionVisible();
+        expect(isMMVisible).toBeTruthy();
+        expect(isDBVisible).toBeTruthy();
 
-        // Get all tables on the page - there should be exactly 2 tables
-        const tables = page.getByRole('table');
-        await expect(tables).toHaveCount(2);
-
-        // Assign tables: first is MM Design, second is DB Level Design
-        const mmTable = tables.nth(0);
-        const dbTable = tables.nth(1);
-
-        /** 
-         * Helper Function: getFileNames
-         * 
-         * Purpose: Extracts file names from a configuration table
-         * 
-         * How it works:
-         * 1. Gets all rows from the table using getByRole('row')
-         * 2. Iterates through rows starting from index 1 (skips header row)
-         * 3. For each row, checks if it has at least 2 grid cells
-         * 4. Extracts the file name from the second cell (index 1)
-         * 5. Filters out empty or whitespace-only values
-         * 6. Returns array of file names
-         * 
-         * @param table - The Playwright Locator for the table element
-         * @returns string[] - Array of file names extracted from the table
-         */
-        async function getFileNames(table) {
-            // Get all rows in the table
-            const rows = table.getByRole('row');
-
-            const fileNames: string[] = [];
-            const count = await rows.count();
-
-            // Start from index 1 to skip header row "Name Status"
-            for (let i = 1; i < count; i++) {
-                const cells = rows.nth(i).getByRole('gridcell');
-                const cellCount = await cells.count();
-                
-                // Only process rows that have at least 2 cells (data rows)
-                // This skips empty/padding rows in the table
-                if (cellCount >= 2) {
-                    try {
-                        // Get text from the second cell (index 1) which contains the file name
-                        const text = await cells.nth(1).innerText();
-                        // Only add non-empty, non-whitespace values
-                        if (text && text.trim()) {
-                            fileNames.push(text.trim());
-                        }
-                    } catch (e) {
-                        // Skip rows that can't be read due to timing or other issues
-                        console.log(`Skipping row ${i}: ${e}`);
-                    }
-                }
-            }
-
-            return fileNames;
-        }
-
-        // ==================== MM Design Validation ====================
-        // Define the expected configuration files for MM Design
+        // Expected configuration files
         const expectedMMFiles = [
-            'excel-migration-dictionary.json',  // Migration dictionary configuration
-            'generate.toml',                     // Code generation settings
-            'excel-migration-types.json',       // Migration type definitions
-            'excel-migration-type.json',        // Migration type configuration
-            'fallout-rules.json'                // Fallout/error handling rules
+            'excel-migration-dictionary.json',
+            'generate.toml',
+            'excel-migration-types.json',
+            'excel-migration-type.json',
+            'fallout-rules.json'
         ];
 
-        // Extract actual file names from MM table and compare with expected
-        const mmFiles = await getFileNames(mmTable);
-        expect(mmFiles.sort()).toEqual(expectedMMFiles.sort());
-
-        // ==================== DB Level Design Validation ====================
-        // Define the expected configuration files for DB Level Design
         const expectedDBFiles = [
-            'database_keywords.txt',   // SQL keywords list
-            'generate.toml',           // Code generation settings
-            'fallout-rules.json',      // Fallout/error handling rules
-            'excel.json'               // Excel configuration
+            'database_keywords.txt',
+            'generate.toml',
+            'fallout-rules.json',
+            'excel.json'
         ];
 
-        // Extract actual file names from DB table and compare with expected
-        const dbFiles = await getFileNames(dbTable);
-        expect(dbFiles.sort()).toEqual(expectedDBFiles.sort());
+        // Validate MM files using SettingsPage method
+        await settingsPage.validateMMFiles(expectedMMFiles);
+
+        // Validate DB files using SettingsPage method
+        await settingsPage.validateDBFiles(expectedDBFiles);
     });
 
+//================================================================================
+// TEST 9-13: Download Settings Files
+//================================================================================
+    const filesToDownload = [
+        'fallout-rules.json'
+    ];
 
-const filesToDownload = [ 
- // 'excel-migration-dictionary.json', 
- // 'generate.toml', 
- // 'excel-migration-types.json', 
- // 'excel-migration-type.json', 
-  'fallout-rules.json' ];
-for (const fileName of filesToDownload)
-   { 
-    test(`Download settings file: ${fileName}`, async ({ page }) => { 
-      // Step 1: Hover over the file row 
-      const fileRow = page.locator(`text=${fileName}`); 
-      await fileRow.hover();
-      // Step 2: Click the three-dot menu (adjust locator to match your DOM) 
-      await page.locator('button.ux-react-dropdown__trigger').click();
-      // Step 3: Trigger download
-      const [ download ] = await Promise.all([ 
-        page.waitForEvent('download'), 
-        page.click('text=Download') ]);
+    for (const fileName of filesToDownload) {
+        test(`Download settings file: ${fileName}`, async ({ page }) => {
+            // Download file using SettingsPage method
+            const download = await settingsPage.downloadFile(fileName);
 
-      // Step 4: Save and validate the file 
-      
-      const downloadPath = path.join(__dirname, 'downloads', await download.suggestedFilename());
-      await download.saveAs(downloadPath); 
-      // Validate file exists
-      expect(fs.existsSync(downloadPath)).toBeTruthy(); 
-      
-      //Validate file content
-      const content = fs.readFileSync(downloadPath, 'utf-8');
-      expect(content.length).toBeGreaterThan(0); // basic check 
-      }); 
+            // Save and validate the file - use process.cwd() for cross-platform compatibility
+            const downloadsDir = path.join(process.cwd(), 'downloads');
+            if (!fs.existsSync(downloadsDir)) {
+                fs.mkdirSync(downloadsDir, { recursive: true });
+            }
+            const downloadPath = path.join(downloadsDir, await download.suggestedFilename());
+            await download.saveAs(downloadPath);
+
+            // Validate file exists
+            expect(fs.existsSync(downloadPath)).toBeTruthy();
+
+            // Validate file content
+            const content = fs.readFileSync(downloadPath, 'utf-8');
+            expect(content.length).toBeGreaterThan(0);
+        });
     }
-
 });
