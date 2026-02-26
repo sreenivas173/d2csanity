@@ -1,0 +1,153 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - generic [ref=e6]:
+    - img [ref=e8]
+    - generic [ref=e10]: Migration Design2Code
+    - generic [ref=e11]:
+      - img [ref=e16] [cursor=pointer]
+      - button "C" [ref=e19] [cursor=pointer]:
+        - generic [ref=e21]: C
+  - generic [ref=e22]:
+    - generic [ref=e23]:
+      - list [ref=e24]:
+        - menuitem "MM Design" [ref=e25] [cursor=pointer]:
+          - listitem [ref=e26]:
+            - generic [ref=e27]:
+              - img [ref=e29]
+              - generic [ref=e35]: MM Design
+        - menuitem "DB Level Design" [ref=e36] [cursor=pointer]:
+          - listitem [ref=e37]:
+            - generic [ref=e38]:
+              - img [ref=e40]
+              - generic [ref=e46]: DB Level Design
+        - menuitem "Settings" [ref=e47] [cursor=pointer]:
+          - listitem [ref=e48]:
+            - generic [ref=e49]:
+              - img [ref=e51]
+              - generic [ref=e57]: Settings
+        - menuitem "Templates" [ref=e58] [cursor=pointer]:
+          - listitem [ref=e59]:
+            - generic [ref=e60]:
+              - img [ref=e62]
+              - generic [ref=e68]: Templates
+      - menuitem "Collapse" [ref=e69] [cursor=pointer]:
+        - listitem [ref=e70]:
+          - generic [ref=e71]:
+            - img [ref=e73]
+            - generic [ref=e79]: Collapse
+    - generic [ref=e86]:
+      - generic [ref=e87]:
+        - generic [ref=e89]: Templates
+        - button [ref=e91] [cursor=pointer]:
+          - img [ref=e94]
+      - table [ref=e97]:
+        - row "Name Status" [ref=e99]:
+          - gridcell "Name" [ref=e101] [cursor=pointer]:
+            - generic [ref=e102]: Name
+          - gridcell "Status" [ref=e105] [cursor=pointer]:
+            - generic [ref=e106]: Status
+        - row "Expand templates" [ref=e110]:
+          - gridcell "Expand templates" [ref=e112]:
+            - button "Expand" [ref=e114] [cursor=pointer]:
+              - img [ref=e115]
+            - generic [ref=e117]:
+              - img [ref=e118]
+              - text: templates
+          - gridcell [ref=e122]
+        - row "Expand configuration" [ref=e126]:
+          - gridcell "Expand configuration" [ref=e128]:
+            - button "Expand" [ref=e130] [cursor=pointer]:
+              - img [ref=e131]
+            - generic [ref=e133]:
+              - img [ref=e134]
+              - text: configuration
+          - gridcell [ref=e138]
+        - row "descriptor.yaml green" [ref=e142]:
+          - gridcell "descriptor.yaml" [ref=e144]:
+            - generic [ref=e146] [cursor=pointer]:
+              - img [ref=e147]
+              - text: descriptor.yaml
+          - gridcell "green" [ref=e151]:
+            - generic "green" [ref=e153]:
+              - generic [ref=e154]: Default
+        - row "runtime-parameters.yaml green" [ref=e158]:
+          - gridcell "runtime-parameters.yaml" [ref=e160]:
+            - generic [ref=e162] [cursor=pointer]:
+              - img [ref=e163]
+              - text: runtime-parameters.yaml
+          - gridcell "green" [ref=e167]:
+            - generic "green" [ref=e169]:
+              - generic [ref=e170]: Default
+        - row "configuration.yaml green" [ref=e174]:
+          - gridcell "configuration.yaml" [ref=e176]:
+            - generic [ref=e178] [cursor=pointer]:
+              - img [ref=e179]
+              - text: configuration.yaml
+          - gridcell "green" [ref=e183]:
+            - generic "green" [ref=e185]:
+              - generic [ref=e186]: Default
+        - row "macroses.json green" [ref=e190]:
+          - gridcell "macroses.json" [ref=e192]:
+            - generic [ref=e194] [cursor=pointer]:
+              - img [ref=e195]
+              - text: macroses.json
+          - gridcell "green" [ref=e199]:
+            - generic "green" [ref=e201]:
+              - generic [ref=e202]: Default
+        - row "Expand mistral" [ref=e206]:
+          - gridcell "Expand mistral" [ref=e208]:
+            - button "Expand" [ref=e210] [cursor=pointer]:
+              - img [ref=e211]
+            - generic [ref=e213]:
+              - img [ref=e214]
+              - text: mistral
+          - gridcell [ref=e218]
+        - row "Expand nifi" [ref=e222]:
+          - gridcell "Expand nifi" [ref=e224]:
+            - button "Expand" [ref=e226] [cursor=pointer]:
+              - img [ref=e227]
+            - generic [ref=e229]:
+              - img [ref=e230]
+              - text: nifi
+          - gridcell [ref=e234]
+        - row "Expand python" [ref=e238]:
+          - gridcell "Expand python" [ref=e240]:
+            - button "Expand" [ref=e242] [cursor=pointer]:
+              - img [ref=e243]
+            - generic [ref=e245]:
+              - img [ref=e246]
+              - text: python
+          - gridcell [ref=e250]
+        - row "Expand queries" [ref=e254]:
+          - gridcell "Expand queries" [ref=e256]:
+            - button "Expand" [active] [ref=e258] [cursor=pointer]:
+              - img [ref=e259]
+            - generic [ref=e261]:
+              - img [ref=e262]
+              - text: queries
+          - gridcell [ref=e266]
+        - row "Expand oracle" [ref=e271]:
+          - gridcell "Expand oracle" [ref=e273]:
+            - button "Expand" [ref=e275] [cursor=pointer]:
+              - img [ref=e276]
+            - generic [ref=e278]:
+              - img [ref=e279]
+              - text: oracle
+          - gridcell [ref=e283]
+      - list [ref=e287]:
+        - listitem [ref=e288]: 1 items, 1-1 shown
+        - listitem [ref=e289] [cursor=pointer]:
+          - img [ref=e290]:
+            - img [ref=e291]
+        - listitem [ref=e293] [cursor=pointer]: "1"
+        - listitem [ref=e294] [cursor=pointer]:
+          - img [ref=e295]:
+            - img [ref=e296]
+        - listitem [ref=e298]:
+          - generic "Page Size" [ref=e299] [cursor=pointer]:
+            - generic [ref=e300]:
+              - combobox "Page Size" [ref=e302]
+              - generic "10 per page" [ref=e303]
+```

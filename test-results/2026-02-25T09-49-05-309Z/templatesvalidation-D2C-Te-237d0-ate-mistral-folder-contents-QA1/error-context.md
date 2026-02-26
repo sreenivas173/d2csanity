@@ -1,0 +1,73 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - generic [ref=e6]:
+    - img [ref=e8]
+    - generic [ref=e10]: Migration Design2Code
+    - generic [ref=e11]:
+      - img [ref=e16] [cursor=pointer]
+      - button "C" [ref=e19] [cursor=pointer]:
+        - generic [ref=e21]: C
+  - generic [ref=e22]:
+    - generic [ref=e23]:
+      - list [ref=e24]:
+        - menuitem "MM Design" [ref=e25] [cursor=pointer]:
+          - listitem [ref=e26]:
+            - generic [ref=e27]:
+              - img [ref=e29]
+              - generic [ref=e35]: MM Design
+        - menuitem "DB Level Design" [ref=e36] [cursor=pointer]:
+          - listitem [ref=e37]:
+            - generic [ref=e38]:
+              - img [ref=e40]
+              - generic [ref=e46]: DB Level Design
+        - menuitem "Settings" [ref=e47] [cursor=pointer]:
+          - listitem [ref=e48]:
+            - generic [ref=e49]:
+              - img [ref=e51]
+              - generic [ref=e57]: Settings
+        - menuitem "Templates" [ref=e58] [cursor=pointer]:
+          - listitem [ref=e59]:
+            - generic [ref=e60]:
+              - img [ref=e62]
+              - generic [ref=e68]: Templates
+      - menuitem "Collapse" [ref=e69] [cursor=pointer]:
+        - listitem [ref=e70]:
+          - generic [ref=e71]:
+            - img [ref=e73]
+            - generic [ref=e79]: Collapse
+    - generic [ref=e86]:
+      - generic [ref=e87]:
+        - generic [ref=e89]: Templates
+        - button [ref=e91] [cursor=pointer]:
+          - img [ref=e94]
+      - table [ref=e97]:
+        - row "Name Status" [ref=e99]:
+          - gridcell "Name" [ref=e101] [cursor=pointer]:
+            - generic [ref=e102]: Name
+          - gridcell "Status" [ref=e105] [cursor=pointer]:
+            - generic [ref=e106]: Status
+        - row "Expand templates" [ref=e110]:
+          - gridcell "Expand templates" [ref=e112]:
+            - button "Expand" [ref=e114] [cursor=pointer]:
+              - img [ref=e115]
+            - generic [ref=e117]:
+              - img [ref=e118]
+              - text: templates
+          - gridcell [ref=e122]
+      - list [ref=e126]:
+        - listitem [ref=e127]: 1 items, 1-1 shown
+        - listitem [ref=e128] [cursor=pointer]:
+          - img [ref=e129]:
+            - img [ref=e130]
+        - listitem [ref=e132] [cursor=pointer]: "1"
+        - listitem [ref=e133] [cursor=pointer]:
+          - img [ref=e134]:
+            - img [ref=e135]
+        - listitem [ref=e137]:
+          - generic "Page Size" [ref=e138] [cursor=pointer]:
+            - generic [ref=e139]:
+              - combobox "Page Size" [ref=e141]
+              - generic "10 per page" [ref=e142]
+```

@@ -1,0 +1,113 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - generic [ref=e6]:
+    - img [ref=e8]
+    - generic [ref=e10]: Migration Design2Code
+    - generic [ref=e11]:
+      - img [ref=e16] [cursor=pointer]
+      - button "C" [ref=e19] [cursor=pointer]:
+        - generic [ref=e21]: C
+  - generic [ref=e22]:
+    - generic [ref=e23]:
+      - list [ref=e24]:
+        - menuitem "MM Design" [ref=e25] [cursor=pointer]:
+          - listitem [ref=e26]:
+            - generic [ref=e27]:
+              - img [ref=e29]
+              - generic [ref=e35]: MM Design
+        - menuitem "DB Level Design" [ref=e36] [cursor=pointer]:
+          - listitem [ref=e37]:
+            - generic [ref=e38]:
+              - img [ref=e40]
+              - generic [ref=e46]: DB Level Design
+        - menuitem "Settings" [ref=e47] [cursor=pointer]:
+          - listitem [ref=e48]:
+            - generic [ref=e49]:
+              - img [ref=e51]
+              - generic [ref=e57]: Settings
+        - menuitem "Templates" [ref=e58] [cursor=pointer]:
+          - listitem [ref=e59]:
+            - generic [ref=e60]:
+              - img [ref=e62]
+              - generic [ref=e68]: Templates
+      - menuitem "Collapse" [ref=e69] [cursor=pointer]:
+        - listitem [ref=e70]:
+          - generic [ref=e71]:
+            - img [ref=e73]
+            - generic [ref=e79]: Collapse
+    - generic [ref=e86]:
+      - generic [ref=e87]:
+        - generic [ref=e89]: Templates
+        - button [ref=e91] [cursor=pointer]:
+          - img [ref=e94]
+      - table [ref=e97]:
+        - row "Name Status" [ref=e99]:
+          - gridcell "Name" [ref=e101] [cursor=pointer]:
+            - generic [ref=e102]: Name
+          - gridcell "Status" [ref=e105] [cursor=pointer]:
+            - generic [ref=e106]: Status
+        - row "Expand templates" [ref=e110]:
+          - gridcell "Expand templates" [ref=e112]:
+            - button "Expand" [active] [ref=e114] [cursor=pointer]:
+              - img [ref=e115]
+            - generic [ref=e117]:
+              - img [ref=e118]
+              - text: templates
+          - gridcell [ref=e122]
+        - row "Expand configuration" [ref=e126]:
+          - gridcell "Expand configuration" [ref=e128]:
+            - button "Expand" [ref=e130] [cursor=pointer]:
+              - img [ref=e131]
+            - generic [ref=e133]:
+              - img [ref=e134]
+              - text: configuration
+          - gridcell [ref=e138]
+        - row "Expand mistral" [ref=e142]:
+          - gridcell "Expand mistral" [ref=e144]:
+            - button "Expand" [ref=e146] [cursor=pointer]:
+              - img [ref=e147]
+            - generic [ref=e149]:
+              - img [ref=e150]
+              - text: mistral
+          - gridcell [ref=e154]
+        - row "Expand nifi" [ref=e158]:
+          - gridcell "Expand nifi" [ref=e160]:
+            - button "Expand" [ref=e162] [cursor=pointer]:
+              - img [ref=e163]
+            - generic [ref=e165]:
+              - img [ref=e166]
+              - text: nifi
+          - gridcell [ref=e170]
+        - row "Expand python" [ref=e174]:
+          - gridcell "Expand python" [ref=e176]:
+            - button "Expand" [ref=e178] [cursor=pointer]:
+              - img [ref=e179]
+            - generic [ref=e181]:
+              - img [ref=e182]
+              - text: python
+          - gridcell [ref=e186]
+        - row "Expand queries" [ref=e190]:
+          - gridcell "Expand queries" [ref=e192]:
+            - button "Expand" [ref=e194] [cursor=pointer]:
+              - img [ref=e195]
+            - generic [ref=e197]:
+              - img [ref=e198]
+              - text: queries
+          - gridcell [ref=e202]
+      - list [ref=e206]:
+        - listitem [ref=e207]: 1 items, 1-1 shown
+        - listitem [ref=e208] [cursor=pointer]:
+          - img [ref=e209]:
+            - img [ref=e210]
+        - listitem [ref=e212] [cursor=pointer]: "1"
+        - listitem [ref=e213] [cursor=pointer]:
+          - img [ref=e214]:
+            - img [ref=e215]
+        - listitem [ref=e217]:
+          - generic "Page Size" [ref=e218] [cursor=pointer]:
+            - generic [ref=e219]:
+              - combobox "Page Size" [ref=e221]
+              - generic "10 per page" [ref=e222]
+```
