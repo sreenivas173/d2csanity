@@ -6,6 +6,7 @@
 
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
+import { MMDesignPage } from '../pages/MMDesignPage';
 
 
 test.describe('Filter Validations', () => {
@@ -26,28 +27,29 @@ test.describe('Filter Validations', () => {
 
   test('Filter Validations', async ({ page }) => {
     const loginPage = new LoginPage(page);
+    const mmDesignPage = new MMDesignPage(page);
 
     await loginPage.goto();
     await loginPage.login('cpq-admin@netcracker.com', 'MARket1234!');
     await expect(page).toHaveURL(/design2code\/migration-management-design/);
 
-    if (await page.locator('text=The page cannot be found').isVisible()) {
+    if (await mmDesignPage.isPage404()) {
       test.skip(true, 'Page is showing 404 error');
     }
 
     // Navigate to MM Design
-    await page.getByText('MM Design').click();
+    await mmDesignPage.navigateToMMDesign();
 
-    const table = page.getByRole('table');
+    const table = mmDesignPage.table;
     await expect(table).toBeVisible();
 
-    const filtersButton = page.locator('button.ux-react-table-new__filters');
-    const paginationInfo = page.locator('text=/\\d+ items, \\d+-\\d+ shown/');
+    const filtersButton = mmDesignPage.filtersButton;
+    const paginationInfo = mmDesignPage.paginationInfo;
 
     await expect(paginationInfo).toBeVisible();
 
     for (const config of filterConfigs) {
-      const dialog = page.getByRole('dialog', { name: /filters/i });
+      const dialog = mmDesignPage.filterDialog;
 
       // Ensure dialog closed before opening
       if (await dialog.isVisible()) {

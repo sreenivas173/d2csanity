@@ -67,14 +67,6 @@ export class SettingsPage {
     return this.tables.nth(1);
   }
 
-  get dropdownTrigger() {
-    return this.page.locator('button.ux-react-dropdown__trigger');
-  }
-
-  get downloadOption() {
-    return this.page.locator('text=Download');
-  }
-
   // ========================================
   // Factory Methods - Section Locators
   // ========================================
@@ -99,17 +91,14 @@ export class SettingsPage {
       .getByRole('button', { name: 'Upload Settings' });
   }
 
-  fileRow(fileName: string) {
-    return this.page.locator(`text=${fileName}`);
-  }
-
   // ========================================
   // Navigation Methods
   // ========================================
 
   async navigateToSettings() {
-    await this.page.click('text=Settings');
-    await this.page.waitForTimeout(2000);
+    // Navigate directly via URL for Settings page
+    await this.page.goto('/design2code/migration-management-design/settings');
+    await this.page.waitForTimeout(3000);
   }
 
   async isPage404() {
@@ -197,6 +186,8 @@ export class SettingsPage {
       'Are you sure you want to revert all settings to the default?'
     );
     await this.yesButton.click();
+    // Wait for the revert action to complete and status to update
+    await this.page.waitForTimeout(2000);
   }
 
   async getAllStatusTexts(): Promise<string[]> {
@@ -361,17 +352,88 @@ export class SettingsPage {
   }
 
   // ========================================
-  // Download Methods
+  // Download Methods - Using JS click for visibility issues
   // ========================================
 
-  async downloadFile(fileName: string) {
-    const fileRow = this.fileRow(fileName);
+  async downloadFile(fileName: string, table: 'MM' | 'DB' = 'MM') {
+    // Scope to specific table
+    const tableElement = table === 'MM' ? this.mmTable : this.dbTable;
+    
+    // Use full row filter
+    const fileRow = tableElement.getByRole('row')
+      .filter({ has: this.page.getByText(fileName, { exact: true }) });
+    
+    // Scroll into view and hover
+    await fileRow.scrollIntoViewIfNeeded();
     await fileRow.hover();
-    await this.dropdownTrigger.click();
+    
+    // Wait for dropdown trigger to appear after hover
+    await this.page.waitForTimeout(1500);
+    
+    // Find dropdown trigger
+    const dropdownTrigger = tableElement.locator('button.ux-react-dropdown__trigger').first();
+    
+    // Use JavaScript click to bypass visibility check issues
+    await dropdownTrigger.evaluate((node: any) => (node as HTMLButtonElement).click());
+    
+    // Wait for dropdown animation
+    await this.page.waitForTimeout(500);
 
-    const downloadPromise = this.page.waitForEvent('download');
-    await this.downloadOption.click();
+    const [download] = await Promise.all([
+      this.page.waitForEvent('download'),
+      this.page.getByText('Download').click()
+    ]);
 
-    return await downloadPromise;
+    return download;
+  }
+
+  // ========================================
+  // View Content Methods
+  // ========================================
+
+  async viewFileContent(fileName: string, table: 'MM' | 'DB' = 'MM') {
+    // Scope to specific table
+    const tableElement = table === 'MM' ? this.mmTable : this.dbTable;
+    
+    // Find and verify file element is visible
+    const fileElement = tableElement.getByRole('gridcell', { name: fileName }).first();
+    await expect(fileElement).toBeVisible();
+    
+    // Scroll into view and hover
+    await fileElement.scrollIntoViewIfNeeded();
+    await fileElement.hover();
+    
+    // Wait for the dropdown to become visible
+    await this.page.waitForTimeout(500);
+    
+    // Find and click dropdown trigger
+    const dropdownTrigger = tableElement.locator('button.ux-react-dropdown__trigger').first();
+    await dropdownTrigger.evaluate((node: any) => (node as HTMLButtonElement).click());
+    
+    // Wait for dropdown menu
+    await this.page.waitForTimeout(300);
+    
+    // Click View Content
+    await this.page.getByText('View Content').click();
+    
+    // Wait for the content dialog to appear
+    await this.page.waitForTimeout(1000);
+    
+    // Return the dialog for validation
+    return this.uploadDialog;
+  }
+
+  async isContentDialogVisible(): Promise<boolean> {
+    try {
+      await expect(this.uploadDialog).toBeVisible();
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async getContentDialogText(): Promise<string> {
+    const dialogText = await this.uploadDialog.textContent();
+    return dialogText || '';
   }
 }

@@ -2,12 +2,14 @@
 
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
+import { MMDesignPage } from '../pages/MMDesignPage';
 
 test.describe('MM Design Download Validation', () => {
   /** Tests MM Design download functionality */
   test('MM Design Download Validation', async ({ page }) => {
     // Initialize the LoginPage object for authentication
     const loginPage = new LoginPage(page);
+    const mmDesignPage = new MMDesignPage(page);
 
     // Navigate to the login page and perform login with admin credentials
     await loginPage.goto();
@@ -17,16 +19,15 @@ test.describe('MM Design Download Validation', () => {
     await expect(page).toHaveURL(/design2code\/migration-management-design/);
 
     // Skip the test if the page shows a 404 error
-    if (await page.locator('text=The page cannot be found').isVisible()) {
+    if (await mmDesignPage.isPage404()) {
       test.skip(true, 'Page is showing 404 error');
     }
 
     // Navigate to the MM Design page by clicking the 'MM Design' link
-    await page.click('text=MM Design');
-    await page.waitForTimeout(2000);
+    await mmDesignPage.navigateToMMDesign();
 
     // Locate the first data row in the table (skipping the header row)
-    const firstDataRow = page.getByRole('row').nth(1);
+    const firstDataRow = mmDesignPage.table.getByRole('row').nth(1);
     await expect(firstDataRow).toBeVisible();
 
     // Click on the first data row to navigate to the details page
