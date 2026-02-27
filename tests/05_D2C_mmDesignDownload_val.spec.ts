@@ -1,11 +1,43 @@
-/** @author Srinivasa Rao Allamsetti */
+/**
+ * Author: Srinivasa Rao Allamsetti
+ * This test file validates the MM Design download functionality.
+ * It includes tests for:
+ * - Navigating to the MM Design page after login
+ * - Selecting a design file from the table
+ * - Downloading the selected design as a ZIP file
+ * - Validating the downloaded file exists and has content
+ * - Saving the downloaded file to the Resources directory
+ */
 
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { MMDesignPage } from '../pages/MMDesignPage';
 
+/**
+ * Test Suite: MM Design Download Validation
+ * 
+ * This suite validates the download functionality of the MM Design page.
+ * Users can download their design files as ZIP archives for offline use.
+ * The tests ensure the download process works correctly and files are saved properly.
+ */
 test.describe('MM Design Download Validation', () => {
-  /** Tests MM Design download functionality */
+  
+  /**
+   * Test: MM Design Download Validation
+   * 
+   * Purpose: Validates that a user can successfully download a design file from the MM Design page.
+   * 
+   * What it validates:
+   * - Login to the application with valid credentials
+   * - Navigation to the MM Design page
+   * - Selection of the first design file from the table
+   * - Presence of the Download ZIP button
+   * - Successful initiation of the download
+   * - Valid filename suggestion from the server
+   * - File is saved to the Resources directory
+   * 
+   * Expected Result: A ZIP file should be downloaded successfully with a valid filename
+   */
   test('MM Design Download Validation', async ({ page }) => {
     // Initialize the LoginPage object for authentication
     const loginPage = new LoginPage(page);

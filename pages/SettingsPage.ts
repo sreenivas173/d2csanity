@@ -55,16 +55,59 @@ export class SettingsPage {
     return this.uploadDialog.getByRole('button', { name: 'Save' });
   }
 
-  get tables() {
-    return this.page.getByRole('table');
+  // get tables() {
+  //   return this.page.getByRole('table');
+  // }
+
+  // get mmTable() {
+  //   return this.tables.nth(0);
+  // }
+
+  // get dbTable() {
+  //   return this.tables.nth(1);
+  // }
+
+
+  get mmSection() {
+    return this.page.getByText('MM Design Settings')
+      .locator('xpath=ancestor::div[contains(@class,"card") or contains(@class,"section")]')
+      .first();
+  }
+
+  get dbSection() {
+    return this.page.getByText('DB Level Design Settings')
+      .locator('xpath=ancestor::div[contains(@class,"card") or contains(@class,"section")]')
+      .first();
   }
 
   get mmTable() {
-    return this.tables.nth(0);
+    return this.page
+      .getByText('MM Design Settings')
+      .locator('xpath=ancestor::div[contains(@class,"generic")]')
+      .locator('table')
+      .first();
   }
 
   get dbTable() {
-    return this.tables.nth(1);
+    return this.page
+      .getByText('DB Level Design Settings')
+      .locator('xpath=ancestor::div[contains(@class,"generic")]')
+      .locator('table')
+      .first();
+  }
+  //✅ Now Keep Your File Extraction Method Simple
+
+
+  async expectMMSectionVisible() {
+    await expect(
+      this.page.getByText('MM Design Settings')
+    ).toBeVisible();
+  }
+
+  async expectDBLevelSectionVisible() {
+    await expect(
+      this.page.getByText('DB Level Design Settings')
+    ).toBeVisible();
   }
 
   // ========================================
@@ -96,9 +139,10 @@ export class SettingsPage {
   // ========================================
 
   async navigateToSettings() {
-    // Navigate directly via URL for Settings page
-    await this.page.goto('/design2code/migration-management-design/settings');
-    await this.page.waitForTimeout(3000);
+    await this.page.getByRole('menuitem', { name: 'Settings' }).click();
+    await expect(
+      this.page.getByRole('button', { name: 'Export' })
+    ).toBeVisible();
   }
 
   async isPage404() {
@@ -109,15 +153,20 @@ export class SettingsPage {
   // Validation Methods
   // ========================================
 
-  async isSettingsVisible(): Promise<boolean> {
-    try {
-      await expect(this.settingsContainer).toBeVisible();
-      await expect(this.settingsContainer).toContainText('Settings');
-      return true;
-    } catch {
-      return false;
-    }
+  async expectSettingsVisible() {
+    await expect(
+      this.page.getByRole('button', { name: 'Export' })
+    ).toBeVisible();
   }
+
+  // async isSettingsVisible(): Promise<boolean> {
+  //   try {
+  //     await expect(this.page.getByRole('heading', { name: 'Settings' })).toBeVisible();
+  //     return true;
+  //   } catch {
+  //     return false;
+  //   }
+  // }
 
   async isExportButtonVisible(): Promise<boolean> {
     try {
@@ -306,87 +355,102 @@ export class SettingsPage {
   // File Table Validation Methods
   // ========================================
 
-  async getTableFileNames(table: 'MM' | 'DB'): Promise<string[]> {
-    const tableElement = table === 'MM' ? this.mmTable : this.dbTable;
-    const rows = tableElement.getByRole('row');
+  // async getTableFileNames(table: 'MM' | 'DB'): Promise<string[]> {
+  //   const tableElement = table === 'MM' ? this.mmTable : this.dbTable;
+  //   const rows = tableElement.getByRole('row');
 
-    const fileNames: string[] = [];
-    const count = await rows.count();
+  //   const fileNames: string[] = [];
+  //   const count = await rows.count();
 
-    // Start from index 1 to skip header row
-    for (let i = 1; i < count; i++) {
-      const cells = rows.nth(i).getByRole('gridcell');
-      const cellCount = await cells.count();
+  //   // Start from index 1 to skip header row
+  //   for (let i = 1; i < count; i++) {
+  //     const cells = rows.nth(i).getByRole('gridcell');
+  //     const cellCount = await cells.count();
 
-      if (cellCount >= 2) {
-        try {
-          const text = await cells.nth(1).innerText();
-          if (text && text.trim()) {
-            fileNames.push(text.trim());
-          }
-        } catch (e) {
-          console.log(`Skipping row ${i}: ${e}`);
-        }
-      }
-    }
-
-    return fileNames;
-  }
-
-  async getMMFiles(): Promise<string[]> {
-    return this.getTableFileNames('MM');
-  }
-
-  async getDBFiles(): Promise<string[]> {
-    return this.getTableFileNames('DB');
-  }
-
-  async validateMMFiles(expectedFiles: string[]): Promise<void> {
-    const actualFiles = await this.getMMFiles();
-    expect(actualFiles.sort()).toEqual(expectedFiles.sort());
-  }
-
-  async validateDBFiles(expectedFiles: string[]): Promise<void> {
-    const actualFiles = await this.getDBFiles();
-    expect(actualFiles.sort()).toEqual(expectedFiles.sort());
-  }
+  //     if (cellCount >= 2) {
+  //       try {
+  //         const text = await cells.nth(1).innerText();
+  //         if (text && text.trim()) {
+  //           fileNames.push(text.trim());
+  //         }
+  //       } catch (e) {
+  //         console.log(`Skipping row ${i}: ${e}`);
+  //       }
+  //     }
+  //   }
 
   // ========================================
   // Download Methods - Using JS click for visibility issues
   // ========================================
 
-  async downloadFile(fileName: string, table: 'MM' | 'DB' = 'MM') {
-    // Scope to specific table
-    const tableElement = table === 'MM' ? this.mmTable : this.dbTable;
-    
-    // Use full row filter
-    const fileRow = tableElement.getByRole('row')
-      .filter({ has: this.page.getByText(fileName, { exact: true }) });
-    
-    // Scroll into view and hover
-    await fileRow.scrollIntoViewIfNeeded();
-    await fileRow.hover();
-    
-    // Wait for dropdown trigger to appear after hover
-    await this.page.waitForTimeout(1500);
-    
-    // Find dropdown trigger
-    const dropdownTrigger = tableElement.locator('button.ux-react-dropdown__trigger').first();
-    
-    // Use JavaScript click to bypass visibility check issues
-    await dropdownTrigger.evaluate((node: any) => (node as HTMLButtonElement).click());
-    
-    // Wait for dropdown animation
-    await this.page.waitForTimeout(500);
+  // async downloadFile(fileName: string, table: 'MM' | 'DB' = 'MM') {
+  //   // Scope to specific table
+  //   const tableElement = table === 'MM' ? this.mmTable : this.dbTable;
 
-    const [download] = await Promise.all([
-      this.page.waitForEvent('download'),
-      this.page.getByText('Download').click()
-    ]);
+  //   // Use full row filter
+  //   const fileRow = tableElement.getByRole('row')
+  //     .filter({ has: this.page.getByText(fileName, { exact: true }) });
 
-    return download;
-  }
+  //   // Scroll into view and hover
+  //   await fileRow.scrollIntoViewIfNeeded();
+  //   await fileRow.hover();
 
+  //   // Wait for dropdown trigger to appear after hover
+  //   await this.page.waitForTimeout(1500);
+
+  //   // Find dropdown trigger
+  //   const dropdownTrigger = tableElement.locator('button.ux-react-dropdown__trigger').first();
+
+  //   // Use JavaScript click to bypass visibility check issues
+  //   await dropdownTrigger.evaluate((node: any) => (node as HTMLButtonElement).click());
+
+  //   // Wait for dropdown animation
+  //   await this.page.waitForTimeout(500);
+
+  //   const [download] = await Promise.all([
+  //     this.page.waitForEvent('download'),
+  //     this.page.getByText('Download').click()
+  //   ]);
+
+  //   return download;
+  // }
+
+ async downloadFile(fileName: string, table: 'MM' | 'DB' = 'MM') {
+
+  const tableElement = table === 'MM'
+    ? this.page.getByRole('table').nth(0)
+    : this.page.getByRole('table').nth(1);
+
+  await expect(tableElement).toBeVisible();
+
+  // Find row that contains the file
+  const fileRow = tableElement
+    .getByRole('row')
+    .filter({ has: this.page.getByText(fileName, { exact: true }) });
+
+  await expect(fileRow).toBeVisible();
+
+  // Go to the parent wrapper that also contains the dropdown button
+  const rowWrapper = fileRow.locator('xpath=..');
+
+  // Hover wrapper (not just row)
+  await rowWrapper.hover();
+
+  const dropdownTrigger = rowWrapper.locator('button').first();
+
+  await expect(dropdownTrigger).toBeVisible();
+  await dropdownTrigger.click();
+
+  const downloadMenuItem = this.page.getByRole('menuitem', { name: 'Download' });
+  await expect(downloadMenuItem).toBeVisible();
+
+  const [download] = await Promise.all([
+    this.page.waitForEvent('download'),
+    downloadMenuItem.click()
+  ]);
+
+  return download;
+}
   // ========================================
   // View Content Methods
   // ========================================
@@ -394,31 +458,31 @@ export class SettingsPage {
   async viewFileContent(fileName: string, table: 'MM' | 'DB' = 'MM') {
     // Scope to specific table
     const tableElement = table === 'MM' ? this.mmTable : this.dbTable;
-    
+
     // Find and verify file element is visible
     const fileElement = tableElement.getByRole('gridcell', { name: fileName }).first();
     await expect(fileElement).toBeVisible();
-    
+
     // Scroll into view and hover
     await fileElement.scrollIntoViewIfNeeded();
     await fileElement.hover();
-    
+
     // Wait for the dropdown to become visible
     await this.page.waitForTimeout(500);
-    
+
     // Find and click dropdown trigger
     const dropdownTrigger = tableElement.locator('button.ux-react-dropdown__trigger').first();
     await dropdownTrigger.evaluate((node: any) => (node as HTMLButtonElement).click());
-    
+
     // Wait for dropdown menu
     await this.page.waitForTimeout(300);
-    
+
     // Click View Content
     await this.page.getByText('View Content').click();
-    
+
     // Wait for the content dialog to appear
     await this.page.waitForTimeout(1000);
-    
+
     // Return the dialog for validation
     return this.uploadDialog;
   }
@@ -436,4 +500,52 @@ export class SettingsPage {
     const dialogText = await this.uploadDialog.textContent();
     return dialogText || '';
   }
+
+  // ========================================
+// MM / DB File Validation Methods
+// ========================================
+// ========================================
+// MM / DB File Validation Methods
+// ========================================
+
+async getTableFileNames(tableIndex: number): Promise<string[]> {
+  const table = this.page.getByRole('table').nth(tableIndex);
+
+  await expect(table).toBeVisible();
+
+  // Wait for the table to load
+  await this.page.waitForTimeout(1000);
+
+  const rows = table.getByRole('row');
+  const rowCount = await rows.count();
+
+  const fileNames: string[] = [];
+
+  // Start from index 1 to skip header row
+  for (let i = 1; i < rowCount; i++) {
+    const row = rows.nth(i);
+    const cells = row.getByRole('gridcell');
+    const cellCount = await cells.count();
+
+    if (cellCount >= 2) {
+      const text = await cells.nth(1).textContent();
+      if (text && text.trim()) {
+        fileNames.push(text.trim());
+      }
+    }
+  }
+
+  return fileNames;
+}
+
+async validateMMFiles(expectedFiles: string[]) {
+  const actualFiles = await this.getTableFileNames(0);
+  expect(actualFiles.sort()).toEqual(expectedFiles.sort());
+}
+
+async validateDBFiles(expectedFiles: string[]) {
+  const actualFiles = await this.getTableFileNames(1);
+  expect(actualFiles.sort()).toEqual(expectedFiles.sort());
+}
+
 }

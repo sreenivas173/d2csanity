@@ -1,13 +1,39 @@
-/** @author Srinivasa Rao Allamsetti */
+/**
+ * Author: Srinivasa Rao Allamsetti
+ * This test file validates the pagination functionality on the DB Level Design page.
+ * It includes tests for:
+ * - Default page validation (page 1)
+ * - Page number navigation
+ * - Next/Previous arrow functionality
+ * - Page size dropdown validation
+ * - Pagination range text updates
+ */
 
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { DBLPage } from '../pages/DBLPage';
 
+/**
+ * Test Suite: Pagination Validation on DBL Design Page
+ * 
+ * This suite validates the pagination functionality of the DB Level Design page.
+ * It ensures that users can navigate through large datasets using pagination controls,
+ * including page numbers, next/previous arrows, and page size dropdown.
+ */
 test.describe('Pagination Validation on DBL Design Page', () => {
   let loginPage: LoginPage;
   let dblPage: DBLPage;
 
+  /**
+   * beforeEach Hook - Runs before each test
+   * 
+   * Purpose: Sets up the test environment by:
+   * 1. Creating a new LoginPage instance
+   * 2. Creating a new DBLPage instance
+   * 3. Navigating to the D2C application
+   * 4. Logging in with test credentials
+   * 5. Navigating to the DB Level Design page
+   */
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     dblPage = new DBLPage(page);

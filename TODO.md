@@ -1,26 +1,36 @@
-# TODO: Add MMDesignPage POM and Update Test Files - COMPLETED
+# TODO: Add Comments to Test Spec Files - COMPLETED
 
-## Summary:
-- [x] 1. Created `pages/MMDesignPage.ts` - New POM class with navigation, search, filter, upload, download, and pagination methods
-- [x] 2. Updated `tests/02_D2C_mmFilter-id.spec.ts` to use MMDesignPage
-- [x] 3. Updated `tests/03_D2C_mm-design.spec.ts` to use MMDesignPage
-- [x] 4. Updated `tests/04_D2C_mmDesignUpload_val.spec.ts` to use MMDesignPage
-- [x] 5. Updated `tests/05_D2C_mmDesignDownload_val.spec.ts` to use MMDesignPage
-- [x] 6. Updated `tests/06_D2C_mmPagination.spec.ts` to use MMDesignPage
-- [x] 7. Tests run successfully after changes (most tests pass, some failures are due to existing timing issues, not POM)
+## Summary
+Review all test spec files and add required comments where missed, so that whoever reads can understand the functionality.
 
-## Test Results:
-- Filter Validations: PASS
-- Search text validation: PASS  
-- Refresh button functionality: FAIL (existing timing issue)
-- Filter by ID contains: PASS
-- Upload Validations: PASS
-- Download Validation: PASS
-- Default page is 1: PASS
-- Clicking page number (2): FAIL (existing timing issue)
-- Next arrow works: PASS
-- Previous arrow works: FAIL (existing timing issue)
-- Page-size dropdown: FAIL (existing timing issue)
-- Pagination range text: FAIL (existing timing issue)
+## Files Updated (All tasks completed)
 
-Note: The failures are related to timing/locator issues in the original tests, not the POM integration. The POM structure is working correctly.
+### 1. tests/05_D2C_mmDesignDownload_val.spec.ts
+- [x] Add header comment with author and description
+- [x] Add test descriptions to each test
+
+### 2. tests/09_D2C_DBL_DesignUpload_val.spec.ts  
+- [x] Add header comment with author and description
+- [x] Add test descriptions to each test
+
+### 3. tests/11_D2C_DBL_Pagination.spec.ts
+- [x] Add header comment with author and description
+- [x] Add test suite description
+- [x] Add beforeEach hook description
+
+## Files Already Have Good Comments (No changes needed)
+- tests/01_D2C_login.spec.ts
+- tests/02_D2C_mmFilter-id.spec.ts
+- tests/03_D2C_mm-design.spec.ts
+- tests/04_D2C_mmDesignUpload_val.spec.ts
+- tests/06_D2C_mmPagination.spec.ts
+- tests/07_D2C_DBLdesign.spec.ts
+- tests/08_D2C_DBL_Filter_val.spec.ts
+- tests/10_D2C_DBL_DesignDownload_val1.spec.ts
+- tests/12_D2C_Settings.spec.ts
+- tests/13_D2C_Settings_File_ViewDownload.spec.ts
+- tests/14_D2C_Templates.spec.ts
+- tests/15_D2C_Template_config_download.spec.ts
+
+## Task Completed
+All test spec files have been reviewed and comments have been added where missing.

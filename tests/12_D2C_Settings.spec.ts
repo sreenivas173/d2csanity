@@ -57,23 +57,25 @@ test.describe('D2C Settings page validations', () => {
     test.beforeEach(async ({ page }) => {
         loginPage = new LoginPage(page);
         settingsPage = new SettingsPage(page);
-        
+
         await loginPage.goto();
         await loginPage.login('cpq-admin@netcracker.com', 'MARket1234!');
         await expect(page).toHaveURL(/design2code\/migration-management-design/);
-        
+
         // Skip test if page shows 404 error
         if (await settingsPage.isPage404()) {
             test.skip(true, 'Page is showing 404 error');
         }
-        
+
         // Navigate to the Settings page
         await settingsPage.navigateToSettings();
+        await page.waitForLoadState('domcontentloaded');
+        await page.waitForTimeout(3000); // Additional wait for dynamic content
     });
 
-//================================================================================
-// TEST 1: Settings Page Validation
-//================================================================================
+    //================================================================================
+    // TEST 1: Settings Page Validation
+    //================================================================================
     /** 
      * Test: Settings page validation
      * 
@@ -87,13 +89,12 @@ test.describe('D2C Settings page validations', () => {
      */
     test('Settings page validation', async ({ page }) => {
         // Use SettingsPage method to validate
-        const isVisible = await settingsPage.isSettingsVisible();
-        expect(isVisible).toBeTruthy();
+        await settingsPage.expectSettingsVisible();
     });
 
-//================================================================================
-// TEST 2: Export Button Validation
-//================================================================================
+    //================================================================================
+    // TEST 2: Export Button Validation
+    //================================================================================
     /** 
      * Test: Settings_Export button validation
      * 
@@ -124,9 +125,9 @@ test.describe('D2C Settings page validations', () => {
         await download.saveAs(savePath);
     });
 
-//================================================================================
-// TEST 3: Import Button Validation
-//================================================================================
+    //================================================================================
+    // TEST 3: Import Button Validation
+    //================================================================================
     /** 
      * Test: Settings_Import button validation
      * 
@@ -147,9 +148,9 @@ test.describe('D2C Settings page validations', () => {
         expect(isImportVisible).toBeTruthy();
     });
 
-//================================================================================
-// TEST 4: Revert All Button Validation
-//================================================================================
+    //================================================================================
+    // TEST 4: Revert All Button Validation
+    //================================================================================
     /** 
      * Test: Revert All resets settings to Default
      * 
@@ -176,9 +177,9 @@ test.describe('D2C Settings page validations', () => {
         expect(areAllDefault).toBeTruthy();
     });
 
-//================================================================================
-// TEST 5: MM Design Settings Upload
-//================================================================================
+    //================================================================================
+    // TEST 5: MM Design Settings Upload
+    //================================================================================
     /** 
      * Test: MM Design Settings--Upload Settings
      * 
@@ -212,21 +213,21 @@ test.describe('D2C Settings page validations', () => {
         expect(isSuccessVisible).toBeTruthy();
     });
 
-//================================================================================
-// TEST 6: DB Level Design Settings Upload
-//================================================================================
+    //================================================================================
+    // TEST 6: DB Level Design Settings Upload
+    //================================================================================
     /** 
      * Test File: Resources/excel.json
      * 
      * Expected Result: File should upload successfully and show confirmation message
      */
     test('DB LEVEL Design Settings--Upload Settings:', async ({ page }) => {
-        
+
         // Resolve path to the test configuration file using process.cwd()
         const resourcesDir = path.join(process.cwd(), 'Resources');
         const excelFilePath = `${resourcesDir}/excel.json`;
 
-        
+
         // Upload settings using SettingsPage method  
         await settingsPage.uploadDBLevelSettings(excelFilePath);
 
@@ -235,9 +236,9 @@ test.describe('D2C Settings page validations', () => {
         expect(isSuccessVisible).toBeTruthy();
     });
 
-//================================================================================
-// TEST 7: Edit Common Parameters
-//================================================================================
+    //================================================================================
+    // TEST 7: Edit Common Parameters
+    //================================================================================
     /** 
      * Test: Validate Edit Common Parameters
      * 
@@ -275,9 +276,9 @@ test.describe('D2C Settings page validations', () => {
         await expect(page.getByText('postgres')).toBeVisible();
     });
 
-//================================================================================
-// TEST 8: Validate MM and DB Level Design Config Files
-//================================================================================
+    //================================================================================
+    // TEST 8: Validate MM and DB Level Design Config Files
+    //================================================================================
     /** 
      * Test: Validate MM and DB Level Design config files
      * 
@@ -308,39 +309,40 @@ test.describe('D2C Settings page validations', () => {
      * 
      * Expected Result: All default configuration files should be present and match expected list
      */
-    test('Validate MM and DB Level Design config files', async ({ page }) => {
-        // Validate both sections are visible
-        const isMMVisible = await settingsPage.isMMSectionVisible();
-        const isDBVisible = await settingsPage.isDBLevelSectionVisible();
-        expect(isMMVisible).toBeTruthy();
-        expect(isDBVisible).toBeTruthy();
+   test('Validate MM and DB Level Design config files', async ({ page }) => {
 
-        // Expected configuration files
-        const expectedMMFiles = [
-            'excel-migration-dictionary.json',
-            'generate.toml',
-            'excel-migration-types.json',
-            'excel-migration-type.json',
-            'fallout-rules.json'
-        ];
+  // Ensure we are on Settings page
+  await settingsPage.navigateToSettings();
 
-        const expectedDBFiles = [
-            'database_keywords.txt',
-            'generate.toml',
-            'fallout-rules.json',
-            'excel.json'
-        ];
+   // Ensure Settings page loaded
+  //await expect(page.getByRole('heading', { name: 'Settings' })).toBeVisible();
 
-        // Validate MM files using SettingsPage method
-        await settingsPage.validateMMFiles(expectedMMFiles);
+  // Validate sections are visible
+  await settingsPage.expectMMSectionVisible();
+  await settingsPage.expectDBLevelSectionVisible();
 
-        // Validate DB files using SettingsPage method
-        await settingsPage.validateDBFiles(expectedDBFiles);
-    });
+  const expectedMMFiles = [
+    'excel-migration-dictionary.json',
+    'generate.toml',
+    'excel-migration-types.json',
+    'excel-migration-type.json',
+    'fallout-rules.json'
+  ];
 
-//================================================================================
-// TEST 9-13: Download Settings Files
-//================================================================================
+  const expectedDBFiles = [
+    'database_keywords.txt',
+    'generate.toml',
+    'fallout-rules.json',
+    'excel.json'
+  ];
+
+  await settingsPage.validateMMFiles(expectedMMFiles);
+  await settingsPage.validateDBFiles(expectedDBFiles);
+});
+
+    //================================================================================
+    // TEST 9-13: Download Settings Files
+    //================================================================================
     const filesToDownload = [
         'fallout-rules.json'
     ];
