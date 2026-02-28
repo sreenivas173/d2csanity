@@ -1,0 +1,267 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - generic [ref=e6]:
+    - img [ref=e8]
+    - generic [ref=e10]: Migration Design2Code
+    - generic [ref=e11]:
+      - img [ref=e16] [cursor=pointer]
+      - button "C" [ref=e19] [cursor=pointer]:
+        - generic [ref=e21]: C
+  - generic [ref=e22]:
+    - generic [ref=e23]:
+      - list [ref=e24]:
+        - menuitem "MM Design" [ref=e25] [cursor=pointer]:
+          - listitem [ref=e26]:
+            - generic [ref=e27]:
+              - img [ref=e29]
+              - generic [ref=e35]: MM Design
+        - menuitem "DB Level Design" [ref=e36] [cursor=pointer]:
+          - listitem [ref=e37]:
+            - generic [ref=e38]:
+              - img [ref=e40]
+              - generic [ref=e46]: DB Level Design
+        - menuitem "Settings" [ref=e47] [cursor=pointer]:
+          - listitem [ref=e48]:
+            - generic [ref=e49]:
+              - img [ref=e51]
+              - generic [ref=e57]: Settings
+        - menuitem "Templates" [ref=e58] [cursor=pointer]:
+          - listitem [ref=e59]:
+            - generic [ref=e60]:
+              - img [ref=e62]
+              - generic [ref=e68]: Templates
+      - menuitem "Collapse" [ref=e69] [cursor=pointer]:
+        - listitem [ref=e70]:
+          - generic [ref=e71]:
+            - img [ref=e73]
+            - generic [ref=e79]: Collapse
+    - generic [ref=e86]:
+      - generic [ref=e87]:
+        - generic [ref=e93]:
+          - textbox "Search" [ref=e94]
+          - generic [ref=e95]:
+            - img:
+              - img
+        - generic [ref=e96]:
+          - button "Upload File" [ref=e97] [cursor=pointer]:
+            - generic [ref=e99]: Upload File
+          - button [ref=e100] [cursor=pointer]:
+            - img [ref=e103]
+          - button [ref=e106] [cursor=pointer]:
+            - img [ref=e109]
+      - table [ref=e112]:
+        - row "Type ID Design File Date Author Error Severity" [ref=e114]:
+          - gridcell "Type" [ref=e116] [cursor=pointer]:
+            - generic [ref=e117]: Type
+          - gridcell "ID" [ref=e120] [cursor=pointer]:
+            - generic [ref=e121]: ID
+          - gridcell "Design File" [ref=e124] [cursor=pointer]:
+            - generic [ref=e125]: Design File
+          - gridcell "Date" [ref=e128] [cursor=pointer]:
+            - generic [ref=e129]: Date
+          - gridcell "Author" [ref=e132] [cursor=pointer]:
+            - generic [ref=e133]: Author
+          - gridcell "Error Severity" [ref=e136] [cursor=pointer]:
+            - generic [ref=e137]: Error Severity
+        - row "Migration Types network-element-exercise-270226 oss-ri-migration-types.xlsx 2026-02-27 16:30 Tenant Admin" [ref=e141] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e143]: Migration Types
+          - gridcell "network-element-exercise-270226" [ref=e146]: network-element-exercise-270226
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e149]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 16:30" [ref=e152]:
+            - generic [ref=e153]: 2026-02-27 16:30
+          - gridcell "Tenant Admin" [ref=e156]: Tenant Admin
+          - gridcell [ref=e159]
+        - row "Migration Types network-element-exercise-270226 oss-ri-migration-types.xlsx 2026-02-27 16:20 Tenant Admin" [ref=e163] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e165]: Migration Types
+          - gridcell "network-element-exercise-270226" [ref=e168]: network-element-exercise-270226
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e171]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 16:20" [ref=e174]:
+            - generic [ref=e175]: 2026-02-27 16:20
+          - gridcell "Tenant Admin" [ref=e178]: Tenant Admin
+          - gridcell [ref=e181]
+        - row "Migration Types network-element-exercise-270226 oss-ri-migration-types.xlsx 2026-02-27 16:06 Tenant Admin" [ref=e185] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e187]: Migration Types
+          - gridcell "network-element-exercise-270226" [ref=e190]: network-element-exercise-270226
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e193]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 16:06" [ref=e196]:
+            - generic [ref=e197]: 2026-02-27 16:06
+          - gridcell "Tenant Admin" [ref=e200]: Tenant Admin
+          - gridcell [ref=e203]
+        - row "Migration Types network-element-exercise-022726 oss-ri-migration-types.xlsx 2026-02-27 16:00 Tenant Admin blue" [ref=e207] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e209]: Migration Types
+          - gridcell "network-element-exercise-022726" [ref=e212]: network-element-exercise-022726
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e215]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 16:00" [ref=e218]:
+            - generic [ref=e219]: 2026-02-27 16:00
+          - gridcell "Tenant Admin" [ref=e222]: Tenant Admin
+          - gridcell "blue" [ref=e225]:
+            - generic "blue" [ref=e227]:
+              - generic [ref=e228]: Minor
+        - row "Migration Types network-element-exercise-022726 oss-ri-migration-types.xlsx 2026-02-27 15:59 Tenant Admin blue" [ref=e232] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e234]: Migration Types
+          - gridcell "network-element-exercise-022726" [ref=e237]: network-element-exercise-022726
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e240]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 15:59" [ref=e243]:
+            - generic [ref=e244]: 2026-02-27 15:59
+          - gridcell "Tenant Admin" [ref=e247]: Tenant Admin
+          - gridcell "blue" [ref=e250]:
+            - generic "blue" [ref=e252]:
+              - generic [ref=e253]: Minor
+        - row "Migration Types network-element-exercise-022726 oss-ri-migration-types.xlsx 2026-02-27 15:58 Tenant Admin blue" [ref=e257] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e259]: Migration Types
+          - gridcell "network-element-exercise-022726" [ref=e262]: network-element-exercise-022726
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e265]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 15:58" [ref=e268]:
+            - generic [ref=e269]: 2026-02-27 15:58
+          - gridcell "Tenant Admin" [ref=e272]: Tenant Admin
+          - gridcell "blue" [ref=e275]:
+            - generic "blue" [ref=e277]:
+              - generic [ref=e278]: Minor
+        - generic [ref=e281]:
+          - row "Migration Types network-element-exercise-022726 oss-ri-migration-types.xlsx 2026-02-27 15:57 Tenant Admin blue" [ref=e282] [cursor=pointer]:
+            - gridcell "Migration Types" [ref=e284]: Migration Types
+            - gridcell "network-element-exercise-022726" [ref=e287]: network-element-exercise-022726
+            - gridcell "oss-ri-migration-types.xlsx" [ref=e290]: oss-ri-migration-types.xlsx
+            - gridcell "2026-02-27 15:57" [ref=e293]:
+              - generic [ref=e294]: 2026-02-27 15:57
+            - gridcell "Tenant Admin" [ref=e297]: Tenant Admin
+            - gridcell "blue" [ref=e300]:
+              - generic "blue" [ref=e302]:
+                - generic [ref=e303]: Minor
+          - button [ref=e306] [cursor=pointer]:
+            - button [ref=e309]:
+              - img [ref=e312]
+        - row "Migration Types network-element-exercise-022726 oss-ri-migration-types.xlsx 2026-02-27 15:53 Tenant Admin blue" [ref=e316] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e318]: Migration Types
+          - gridcell "network-element-exercise-022726" [ref=e321]: network-element-exercise-022726
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e324]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 15:53" [ref=e327]:
+            - generic [ref=e328]: 2026-02-27 15:53
+          - gridcell "Tenant Admin" [ref=e331]: Tenant Admin
+          - gridcell "blue" [ref=e334]:
+            - generic "blue" [ref=e336]:
+              - generic [ref=e337]: Minor
+        - row "Migration Types network-element-exercise-022726 oss-ri-migration-types.xlsx 2026-02-27 15:50 Tenant Admin blue" [ref=e341] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e343]: Migration Types
+          - gridcell "network-element-exercise-022726" [ref=e346]: network-element-exercise-022726
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e349]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 15:50" [ref=e352]:
+            - generic [ref=e353]: 2026-02-27 15:50
+          - gridcell "Tenant Admin" [ref=e356]: Tenant Admin
+          - gridcell "blue" [ref=e359]:
+            - generic "blue" [ref=e361]:
+              - generic [ref=e362]: Minor
+        - row "Migration Types network-element-exercise-022726 oss-ri-migration-types.xlsx 2026-02-27 15:47 Tenant Admin blue" [ref=e366] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e368]: Migration Types
+          - gridcell "network-element-exercise-022726" [ref=e371]: network-element-exercise-022726
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e374]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 15:47" [ref=e377]:
+            - generic [ref=e378]: 2026-02-27 15:47
+          - gridcell "Tenant Admin" [ref=e381]: Tenant Admin
+          - gridcell "blue" [ref=e384]:
+            - generic "blue" [ref=e386]:
+              - generic [ref=e387]: Minor
+        - row "Migration Types network-element-exercise-022726 oss-ri-migration-types.xlsx 2026-02-27 15:45 Tenant Admin blue" [ref=e391] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e393]: Migration Types
+          - gridcell "network-element-exercise-022726" [ref=e396]: network-element-exercise-022726
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e399]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 15:45" [ref=e402]:
+            - generic [ref=e403]: 2026-02-27 15:45
+          - gridcell "Tenant Admin" [ref=e406]: Tenant Admin
+          - gridcell "blue" [ref=e409]:
+            - generic "blue" [ref=e411]:
+              - generic [ref=e412]: Minor
+        - row "Migration Types network-element-exercise-022726 oss-ri-migration-types.xlsx 2026-02-27 15:42 Tenant Admin blue" [ref=e416] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e418]: Migration Types
+          - gridcell "network-element-exercise-022726" [ref=e421]: network-element-exercise-022726
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e424]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 15:42" [ref=e427]:
+            - generic [ref=e428]: 2026-02-27 15:42
+          - gridcell "Tenant Admin" [ref=e431]: Tenant Admin
+          - gridcell "blue" [ref=e434]:
+            - generic "blue" [ref=e436]:
+              - generic [ref=e437]: Minor
+        - row "Migration Types network-element-exercise-270226 oss-ri-migration-types.xlsx 2026-02-27 15:39 Tenant Admin" [ref=e441] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e443]: Migration Types
+          - gridcell "network-element-exercise-270226" [ref=e446]: network-element-exercise-270226
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e449]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 15:39" [ref=e452]:
+            - generic [ref=e453]: 2026-02-27 15:39
+          - gridcell "Tenant Admin" [ref=e456]: Tenant Admin
+          - gridcell [ref=e459]
+        - row "Migration Types network-element-exercise-022726 oss-ri-migration-types.xlsx 2026-02-27 15:32 Tenant Admin blue" [ref=e463] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e465]: Migration Types
+          - gridcell "network-element-exercise-022726" [ref=e468]: network-element-exercise-022726
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e471]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 15:32" [ref=e474]:
+            - generic [ref=e475]: 2026-02-27 15:32
+          - gridcell "Tenant Admin" [ref=e478]: Tenant Admin
+          - gridcell "blue" [ref=e481]:
+            - generic "blue" [ref=e483]:
+              - generic [ref=e484]: Minor
+        - row "Migration Types network-element-exercise oss-ri-migration-types.xlsx 2026-02-27 15:26 Tenant Admin blue" [ref=e488] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e490]: Migration Types
+          - gridcell "network-element-exercise" [ref=e493]: network-element-exercise
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e496]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 15:26" [ref=e499]:
+            - generic [ref=e500]: 2026-02-27 15:26
+          - gridcell "Tenant Admin" [ref=e503]: Tenant Admin
+          - gridcell "blue" [ref=e506]:
+            - generic "blue" [ref=e508]:
+              - generic [ref=e509]: Minor
+        - row "Migration Types network-element-exercise oss-ri-migration-types.xlsx 2026-02-27 15:17 Tenant Admin" [ref=e513] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e515]: Migration Types
+          - gridcell "network-element-exercise" [ref=e518]: network-element-exercise
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e521]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 15:17" [ref=e524]:
+            - generic [ref=e525]: 2026-02-27 15:17
+          - gridcell "Tenant Admin" [ref=e528]: Tenant Admin
+          - gridcell [ref=e531]
+        - row "Migration Types network-element-exercise oss-ri-migration-types.xlsx 2026-02-27 14:46 Tenant Admin" [ref=e535] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e537]: Migration Types
+          - gridcell "network-element-exercise" [ref=e540]: network-element-exercise
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e543]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 14:46" [ref=e546]:
+            - generic [ref=e547]: 2026-02-27 14:46
+          - gridcell "Tenant Admin" [ref=e550]: Tenant Admin
+          - gridcell [ref=e553]
+        - row "Migration Types network-element-exercise oss-ri-migration-types.xlsx 2026-02-27 14:39 Tenant Admin" [ref=e557] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e559]: Migration Types
+          - gridcell "network-element-exercise" [ref=e562]: network-element-exercise
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e565]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 14:39" [ref=e568]:
+            - generic [ref=e569]: 2026-02-27 14:39
+          - gridcell "Tenant Admin" [ref=e572]: Tenant Admin
+          - gridcell [ref=e575]
+        - row "Migration Types network-element-exercise oss-ri-migration-types.xlsx 2026-02-27 14:36 Tenant Admin" [ref=e579] [cursor=pointer]:
+          - gridcell "Migration Types" [ref=e581]: Migration Types
+          - gridcell "network-element-exercise" [ref=e584]: network-element-exercise
+          - gridcell "oss-ri-migration-types.xlsx" [ref=e587]: oss-ri-migration-types.xlsx
+          - gridcell "2026-02-27 14:36" [ref=e590]:
+            - generic [ref=e591]: 2026-02-27 14:36
+          - gridcell "Tenant Admin" [ref=e594]: Tenant Admin
+          - gridcell [ref=e597]
+      - list [ref=e601]:
+        - listitem [ref=e602]: 200 items, 1-20 shown
+        - listitem [ref=e603] [cursor=pointer]:
+          - img [ref=e604]:
+            - img [ref=e605]
+        - listitem [ref=e607] [cursor=pointer]: "1"
+        - listitem [ref=e608] [cursor=pointer]: "2"
+        - listitem [ref=e609] [cursor=pointer]: "3"
+        - listitem [ref=e610] [cursor=pointer]: "4"
+        - listitem [ref=e611] [cursor=pointer]: "5"
+        - listitem: ...
+        - listitem [ref=e612] [cursor=pointer]: "10"
+        - listitem [ref=e613] [cursor=pointer]:
+          - img [ref=e614]:
+            - img [ref=e615]
+        - listitem [ref=e617]:
+          - generic "Page Size" [ref=e618] [cursor=pointer]:
+            - generic: 20 per page
+            - generic [ref=e619]:
+              - combobox "Page Size" [active] [ref=e621]
+              - generic "20 per page" [ref=e622]
+```

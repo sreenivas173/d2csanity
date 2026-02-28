@@ -279,15 +279,17 @@ export class MMDesignPage {
   // ========================================
 
   async goToPage(pageNumber: number) {
-    const pageButton = this.paginationContainer.getByRole('listitem', { name: String(pageNumber) });
-    
+    const pageButton = this.paginationContainer.locator('li.ux-react-pagination-item').filter({ hasText: new RegExp(`^${pageNumber}$`) });
+
     // Check if page button exists
     const count = await pageButton.count();
     if (count === 0) {
       return false;
     }
-    
-    await pageButton.click({ force: true });
+
+    await pageButton.scrollIntoViewIfNeeded();
+    await pageButton.click();
+    await this.page.waitForTimeout(2000); // Wait for navigation
     return true;
   }
 

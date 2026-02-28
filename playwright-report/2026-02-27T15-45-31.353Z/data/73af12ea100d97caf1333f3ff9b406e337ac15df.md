@@ -1,0 +1,257 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - generic [ref=e6]:
+    - img [ref=e8]
+    - generic [ref=e10]: Migration Design2Code
+    - generic [ref=e11]:
+      - img [ref=e16] [cursor=pointer]
+      - button "C" [ref=e19] [cursor=pointer]:
+        - generic [ref=e21]: C
+  - generic [ref=e22]:
+    - generic [ref=e23]:
+      - list [ref=e24]:
+        - menuitem "MM Design" [ref=e25] [cursor=pointer]:
+          - listitem [ref=e26]:
+            - generic [ref=e27]:
+              - img [ref=e29]
+              - generic [ref=e35]: MM Design
+        - menuitem "DB Level Design" [ref=e36] [cursor=pointer]:
+          - listitem [ref=e37]:
+            - generic [ref=e38]:
+              - img [ref=e40]
+              - generic [ref=e46]: DB Level Design
+        - menuitem "Settings" [ref=e47] [cursor=pointer]:
+          - listitem [ref=e48]:
+            - generic [ref=e49]:
+              - img [ref=e51]
+              - generic [ref=e57]: Settings
+        - menuitem "Templates" [ref=e58] [cursor=pointer]:
+          - listitem [ref=e59]:
+            - generic [ref=e60]:
+              - img [ref=e62]
+              - generic [ref=e68]: Templates
+      - menuitem "Collapse" [ref=e69] [cursor=pointer]:
+        - listitem [ref=e70]:
+          - generic [ref=e71]:
+            - img [ref=e73]
+            - generic [ref=e79]: Collapse
+    - generic [ref=e86]:
+      - generic [ref=e87]:
+        - generic [ref=e89]: Templates
+        - button [ref=e91] [cursor=pointer]:
+          - img [ref=e94]
+      - table [ref=e97]:
+        - row "Name Status" [ref=e99]:
+          - gridcell "Name" [ref=e101] [cursor=pointer]:
+            - generic [ref=e102]: Name
+          - gridcell "Status" [ref=e105] [cursor=pointer]:
+            - generic [ref=e106]: Status
+        - row "Expand templates" [ref=e110]:
+          - gridcell "Expand templates" [ref=e112]:
+            - button "Expand" [ref=e114] [cursor=pointer]:
+              - img [ref=e115]
+            - generic [ref=e117]:
+              - img [ref=e118]
+              - text: templates
+          - gridcell [ref=e122]
+        - row "Expand configuration" [ref=e126]:
+          - gridcell "Expand configuration" [ref=e128]:
+            - button "Expand" [ref=e130] [cursor=pointer]:
+              - img [ref=e131]
+            - generic [ref=e133]:
+              - img [ref=e134]
+              - text: configuration
+          - gridcell [ref=e138]
+        - row "Expand mistral" [ref=e142]:
+          - gridcell "Expand mistral" [ref=e144]:
+            - button "Expand" [ref=e146] [cursor=pointer]:
+              - img [ref=e147]
+            - generic [ref=e149]:
+              - img [ref=e150]
+              - text: mistral
+          - gridcell [ref=e154]
+        - row "Expand nifi" [ref=e158]:
+          - gridcell "Expand nifi" [ref=e160]:
+            - button "Expand" [ref=e162] [cursor=pointer]:
+              - img [ref=e163]
+            - generic [ref=e165]:
+              - img [ref=e166]
+              - text: nifi
+          - gridcell [ref=e170]
+        - row "Expand python" [ref=e174]:
+          - gridcell "Expand python" [ref=e176]:
+            - button "Expand" [ref=e178] [cursor=pointer]:
+              - img [ref=e179]
+            - generic [ref=e181]:
+              - img [ref=e182]
+              - text: python
+          - gridcell [ref=e186]
+        - row "Expand queries" [ref=e190]:
+          - gridcell "Expand queries" [ref=e192]:
+            - button "Expand" [ref=e194] [cursor=pointer]:
+              - img [ref=e195]
+            - generic [ref=e197]:
+              - img [ref=e198]
+              - text: queries
+          - gridcell [ref=e202]
+        - row "Expand postgres" [ref=e206]:
+          - gridcell "Expand postgres" [ref=e208]:
+            - button "Expand" [active] [ref=e210] [cursor=pointer]:
+              - img [ref=e211]
+            - generic [ref=e213]:
+              - img [ref=e214]
+              - text: postgres
+          - gridcell [ref=e218]
+        - row "d2c_entity_key.sql green" [ref=e223]:
+          - gridcell "d2c_entity_key.sql" [ref=e225]:
+            - generic [ref=e227] [cursor=pointer]:
+              - img [ref=e228]
+              - text: d2c_entity_key.sql
+          - gridcell "green" [ref=e232]:
+            - generic "green" [ref=e234]:
+              - generic [ref=e235]: Default
+        - row "d2c_fallout_report_detail.sql green" [ref=e239]:
+          - gridcell "d2c_fallout_report_detail.sql" [ref=e241]:
+            - generic [ref=e243] [cursor=pointer]:
+              - img [ref=e244]
+              - text: d2c_fallout_report_detail.sql
+          - gridcell "green" [ref=e248]:
+            - generic "green" [ref=e250]:
+              - generic [ref=e251]: Default
+        - row "d2c_flt_entity.sql green" [ref=e255]:
+          - gridcell "d2c_flt_entity.sql" [ref=e257]:
+            - generic [ref=e259] [cursor=pointer]:
+              - img [ref=e260]
+              - text: d2c_flt_entity.sql
+          - gridcell "green" [ref=e264]:
+            - generic "green" [ref=e266]:
+              - generic [ref=e267]: Default
+        - row "d2c_flt_entity_keys.sql green" [ref=e271]:
+          - gridcell "d2c_flt_entity_keys.sql" [ref=e273]:
+            - generic [ref=e275] [cursor=pointer]:
+              - img [ref=e276]
+              - text: d2c_flt_entity_keys.sql
+          - gridcell "green" [ref=e280]:
+            - generic "green" [ref=e282]:
+              - generic [ref=e283]: Default
+        - row "d2c_flt_entity_keys_v.sql green" [ref=e287]:
+          - gridcell "d2c_flt_entity_keys_v.sql" [ref=e289]:
+            - generic [ref=e291] [cursor=pointer]:
+              - img [ref=e292]
+              - text: d2c_flt_entity_keys_v.sql
+          - gridcell "green" [ref=e296]:
+            - generic "green" [ref=e298]:
+              - generic [ref=e299]: Default
+        - row "d2c_fallout_report.sql green" [ref=e303]:
+          - gridcell "d2c_fallout_report.sql" [ref=e305]:
+            - generic [ref=e307] [cursor=pointer]:
+              - img [ref=e308]
+              - text: d2c_fallout_report.sql
+          - gridcell "green" [ref=e312]:
+            - generic "green" [ref=e314]:
+              - generic [ref=e315]: Default
+        - row "d2c_flt_entity_update.sql green" [ref=e319]:
+          - gridcell "d2c_flt_entity_update.sql" [ref=e321]:
+            - generic [ref=e323] [cursor=pointer]:
+              - img [ref=e324]
+              - text: d2c_flt_entity_update.sql
+          - gridcell "green" [ref=e328]:
+            - generic "green" [ref=e330]:
+              - generic [ref=e331]: Default
+        - row "Expand core" [ref=e335]:
+          - gridcell "Expand core" [ref=e337]:
+            - button "Expand" [ref=e339] [cursor=pointer]:
+              - img [ref=e340]
+            - generic [ref=e342]:
+              - img [ref=e343]
+              - text: core
+          - gridcell [ref=e347]
+        - row "Expand fallouts" [ref=e351]:
+          - gridcell "Expand fallouts" [ref=e353]:
+            - button "Expand" [ref=e355] [cursor=pointer]:
+              - img [ref=e356]
+            - generic [ref=e358]:
+              - img [ref=e359]
+              - text: fallouts
+          - gridcell [ref=e363]
+        - row "d2c_migration_execution.sql green" [ref=e367]:
+          - gridcell "d2c_migration_execution.sql" [ref=e369]:
+            - generic [ref=e371] [cursor=pointer]:
+              - img [ref=e372]
+              - text: d2c_migration_execution.sql
+          - gridcell "green" [ref=e376]:
+            - generic "green" [ref=e378]:
+              - generic [ref=e379]: Default
+        - row "d2c_migration_initialization.sql green" [ref=e383]:
+          - gridcell "d2c_migration_initialization.sql" [ref=e385]:
+            - generic [ref=e387] [cursor=pointer]:
+              - img [ref=e388]
+              - text: d2c_migration_initialization.sql
+          - gridcell "green" [ref=e392]:
+            - generic "green" [ref=e394]:
+              - generic [ref=e395]: Default
+        - row "d2c_user_tables.sql green" [ref=e399]:
+          - gridcell "d2c_user_tables.sql" [ref=e401]:
+            - generic [ref=e403] [cursor=pointer]:
+              - img [ref=e404]
+              - text: d2c_user_tables.sql
+          - gridcell "green" [ref=e408]:
+            - generic "green" [ref=e410]:
+              - generic [ref=e411]: Default
+        - row "Expand gather" [ref=e415]:
+          - gridcell "Expand gather" [ref=e417]:
+            - button "Expand" [ref=e419] [cursor=pointer]:
+              - img [ref=e420]
+            - generic [ref=e422]:
+              - img [ref=e423]
+              - text: gather
+          - gridcell [ref=e427]
+        - row "Expand init" [ref=e431]:
+          - gridcell "Expand init" [ref=e433]:
+            - button "Expand" [ref=e435] [cursor=pointer]:
+              - img [ref=e436]
+            - generic [ref=e438]:
+              - img [ref=e439]
+              - text: init
+          - gridcell [ref=e443]
+        - row "Expand mm" [ref=e447]:
+          - gridcell "Expand mm" [ref=e449]:
+            - button "Expand" [ref=e451] [cursor=pointer]:
+              - img [ref=e452]
+            - generic [ref=e454]:
+              - img [ref=e455]
+              - text: mm
+          - gridcell [ref=e459]
+        - row "Expand pse" [ref=e463]:
+          - gridcell "Expand pse" [ref=e465]:
+            - button "Expand" [ref=e467] [cursor=pointer]:
+              - img [ref=e468]
+            - generic [ref=e470]:
+              - img [ref=e471]
+              - text: pse
+          - gridcell [ref=e475]
+        - row "d2c_flt_report_by_table.sql green" [ref=e479]:
+          - gridcell "d2c_flt_report_by_table.sql" [ref=e481]:
+            - generic [ref=e483] [cursor=pointer]:
+              - img [ref=e484]
+              - text: d2c_flt_report_by_table.sql
+          - gridcell "green" [ref=e488]:
+            - generic "green" [ref=e490]:
+              - generic [ref=e491]: Default
+      - list [ref=e495]:
+        - listitem [ref=e496]: 1 items, 1-1 shown
+        - listitem [ref=e497] [cursor=pointer]:
+          - img [ref=e498]:
+            - img [ref=e499]
+        - listitem [ref=e501] [cursor=pointer]: "1"
+        - listitem [ref=e502] [cursor=pointer]:
+          - img [ref=e503]:
+            - img [ref=e504]
+        - listitem [ref=e506]:
+          - generic "Page Size" [ref=e507] [cursor=pointer]:
+            - generic [ref=e508]:
+              - combobox "Page Size" [ref=e510]
+              - generic "10 per page" [ref=e511]
+```

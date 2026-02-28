@@ -433,16 +433,28 @@ export class SettingsPage {
   // Go to the parent wrapper that also contains the dropdown button
   const rowWrapper = fileRow.locator('xpath=..');
 
-  // Hover wrapper (not just row)
+  // Hover wrapper (not just row) with retry
   await rowWrapper.hover();
+  await this.page.waitForTimeout(1000); // Wait for dropdown to appear
 
   const dropdownTrigger = rowWrapper.locator('button').first();
 
-  await expect(dropdownTrigger).toBeVisible();
-  await dropdownTrigger.click();
+  // Retry clicking dropdown trigger if not visible
+  let attempts = 0;
+  while (attempts < 3) {
+    try {
+      await expect(dropdownTrigger).toBeVisible({ timeout: 2000 });
+      await dropdownTrigger.click({ force: true });
+      break;
+    } catch {
+      attempts++;
+      await rowWrapper.hover();
+      await this.page.waitForTimeout(500);
+    }
+  }
 
   const downloadMenuItem = this.page.getByRole('menuitem', { name: 'Download' });
-  await expect(downloadMenuItem).toBeVisible();
+  await expect(downloadMenuItem).toBeVisible({ timeout: 5000 });
 
   const [download] = await Promise.all([
     this.page.waitForEvent('download'),
@@ -456,29 +468,45 @@ export class SettingsPage {
   // ========================================
 
   async viewFileContent(fileName: string, table: 'MM' | 'DB' = 'MM') {
-    // Scope to specific table
-    const tableElement = table === 'MM' ? this.mmTable : this.dbTable;
+    const tableElement = table === 'MM'
+      ? this.page.getByRole('table').nth(0)
+      : this.page.getByRole('table').nth(1);
 
-    // Find and verify file element is visible
-    const fileElement = tableElement.getByRole('gridcell', { name: fileName }).first();
-    await expect(fileElement).toBeVisible();
+    await expect(tableElement).toBeVisible();
 
-    // Scroll into view and hover
-    await fileElement.scrollIntoViewIfNeeded();
-    await fileElement.hover();
+    // Find row that contains the file
+    const fileRow = tableElement
+      .getByRole('row')
+      .filter({ has: this.page.getByText(fileName, { exact: true }) });
 
-    // Wait for the dropdown to become visible
-    await this.page.waitForTimeout(500);
+    await expect(fileRow).toBeVisible();
 
-    // Find and click dropdown trigger
-    const dropdownTrigger = tableElement.locator('button.ux-react-dropdown__trigger').first();
-    await dropdownTrigger.evaluate((node: any) => (node as HTMLButtonElement).click());
+    // Go to the parent wrapper that also contains the dropdown button
+    const rowWrapper = fileRow.locator('xpath=..');
 
-    // Wait for dropdown menu
-    await this.page.waitForTimeout(300);
+    // Hover wrapper (not just row) with retry
+    await rowWrapper.hover();
+    await this.page.waitForTimeout(1000); // Wait for dropdown to appear
 
-    // Click View Content
-    await this.page.getByText('View Content').click();
+    const dropdownTrigger = rowWrapper.locator('button').first();
+
+    // Retry clicking dropdown trigger if not visible
+    let attempts = 0;
+    while (attempts < 3) {
+      try {
+        await expect(dropdownTrigger).toBeVisible({ timeout: 2000 });
+        await dropdownTrigger.click({ force: true });
+        break;
+      } catch {
+        attempts++;
+        await rowWrapper.hover();
+        await this.page.waitForTimeout(500);
+      }
+    }
+
+    const viewContentMenuItem = this.page.getByRole('menuitem', { name: 'View Content' });
+    await expect(viewContentMenuItem).toBeVisible({ timeout: 5000 });
+    await viewContentMenuItem.click();
 
     // Wait for the content dialog to appear
     await this.page.waitForTimeout(1000);

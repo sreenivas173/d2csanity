@@ -136,29 +136,47 @@ test.describe('Pagination Validation on DBL Design Page', () => {
 
   /** Page-size dropdown validation */
   test('Page-size dropdown validation', async ({ page }) => {
-    await expect(dblPage.table).toBeVisible();
+    const table = dblPage.table;
+    await expect(table).toBeVisible();
 
-    const initialText = await dblPage.getPaginationText();
+    const rangeText = dblPage.paginationInfo;
+    await expect(rangeText).toBeVisible();
+
     const totalItems = await dblPage.getTotalItems();
     expect(totalItems).toBeGreaterThan(0);
 
-    // Set page size to 20
+    // Set page size to 20 using POM method
     await dblPage.setPageSize(20);
 
-    // Verify range
-    const updatedText = await dblPage.getPaginationText();
-    const firstPageMatch = updatedText.match(/(\d+)-(\d+) shown/);
+    // Wait deterministically for correct range
+    await expect.poll(async () => {
+      return await rangeText.textContent();
+    }).toMatch(/\d+ items, 1-\d+ shown/);
+
+    const updatedText = await rangeText.textContent();
+    const firstPageMatch = updatedText!.match(/(\d+)-(\d+) shown/);
+
     expect(Number(firstPageMatch![1])).toBe(1);
     expect(Number(firstPageMatch![2])).toBeLessThanOrEqual(20);
 
-    // Navigate to last page if more than 1 page
     const pageSize = 20;
     const expectedPages = Math.ceil(totalItems / pageSize);
-    if (expectedPages > 1) {
-      await dblPage.goToPage(expectedPages);
-      const finalText = await dblPage.getPaginationText();
-      expect(finalText).toMatch(new RegExp(String((expectedPages - 1) * pageSize + 1)));
-    }
+
+    if (expectedPages === 1) return;
+
+    // Navigate to the last page
+    await dblPage.goToPage(expectedPages);
+
+    const expectedStart = (expectedPages - 1) * pageSize + 1;
+    const expectedEnd = totalItems;
+
+    await expect(rangeText).toContainText(String(expectedStart));
+
+    const finalText = await rangeText.textContent();
+    const finalMatch = finalText!.match(/(\d+)-(\d+) shown/);
+
+    expect(Number(finalMatch![1])).toBe(expectedStart);
+    expect(Number(finalMatch![2])).toBe(expectedEnd);
   });
 
   /** Pagination range text updates correctly on page 2 */

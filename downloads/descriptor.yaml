@@ -400,7 +400,7 @@ actions:
         input:
           - name: previously-missed-data
         output:
-          - name: load-result-data
+          - name: result
       {{- else if eq $loadDataProc "oss-yang-inventory" }}
         processor: oss-yang-inventory
         config:

@@ -13,9 +13,9 @@ export class TemplatesPage {
     return this.page.getByRole('table');
   }
 
-  folderRow(folderName: string) {
-  return this.table.getByRole('row', {
-    name: new RegExp(folderName, 'i')
+folderRow(folderName: string) {
+  return this.table.getByRole('row').filter({
+    has: this.page.getByText(folderName, { exact: true })
   });
 }
 
@@ -28,18 +28,25 @@ export class TemplatesPage {
 
   // ---------- Actions ----------
 
-  async expandFolder(folderName: string) {
-    const row = this.folderRow(folderName);
+ async expandFolder(folderName: string) {
+  const row = this.folderRow(folderName);
 
-    await expect(row).toBeVisible();
+  await expect(row).toBeVisible();
 
-    const expandButton = row.getByRole('button');
+  const expandButton = row.getByRole('button');
 
-    if (await expandButton.isVisible()) {
-      await expandButton.click();
-    }
+  if (await expandButton.isVisible()) {
+    await expandButton.click();
   }
+}
 
+async expectFileVisible(fileName: string) {
+  const fileRow = this.table.getByRole('row').filter({
+    has: this.page.getByText(fileName)
+  });
+
+  await expect(fileRow).toBeVisible({ timeout: 10000 });
+}
   // ---------- Validation ----------
 
   // async validateConfigurationContents() {
@@ -82,7 +89,7 @@ export class TemplatesPage {
 
 async validateTree(parentFolder: string, structure: any) {
 
-  // Expand parent
+  // Expand current level
   await this.expandFolder(parentFolder);
 
   for (const key of Object.keys(structure)) {
@@ -90,19 +97,15 @@ async validateTree(parentFolder: string, structure: any) {
     const value = structure[key];
 
     if (Array.isArray(value)) {
-      // key is folder with files
+      // Folder with files
       await this.expandFolder(key);
 
       for (const file of value) {
-        await expect(
-          this.table.getByRole('row').filter({
-            has: this.page.getByText(file, { exact: true })
-          })
-        ).toBeVisible();
+        await this.expectFileVisible(file);
       }
 
     } else {
-      // key is subfolder with nested structure
+      // Nested folder
       await this.validateTree(key, value);
     }
   }

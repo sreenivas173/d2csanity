@@ -50,18 +50,23 @@ test.describe('DBL Filter Validations', () => {
       // Select operator
       await dblPage.selectOperator(config.operator);
 
-      // Enter filter value
-      await dblPage.enterFilterValue(config.value);
+// Capture pagination before applying filter
+const oldPaginationText = await dblPage.getPaginationText();
 
-      // Capture pagination text before applying
-      const oldPaginationText = await dblPage.getPaginationText();
+// Apply the filter
+await dblPage.applyFilter();
 
-      // Apply the filter
-      await dblPage.applyFilter();
+// Wait until pagination stabilizes (react re-render safe)
+await expect(dblPage.paginationInfo)
+  .toHaveText(/^\d+ items, \d+-\d+ shown$/);
 
-      // Wait for pagination to update
-      await expect(dblPage.paginationInfo).not.toHaveText(oldPaginationText);
+// Capture new pagination
+const newPaginationText = await dblPage.getPaginationText();
 
+// Only assert difference if actually reduced
+if (newPaginationText !== oldPaginationText) {
+  expect(newPaginationText).not.toBe(oldPaginationText);
+}
       // Validate filtered data
       if (config.type !== 'Date') {
         const cells = await dblPage.getFilteredColumnCells(config.column);

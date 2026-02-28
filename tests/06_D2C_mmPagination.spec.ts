@@ -85,8 +85,8 @@ test.describe('Pagination Validation on MM Design Page', () => {
     // Click page 2 using POM method
     await mmDesignPage.goToPage(2);
 
-    // Optionally ensure table re-rendered
-    await expect(table.getByRole('row').nth(1)).toBeVisible();
+    // Wait for pagination to update to page 2
+    await expect(mmDesignPage.paginationInfo).toContainText('11-');
 
     // After navigation, get the first data row again and capture its ID
     const updatedFirstRow = table.getByRole('row').nth(1);
@@ -144,8 +144,8 @@ test.describe('Pagination Validation on MM Design Page', () => {
     // Click the second page dynamically
     await mmDesignPage.goToPage(2);
 
-    // Wait for range to change away from 1-
-    await expect(rangeText).not.toContainText('1-');
+    // Wait for range to change to page 2
+    await expect(rangeText).toHaveText(/11-\d+ shown/);
 
     // Click previous arrow
     await mmDesignPage.clickPreviousArrow();

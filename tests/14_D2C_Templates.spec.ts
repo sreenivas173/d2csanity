@@ -300,35 +300,51 @@ test.describe('D2C Templates page validations', () => {
      */
 
     // Define the complete queries folder structure for validation
-    const queriesStructure = {
-        oracle: {
-            core: [
-                'create_table_transformation.sql',
-                'drop_object.sql',
-                'exec_immediate.sql',
-                'insert.sql',
-                'union.sql',
-                'create_table.sql',
-                'create_table_as.sql',
-                'echo_terminator.sql',
-                'job_use.sql',
-                'prompt.sql',
-                'synonym.sql',
-                'd2c_flt_entity_keys.sql',
-                'd2c_flt_entity_update.sql',
-                'd2c_flt_entity_update2.sql',
-                'd2c_fallout_report.sql',
-                'd2c_fallout_report_detail.sql'
-            ]
-        }
-    };
+    const queriesStructure = [
+        'create_table_transformation.sql',
+        'drop_object.sql',
+        'exec_immediate.sql',
+        'insert.sql',
+        'union.sql',
+        'create_table.sql',
+        'create_table_as.sql',
+        'echo_terminator.sql',
+        'job_use.sql',
+        'prompt.sql',
+        'synonym.sql',
+        'd2c_flt_entity_keys.sql',
+        'd2c_flt_entity_update.sql',
+        'd2c_flt_entity_update2.sql',
+        'd2c_fallout_report.sql',
+        'd2c_fallout_report_detail.sql'
+    ];
 
     test('Validate queries full structure', async () => {
-        // Use the validateTree method to validate the complete hierarchical structure
-        // This method recursively expands folders and validates file presence
-        await templatesPage.validateTree('templates', {
-            queries: queriesStructure
-        });
-    });
 
+  await templatesPage.expandFolder('templates');
+  await templatesPage.expandFolder('queries');
+  await templatesPage.expandFolder('postgres');
+
+  const expectedFiles = [
+    'd2c_entity_key.sql',
+    'd2c_fallout_report_detail.sql',
+    'd2c_flt_entity.sql',
+    'd2c_flt_entity_keys.sql',
+    'd2c_flt_entity_keys_v.sql',
+    'd2c_fallout_report.sql',
+    'd2c_flt_entity_update.sql',
+    'd2c_migration_execution.sql',
+    'd2c_migration_initialization.sql',
+    'd2c_user_tables.sql',
+    'd2c_flt_report_by_table.sql'
+  ];
+
+  for (const file of expectedFiles) {
+    await expect(
+      templatesPage.table.getByRole('row').filter({
+        has: templatesPage.page.getByText(file)
+      })
+    ).toBeVisible({ timeout: 10000 });
+  }
+});
 });

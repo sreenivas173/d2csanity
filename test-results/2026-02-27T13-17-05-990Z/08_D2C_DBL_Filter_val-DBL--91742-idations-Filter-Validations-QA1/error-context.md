@@ -1,0 +1,176 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - generic [ref=e6]:
+    - img [ref=e8]
+    - generic [ref=e10]: Migration Design2Code
+    - generic [ref=e11]:
+      - img [ref=e16] [cursor=pointer]
+      - button "C" [ref=e19] [cursor=pointer]:
+        - generic [ref=e21]: C
+  - generic [ref=e22]:
+    - generic [ref=e23]:
+      - list [ref=e24]:
+        - menuitem "MM Design" [ref=e25] [cursor=pointer]:
+          - listitem [ref=e26]:
+            - generic [ref=e27]:
+              - img [ref=e29]
+              - generic [ref=e35]: MM Design
+        - menuitem "DB Level Design" [ref=e36] [cursor=pointer]:
+          - listitem [ref=e37]:
+            - generic [ref=e38]:
+              - img [ref=e40]
+              - generic [ref=e46]: DB Level Design
+        - menuitem "Settings" [ref=e47] [cursor=pointer]:
+          - listitem [ref=e48]:
+            - generic [ref=e49]:
+              - img [ref=e51]
+              - generic [ref=e57]: Settings
+        - menuitem "Templates" [ref=e58] [cursor=pointer]:
+          - listitem [ref=e59]:
+            - generic [ref=e60]:
+              - img [ref=e62]
+              - generic [ref=e68]: Templates
+      - menuitem "Collapse" [ref=e69] [cursor=pointer]:
+        - listitem [ref=e70]:
+          - generic [ref=e71]:
+            - img [ref=e73]
+            - generic [ref=e79]: Collapse
+    - generic [ref=e86]:
+      - generic [ref=e87]:
+        - generic [ref=e93]:
+          - textbox "Search" [ref=e94]
+          - generic [ref=e95]:
+            - img:
+              - img
+        - generic [ref=e96]:
+          - button "Upload File" [ref=e97] [cursor=pointer]:
+            - generic [ref=e99]: Upload File
+          - button [ref=e100] [cursor=pointer]:
+            - img [ref=e103]
+          - generic [ref=e105]:
+            - button [active] [ref=e106] [cursor=pointer]:
+              - img [ref=e109]
+            - superscript [ref=e111]:
+              - generic [ref=e112]: "1"
+      - table [ref=e114]:
+        - row "Type Design File Date Author Error Severity" [ref=e116]:
+          - gridcell "Type" [ref=e118] [cursor=pointer]:
+            - generic [ref=e119]: Type
+          - gridcell "Design File" [ref=e122] [cursor=pointer]:
+            - generic [ref=e123]: Design File
+            - img [ref=e126]
+          - gridcell "Date" [ref=e130] [cursor=pointer]:
+            - generic [ref=e131]: Date
+          - gridcell "Author" [ref=e134] [cursor=pointer]:
+            - generic [ref=e135]: Author
+          - gridcell "Error Severity" [ref=e138] [cursor=pointer]:
+            - generic [ref=e139]: Error Severity
+        - row "DB Level d2c_example_IDB_ora_Srini.xlsx 2026-02-27 17:45 Tenant Admin red" [ref=e143] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e145]: DB Level
+          - gridcell "d2c_example_IDB_ora_Srini.xlsx" [ref=e148]: d2c_example_IDB_ora_Srini.xlsx
+          - gridcell "2026-02-27 17:45" [ref=e151]:
+            - generic [ref=e152]: 2026-02-27 17:45
+          - gridcell "Tenant Admin" [ref=e155]: Tenant Admin
+          - gridcell "red" [ref=e158]:
+            - generic "red" [ref=e160]:
+              - generic [ref=e161]: Blocker
+        - row "DB Level d2c_example_IDB_ora_Srini.xlsx 2026-02-27 10:41 Tenant Admin red" [ref=e165] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e167]: DB Level
+          - gridcell "d2c_example_IDB_ora_Srini.xlsx" [ref=e170]: d2c_example_IDB_ora_Srini.xlsx
+          - gridcell "2026-02-27 10:41" [ref=e173]:
+            - generic [ref=e174]: 2026-02-27 10:41
+          - gridcell "Tenant Admin" [ref=e177]: Tenant Admin
+          - gridcell "red" [ref=e180]:
+            - generic "red" [ref=e182]:
+              - generic [ref=e183]: Blocker
+        - row "DB Level d2c_example_IDB_ora_Srini.xlsx 2026-02-26 19:47 Tenant Admin red" [ref=e187] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e189]: DB Level
+          - gridcell "d2c_example_IDB_ora_Srini.xlsx" [ref=e192]: d2c_example_IDB_ora_Srini.xlsx
+          - gridcell "2026-02-26 19:47" [ref=e195]:
+            - generic [ref=e196]: 2026-02-26 19:47
+          - gridcell "Tenant Admin" [ref=e199]: Tenant Admin
+          - gridcell "red" [ref=e202]:
+            - generic "red" [ref=e204]:
+              - generic [ref=e205]: Blocker
+        - generic [ref=e208]:
+          - row "DB Level d2c_example_IDB_ora_Srini.xlsx 2026-02-26 19:46 Tenant Admin red" [ref=e209] [cursor=pointer]:
+            - gridcell "DB Level" [ref=e211]: DB Level
+            - gridcell "d2c_example_IDB_ora_Srini.xlsx" [ref=e214]: d2c_example_IDB_ora_Srini.xlsx
+            - gridcell "2026-02-26 19:46" [ref=e217]:
+              - generic [ref=e218]: 2026-02-26 19:46
+            - gridcell "Tenant Admin" [ref=e221]: Tenant Admin
+            - gridcell "red" [ref=e224]:
+              - generic "red" [ref=e226]:
+                - generic [ref=e227]: Blocker
+          - button [ref=e230] [cursor=pointer]:
+            - button [ref=e233]:
+              - img [ref=e236]
+        - row "DB Level d2c_example_IDB_ora_Srini.xlsx 2026-02-26 19:46 Tenant Admin red" [ref=e240] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e242]: DB Level
+          - gridcell "d2c_example_IDB_ora_Srini.xlsx" [ref=e245]: d2c_example_IDB_ora_Srini.xlsx
+          - gridcell "2026-02-26 19:46" [ref=e248]:
+            - generic [ref=e249]: 2026-02-26 19:46
+          - gridcell "Tenant Admin" [ref=e252]: Tenant Admin
+          - gridcell "red" [ref=e255]:
+            - generic "red" [ref=e257]:
+              - generic [ref=e258]: Blocker
+        - row "DB Level d2c_example_SDB_oracle.xlsx 2026-02-25 18:54 Tenant Admin blue" [ref=e262] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e264]: DB Level
+          - gridcell "d2c_example_SDB_oracle.xlsx" [ref=e267]: d2c_example_SDB_oracle.xlsx
+          - gridcell "2026-02-25 18:54" [ref=e270]:
+            - generic [ref=e271]: 2026-02-25 18:54
+          - gridcell "Tenant Admin" [ref=e274]: Tenant Admin
+          - gridcell "blue" [ref=e277]:
+            - generic "blue" [ref=e279]:
+              - generic [ref=e280]: Minor
+        - row "DB Level d2c_example_IDB_ora.xlsx 2026-02-25 09:51 Tenant Admin" [ref=e284] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e286]: DB Level
+          - gridcell "d2c_example_IDB_ora.xlsx" [ref=e289]: d2c_example_IDB_ora.xlsx
+          - gridcell "2026-02-25 09:51" [ref=e292]:
+            - generic [ref=e293]: 2026-02-25 09:51
+          - gridcell "Tenant Admin" [ref=e296]: Tenant Admin
+          - gridcell [ref=e299]
+        - row "DB Level d2c_example_IDB_ora.xlsx 2026-02-24 10:14 Tenant Admin" [ref=e303] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e305]: DB Level
+          - gridcell "d2c_example_IDB_ora.xlsx" [ref=e308]: d2c_example_IDB_ora.xlsx
+          - gridcell "2026-02-24 10:14" [ref=e311]:
+            - generic [ref=e312]: 2026-02-24 10:14
+          - gridcell "Tenant Admin" [ref=e315]: Tenant Admin
+          - gridcell [ref=e318]
+        - row "DB Level d2c_example_IDB_ora_Srini.xlsx 2026-02-23 11:45 Tenant Admin" [ref=e322] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e324]: DB Level
+          - gridcell "d2c_example_IDB_ora_Srini.xlsx" [ref=e327]: d2c_example_IDB_ora_Srini.xlsx
+          - gridcell "2026-02-23 11:45" [ref=e330]:
+            - generic [ref=e331]: 2026-02-23 11:45
+          - gridcell "Tenant Admin" [ref=e334]: Tenant Admin
+          - gridcell [ref=e337]
+        - row "DB Level d2c_example_IDB_ora.xlsx 2026-02-23 09:49 Tenant Admin" [ref=e341] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e343]: DB Level
+          - gridcell "d2c_example_IDB_ora.xlsx" [ref=e346]: d2c_example_IDB_ora.xlsx
+          - gridcell "2026-02-23 09:49" [ref=e349]:
+            - generic [ref=e350]: 2026-02-23 09:49
+          - gridcell "Tenant Admin" [ref=e353]: Tenant Admin
+          - gridcell [ref=e356]
+      - list [ref=e360]:
+        - listitem [ref=e361]: 130 items, 1-10 shown
+        - listitem [ref=e362] [cursor=pointer]:
+          - img [ref=e363]:
+            - img [ref=e364]
+        - listitem [ref=e366] [cursor=pointer]: "1"
+        - listitem [ref=e367] [cursor=pointer]: "2"
+        - listitem [ref=e368] [cursor=pointer]: "3"
+        - listitem [ref=e369] [cursor=pointer]: "4"
+        - listitem [ref=e370] [cursor=pointer]: "5"
+        - listitem: ...
+        - listitem [ref=e371] [cursor=pointer]: "13"
+        - listitem [ref=e372] [cursor=pointer]:
+          - img [ref=e373]:
+            - img [ref=e374]
+        - listitem [ref=e376]:
+          - generic "Page Size" [ref=e377] [cursor=pointer]:
+            - generic [ref=e378]:
+              - combobox "Page Size" [ref=e380]
+              - generic "10 per page" [ref=e381]
+```

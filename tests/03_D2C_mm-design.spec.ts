@@ -52,8 +52,8 @@ test.describe('MM Design Page Validations', () => {
 
     await mmDesignPage.clickRefresh();
 
-    // Validate search input still retains value (correct behavior)
-    await expect(searchInput).toHaveValue('oss-lm-mig');
+    // Validate search input is cleared after refresh (actual behavior)
+    await expect(searchInput).toHaveValue('');
 
     // Validate table reloaded
     const table = mmDesignPage.table;

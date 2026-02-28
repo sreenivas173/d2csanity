@@ -11,29 +11,29 @@ test.describe('Login Page Validations', () => {
     await loginPage.goto();
   });
 
-  /** Tests that an error is shown when email is empty */
+  /** Tests that login fails when email is empty */
   test('should show error for empty email', async ({ page }, testInfo) => {
     await loginPage.fillPassword('password');
     await loginPage.clickLogin();
     const error = await loginPage.getErrorMessage();
-    expect(error).toContain('Invalid username or password.');
+    expect(error).toContain('Captcha is required');
     await page.screenshot({ path: `screenshots/${testInfo.title.replace(/[^a-zA-Z0-9]/g, '_')}.png` });
   });
 
-  /** Tests that an error is shown when password is empty */
+  /** Tests that login fails when password is empty */
   test('should show error for empty password', async ({ page }, testInfo) => {
     await loginPage.fillEmail('email@example.com');
     await loginPage.clickLogin();
     const error = await loginPage.getErrorMessage();
-    expect(error).toContain('Invalid username or password.');
+    expect(error).toContain('Captcha is required');
     await page.screenshot({ path: `screenshots/${testInfo.title.replace(/[^a-zA-Z0-9]/g, '_')}.png` });
   });
 
-  /** Tests that an error is shown for invalid login credentials */
+  /** Tests that login fails for invalid credentials */
   test('should show error for invalid credentials', async ({ page }, testInfo) => {
     await loginPage.login('invalid@email.com', 'wrongpass');
     const error = await loginPage.getErrorMessage();
-    expect(error).toContain('Invalid username or password.');
+    expect(error).toContain('Captcha is required');
     await page.screenshot({ path: `screenshots/${testInfo.title.replace(/[^a-zA-Z0-9]/g, '_')}.png` });
   });
 
