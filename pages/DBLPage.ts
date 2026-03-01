@@ -325,16 +325,57 @@ export class DBLPage {
   // Pagination Methods
   // ========================================
 
-  async goToPage(pageNumber: number) {
-    const pageButton = this.paginationContainer.getByRole('listitem', { name: String(pageNumber) });
+  // async goToPage(pageNumber: number) {
+  //   const pageButton = this.paginationContainer.getByRole('listitem', { name: String(pageNumber) });
     
-    // Check if page button exists
-    const count = await pageButton.count();
+  //   // Check if page button exists
+  //   const count = await pageButton.count();
+  //   if (count === 0) {
+  //     return false;
+  //   }
+    
+  //   await pageButton.click({ force: true });
+  //   return true;
+  // }
+
+  async goToPage(pageNumber: number): Promise<boolean> {
+    // First try to find exact page button
+    let pageButton = this.paginationContainer
+      .locator('li')
+      .filter({ hasText: new RegExp(`^${pageNumber}$`) })
+      .first();
+
+    let count = await pageButton.count();
+    
+    // If exact page button not found, try using role button
     if (count === 0) {
-      return false;
+      pageButton = this.paginationContainer.getByRole('button', { name: String(pageNumber) });
+      count = await pageButton.count();
     }
     
-    await pageButton.click({ force: true });
+    // If still not found, return false
+    if (count === 0) {
+      console.log(`Page ${pageNumber} button not found`);
+      return false;
+    }
+
+    await pageButton.scrollIntoViewIfNeeded();
+    await pageButton.click();
+
+    // Get current page size dynamically from the page size dropdown
+    const pageSizeSelect = this.page.locator('.ant-select-selector').last();
+    const pageSizeText = await pageSizeSelect.textContent();
+    const pageSizeMatch = pageSizeText?.match(/(\d+)/);
+    const pageSize = pageSizeMatch ? Number(pageSizeMatch[1]) : 10;
+
+    const expectedStart = (pageNumber - 1) * pageSize + 1;
+
+    // Wait for pagination text to reflect new page
+    await expect.poll(async () => {
+      const { start } = await this.getCurrentPageRange();
+      return start === expectedStart;
+    }, { timeout: 10000 }).toBeTruthy();
+    
     return true;
   }
 
@@ -354,13 +395,31 @@ export class DBLPage {
   }
 
   async clickPreviousArrow() {
-    const items = this.paginationContainer.locator('li');
-    const prevArrow = items.nth(1);
+    const prevArrow = this.paginationContainer.locator('li.ux-react-pagination-prev');
     
     await expect(prevArrow).toBeVisible();
-    await expect(prevArrow).toBeEnabled();
     
+    // Check if disabled
+    const isDisabled = await prevArrow.getAttribute('aria-disabled');
+    if (isDisabled === 'true') {
+      return false;
+    }
+    
+    // Click and wait for table to reload first
     await prevArrow.click({ force: true });
+    
+    // Wait for valid pagination data to appear (not 0 items)
+    await expect.poll(async () => {
+      const text = await this.getPaginationText();
+      const match = text.match(/(\d+) items/);
+      const totalItems = match ? Number(match[1]) : 0;
+      return totalItems > 0;
+    }, { timeout: 10000 }).toBeTruthy();
+    
+    // Additional wait for pagination to stabilize
+    await this.page.waitForTimeout(500);
+    
+    return true;
   }
 
   async getPageCount(): Promise<number> {
@@ -389,11 +448,16 @@ export class DBLPage {
 
   async getCurrentPageRange(): Promise<{ start: number; end: number }> {
     const text = await this.getPaginationText();
+    // Handle both normal cases like "10 items, 1-10 shown" and edge case "0 items, 0-0 shown"
     const match = text.match(/(\d+)-(\d+) shown/);
-    return {
-      start: match ? Number(match[1]) : 0,
-      end: match ? Number(match[2]) : 0
-    };
+    if (match) {
+      return {
+        start: Number(match[1]),
+        end: Number(match[2])
+      };
+    }
+    // If no match, return default values indicating invalid state
+    return { start: 0, end: 0 };
   }
 
   // ========================================

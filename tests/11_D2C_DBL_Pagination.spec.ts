@@ -197,6 +197,8 @@ test.describe('Pagination Validation on DBL Design Page', () => {
 
     // Navigate to Page 2
     await dblPage.goToPage(2);
-    await expect(dblPage.paginationInfo).toHaveText(/\d+ items, 11-\d+ shown/);
+    await expect.poll(async () => {
+  return await dblPage.paginationInfo.textContent();
+}).toMatch(/\d+ items, 11-\d+ shown/);
   });
 });

@@ -1,0 +1,212 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e4]:
+  - generic [ref=e6]:
+    - img [ref=e8]
+    - generic [ref=e10]: Migration Design2Code
+    - generic [ref=e11]:
+      - img [ref=e16] [cursor=pointer]
+      - button "C" [ref=e19] [cursor=pointer]:
+        - generic [ref=e21]: C
+  - generic [ref=e22]:
+    - generic [ref=e23]:
+      - list [ref=e24]:
+        - menuitem "MM Design" [ref=e25] [cursor=pointer]:
+          - listitem [ref=e26]:
+            - generic [ref=e27]:
+              - img [ref=e29]
+              - generic [ref=e35]: MM Design
+        - menuitem "DB Level Design" [ref=e36] [cursor=pointer]:
+          - listitem [ref=e37]:
+            - generic [ref=e38]:
+              - img [ref=e40]
+              - generic [ref=e46]: DB Level Design
+        - menuitem "Settings" [ref=e47] [cursor=pointer]:
+          - listitem [ref=e48]:
+            - generic [ref=e49]:
+              - img [ref=e51]
+              - generic [ref=e57]: Settings
+        - menuitem "Templates" [ref=e58] [cursor=pointer]:
+          - listitem [ref=e59]:
+            - generic [ref=e60]:
+              - img [ref=e62]
+              - generic [ref=e68]: Templates
+      - menuitem "Collapse" [ref=e69] [cursor=pointer]:
+        - listitem [ref=e70]:
+          - generic [ref=e71]:
+            - img [ref=e73]
+            - generic [ref=e79]: Collapse
+    - generic [ref=e86]:
+      - generic [ref=e87]:
+        - generic [ref=e93]:
+          - textbox "Search" [ref=e94]
+          - generic [ref=e95]:
+            - img:
+              - img
+        - generic [ref=e96]:
+          - button "Upload File" [ref=e97] [cursor=pointer]:
+            - generic [ref=e99]: Upload File
+          - button [ref=e100] [cursor=pointer]:
+            - img [ref=e103]
+          - button [ref=e106] [cursor=pointer]:
+            - img [ref=e109]
+      - table [ref=e112]:
+        - row "Type Design File Date Author Error Severity" [ref=e114]:
+          - gridcell "Type" [ref=e116] [cursor=pointer]:
+            - generic [ref=e117]: Type
+          - gridcell "Design File" [ref=e120] [cursor=pointer]:
+            - generic [ref=e121]: Design File
+          - gridcell "Date" [ref=e124] [cursor=pointer]:
+            - generic [ref=e125]: Date
+          - gridcell "Author" [ref=e128] [cursor=pointer]:
+            - generic [ref=e129]: Author
+          - gridcell "Error Severity" [ref=e132] [cursor=pointer]:
+            - generic [ref=e133]: Error Severity
+        - row "DB Level NC.ODIDO.FXL.DM.IDB (18).xlsx 2025-10-01 14:30 Tenant Admin yellow" [ref=e137] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e139]: DB Level
+          - gridcell "NC.ODIDO.FXL.DM.IDB (18).xlsx" [ref=e142]: NC.ODIDO.FXL.DM.IDB (18).xlsx
+          - gridcell "2025-10-01 14:30" [ref=e145]:
+            - generic [ref=e146]: 2025-10-01 14:30
+          - gridcell "Tenant Admin" [ref=e149]: Tenant Admin
+          - gridcell "yellow" [ref=e152]:
+            - generic "yellow" [ref=e154]:
+              - generic [ref=e155]: Major
+        - row "DB Level NC.ODIDO.FXL.DM.IDB (17).xlsx 2025-10-01 14:18 Tenant Admin yellow" [ref=e159] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e161]: DB Level
+          - gridcell "NC.ODIDO.FXL.DM.IDB (17).xlsx" [ref=e164]: NC.ODIDO.FXL.DM.IDB (17).xlsx
+          - gridcell "2025-10-01 14:18" [ref=e167]:
+            - generic [ref=e168]: 2025-10-01 14:18
+          - gridcell "Tenant Admin" [ref=e171]: Tenant Admin
+          - gridcell "yellow" [ref=e174]:
+            - generic "yellow" [ref=e176]:
+              - generic [ref=e177]: Major
+        - row "DB Level NC.ND.PH2_2.TRAPPIST.DM.DDS.SDB_new.xlsx 2025-09-29 13:50 Tenant Admin red" [ref=e181] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e183]: DB Level
+          - gridcell "NC.ND.PH2_2.TRAPPIST.DM.DDS.SDB_new.xlsx" [ref=e186]: NC.ND.PH2_2.TRAPPIST.DM.DDS.SDB_new.xlsx
+          - gridcell "2025-09-29 13:50" [ref=e189]:
+            - generic [ref=e190]: 2025-09-29 13:50
+          - gridcell "Tenant Admin" [ref=e193]: Tenant Admin
+          - gridcell "red" [ref=e196]:
+            - generic "red" [ref=e198]:
+              - generic [ref=e199]: Blocker
+        - row "DB Level d2c_example_SDB_pg(2).xlsx 2025-09-29 12:39 Tenant Admin yellow" [ref=e203] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e205]: DB Level
+          - gridcell "d2c_example_SDB_pg(2).xlsx" [ref=e208]: d2c_example_SDB_pg(2).xlsx
+          - gridcell "2025-09-29 12:39" [ref=e211]:
+            - generic [ref=e212]: 2025-09-29 12:39
+          - gridcell "Tenant Admin" [ref=e215]: Tenant Admin
+          - gridcell "yellow" [ref=e218]:
+            - generic "yellow" [ref=e220]:
+              - generic [ref=e221]: Major
+        - row "DB Level d2c_example_SDB_pg_dbl_pse.xlsx 2025-09-26 13:22 Tenant Admin yellow" [ref=e225] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e227]: DB Level
+          - gridcell "d2c_example_SDB_pg_dbl_pse.xlsx" [ref=e230]: d2c_example_SDB_pg_dbl_pse.xlsx
+          - gridcell "2025-09-26 13:22" [ref=e233]:
+            - generic [ref=e234]: 2025-09-26 13:22
+          - gridcell "Tenant Admin" [ref=e237]: Tenant Admin
+          - gridcell "yellow" [ref=e240]:
+            - generic "yellow" [ref=e242]:
+              - generic [ref=e243]: Major
+        - row "DB Level d2c_example_SDB_pg(2).xlsx 2025-09-25 15:37 Tenant Admin yellow" [ref=e247] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e249]: DB Level
+          - gridcell "d2c_example_SDB_pg(2).xlsx" [ref=e252]: d2c_example_SDB_pg(2).xlsx
+          - gridcell "2025-09-25 15:37" [ref=e255]:
+            - generic [ref=e256]: 2025-09-25 15:37
+          - gridcell "Tenant Admin" [ref=e259]: Tenant Admin
+          - gridcell "yellow" [ref=e262]:
+            - generic "yellow" [ref=e264]:
+              - generic [ref=e265]: Major
+        - row "DB Level NC.ODIDO.FXL.DM.IDB (3)(1).xlsx 2025-09-19 13:17 Tenant Admin blue" [ref=e269] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e271]: DB Level
+          - gridcell "NC.ODIDO.FXL.DM.IDB (3)(1).xlsx" [ref=e274]: NC.ODIDO.FXL.DM.IDB (3)(1).xlsx
+          - gridcell "2025-09-19 13:17" [ref=e277]:
+            - generic [ref=e278]: 2025-09-19 13:17
+          - gridcell "Tenant Admin" [ref=e281]: Tenant Admin
+          - gridcell "blue" [ref=e284]:
+            - generic "blue" [ref=e286]:
+              - generic [ref=e287]: Minor
+        - row "DB Level d2c_example_IDB_oracle.xlsx 2025-09-19 11:37 Tenant Admin yellow" [ref=e291] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e293]: DB Level
+          - gridcell "d2c_example_IDB_oracle.xlsx" [ref=e296]: d2c_example_IDB_oracle.xlsx
+          - gridcell "2025-09-19 11:37" [ref=e299]:
+            - generic [ref=e300]: 2025-09-19 11:37
+          - gridcell "Tenant Admin" [ref=e303]: Tenant Admin
+          - gridcell "yellow" [ref=e306]:
+            - generic "yellow" [ref=e308]:
+              - generic [ref=e309]: Major
+        - row "DB Level NC.ODIDO.FXL.DM.IDB (3)(1).xlsx 2025-09-18 15:38 Tenant Admin blue" [ref=e313] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e315]: DB Level
+          - gridcell "NC.ODIDO.FXL.DM.IDB (3)(1).xlsx" [ref=e318]: NC.ODIDO.FXL.DM.IDB (3)(1).xlsx
+          - gridcell "2025-09-18 15:38" [ref=e321]:
+            - generic [ref=e322]: 2025-09-18 15:38
+          - gridcell "Tenant Admin" [ref=e325]: Tenant Admin
+          - gridcell "blue" [ref=e328]:
+            - generic "blue" [ref=e330]:
+              - generic [ref=e331]: Minor
+        - row "DB Level NC.ODIDO.FXL.DM.IDB (3)(1).xlsx 2025-09-18 13:08 Tenant Admin blue" [ref=e335] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e337]: DB Level
+          - gridcell "NC.ODIDO.FXL.DM.IDB (3)(1).xlsx" [ref=e340]: NC.ODIDO.FXL.DM.IDB (3)(1).xlsx
+          - gridcell "2025-09-18 13:08" [ref=e343]:
+            - generic [ref=e344]: 2025-09-18 13:08
+          - gridcell "Tenant Admin" [ref=e347]: Tenant Admin
+          - gridcell "blue" [ref=e350]:
+            - generic "blue" [ref=e352]:
+              - generic [ref=e353]: Minor
+        - row "DB Level NC.ODIDO.FXL.DM.IDB (13).xlsx 2025-09-18 12:08 Tenant Admin yellow" [ref=e357] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e359]: DB Level
+          - gridcell "NC.ODIDO.FXL.DM.IDB (13).xlsx" [ref=e362]: NC.ODIDO.FXL.DM.IDB (13).xlsx
+          - gridcell "2025-09-18 12:08" [ref=e365]:
+            - generic [ref=e366]: 2025-09-18 12:08
+          - gridcell "Tenant Admin" [ref=e369]: Tenant Admin
+          - gridcell "yellow" [ref=e372]:
+            - generic "yellow" [ref=e374]:
+              - generic [ref=e375]: Major
+        - row "DB Level d2c_example_IDB_oracle.xlsx 2025-09-18 12:05 Tenant Admin yellow" [ref=e379] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e381]: DB Level
+          - gridcell "d2c_example_IDB_oracle.xlsx" [ref=e384]: d2c_example_IDB_oracle.xlsx
+          - gridcell "2025-09-18 12:05" [ref=e387]:
+            - generic [ref=e388]: 2025-09-18 12:05
+          - gridcell "Tenant Admin" [ref=e391]: Tenant Admin
+          - gridcell "yellow" [ref=e394]:
+            - generic "yellow" [ref=e396]:
+              - generic [ref=e397]: Major
+        - row "DB Level d2c_example_SDB_pg.xlsx 2025-09-18 11:51 Tenant Admin yellow" [ref=e401] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e403]: DB Level
+          - gridcell "d2c_example_SDB_pg.xlsx" [ref=e406]: d2c_example_SDB_pg.xlsx
+          - gridcell "2025-09-18 11:51" [ref=e409]:
+            - generic [ref=e410]: 2025-09-18 11:51
+          - gridcell "Tenant Admin" [ref=e413]: Tenant Admin
+          - gridcell "yellow" [ref=e416]:
+            - generic "yellow" [ref=e418]:
+              - generic [ref=e419]: Major
+        - row "DB Level d2c_example_SDB_ora.xlsx 2025-09-04 18:07 Tenant Admin blue" [ref=e423] [cursor=pointer]:
+          - gridcell "DB Level" [ref=e425]: DB Level
+          - gridcell "d2c_example_SDB_ora.xlsx" [ref=e428]: d2c_example_SDB_ora.xlsx
+          - gridcell "2025-09-04 18:07" [ref=e431]:
+            - generic [ref=e432]: 2025-09-04 18:07
+          - gridcell "Tenant Admin" [ref=e435]: Tenant Admin
+          - gridcell "blue" [ref=e438]:
+            - generic "blue" [ref=e440]:
+              - generic [ref=e441]: Minor
+      - list [ref=e445]:
+        - listitem [ref=e446]: 134 items, 121-134 shown
+        - listitem [ref=e447] [cursor=pointer]:
+          - img [ref=e448]:
+            - img [ref=e449]
+        - listitem [ref=e451] [cursor=pointer]: "1"
+        - listitem [ref=e452] [cursor=pointer]: "2"
+        - listitem [ref=e453] [cursor=pointer]: "3"
+        - listitem [ref=e454] [cursor=pointer]: "4"
+        - listitem [ref=e455] [cursor=pointer]: "5"
+        - listitem [ref=e456] [cursor=pointer]: "6"
+        - listitem [ref=e457] [cursor=pointer]: "7"
+        - listitem [ref=e458] [cursor=pointer]:
+          - img [ref=e459]:
+            - img [ref=e460]
+        - listitem [ref=e462]:
+          - generic "Page Size" [ref=e463] [cursor=pointer]:
+            - generic [ref=e464]:
+              - combobox "Page Size" [ref=e466]
+              - generic "20 per page" [ref=e467]
+```
