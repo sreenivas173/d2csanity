@@ -129,13 +129,27 @@ actions:
         description: |
 {{ $item.ExtractionRuleDescription | Indent 10 }}
         processor: sql
+        {{- if $item.AggregationRelation }}
+        input:
+          - name: raw-{{ index $item.AggregationParentArray 0 }}
+        {{- end }}
         config:
           filename: extract_{{ ReplaceAll $item.ItemType "-" "_" | ToLower }}.sql
           source-system: {{ $SourceSystem }}
           type: select
           parameters:
+            {{- if $item.AggregationRelation }}
+            - name: sourceid
+              value: $.resources['raw-{{ index $item.AggregationParentArray 0 }}'].data[*]["{{ $item.ChildRefField }}"]
+              multiple: true
+            {{- else }}
             - name: batch_id
               value: $.params['batch-id']
+            - name: configuration_id
+              value: $.configuration
+            - name: descriptor_id
+              value: $.descriptor 
+            {{- end }}
         output:
           - name: {{ $item.ItemRaw | ToLower }}
         {{- range $datakey, $dataitem := $item.Items }}
@@ -365,8 +379,6 @@ actions:
   - id: technical-retry
     description: |
       Action for uploading transformed data in statuses Failed and In-progress into target system.
-    output:
-      - load-result-data
     steps:
       - id: get-transformed-missed
         description: "Get transformed data from MDC db into JSON format"

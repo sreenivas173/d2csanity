@@ -31,13 +31,21 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'QA1',
+      name: 'QA1_D2C',
       use: {
         ...devices['Desktop Chrome'],
         baseURL: 'https://migration-design2code-ui-qa1.cloudmt.managed.netcracker.cloud/'
       },
     },
-
+   
+   
+     {
+       name: 'QA1_MM',
+       use: {
+         ...devices['Desktop Chrome'],
+         baseURL: 'https://cdn-edge-service-qa1.cloudmt.managed.netcracker.cloud//'
+       },
+     }
     // { 
     //   name: 'QA3', 
     //   use: { ...devices['Desktop Chrome'],
