@@ -1,0 +1,198 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e5]:
+    - generic [ref=e7]:
+      - img [ref=e9]
+      - generic [ref=e11]: MIGRATION HUB
+      - tablist [ref=e13]:
+        - generic [ref=e15]:
+          - tab [ref=e16] [cursor=pointer]: Sessions
+          - tab [selected] [ref=e17]: Configurations
+          - tab [ref=e18] [cursor=pointer]: Source Profiles
+          - tab [ref=e19] [cursor=pointer]: Monitoring
+      - generic [ref=e20]:
+        - img [ref=e25] [cursor=pointer]
+        - button [ref=e28] [cursor=pointer]:
+          - generic [ref=e30]: C
+    - generic [ref=e34]:
+      - generic [ref=e35]:
+        - generic [ref=e41]:
+          - textbox [ref=e42]:
+            - /placeholder: Search
+          - generic [ref=e43]:
+            - img:
+              - img
+        - generic [ref=e44]:
+          - button [ref=e45] [cursor=pointer]:
+            - generic [ref=e46]:
+              - img [ref=e48]
+              - generic [ref=e50]: Upload
+          - button [ref=e51] [cursor=pointer]:
+            - img [ref=e54]
+          - button [ref=e57] [cursor=pointer]:
+            - img [ref=e60]
+      - table [ref=e63]:
+        - row [ref=e65]:
+          - gridcell [ref=e67] [cursor=pointer]:
+            - generic [ref=e68]: Configuration ID
+          - gridcell [ref=e71] [cursor=pointer]:
+            - generic [ref=e72]: Version
+          - gridcell [ref=e75] [cursor=pointer]:
+            - generic [ref=e76]: Status
+            - img [ref=e79]
+          - gridcell [ref=e83] [cursor=pointer]:
+            - generic [ref=e84]: Created When
+            - img [ref=e87]
+          - gridcell [ref=e91]:
+            - generic [ref=e92]: Description
+        - row [ref=e96]:
+          - gridcell [ref=e98]:
+            - link [ref=e99] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=3d29266e-a6ed-4032-b32d-4f1326cd0598
+              - generic [ref=e100]: bss-cpq-21009
+          - gridcell [ref=e103]: 1.0.0-1773385259
+          - gridcell [ref=e106]:
+            - generic [ref=e109]: Active
+          - gridcell [ref=e112]:
+            - generic [ref=e113]: 2026-03-13 12:31
+          - gridcell [ref=e116]
+        - row [ref=e120]:
+          - gridcell [ref=e122]:
+            - link [ref=e123] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=83c678b5-2db9-476e-983c-e7793c3d1577
+              - generic [ref=e124]: oss-lm-migration-Mar13thsanity
+          - gridcell [ref=e127]: 1.0.1-1773375175
+          - gridcell [ref=e130]:
+            - generic [ref=e133]: Active
+          - gridcell [ref=e136]:
+            - generic [ref=e137]: 2026-03-13 09:43
+          - gridcell [ref=e140]
+        - row [ref=e144]:
+          - gridcell [ref=e146]:
+            - link [ref=e147] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=6910ea8f-b3f5-4a17-81d4-c174363f6b31
+              - generic [ref=e148]: oss-lm-migration-Mar11thsanityretest
+          - gridcell [ref=e151]: 1.0.1-1773225694
+          - gridcell [ref=e154]:
+            - generic [ref=e157]: Active
+          - gridcell [ref=e160]:
+            - generic [ref=e161]: 2026-03-11 16:12
+          - gridcell [ref=e164]
+        - row [ref=e168]:
+          - gridcell [ref=e170]:
+            - link [ref=e171] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=2222adb3-d9a0-4f73-ace3-08c5910baf97
+              - generic [ref=e172]: oss-lm-migration-Mar11thsanity
+          - gridcell [ref=e175]: 1.0.1-1773203279
+          - gridcell [ref=e178]:
+            - generic [ref=e181]: Active
+          - gridcell [ref=e184]:
+            - generic [ref=e185]: 2026-03-11 09:59
+          - gridcell [ref=e188]
+        - row [ref=e192]:
+          - gridcell [ref=e194]:
+            - link [ref=e195] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=5eb120f2-ddf3-4b9e-852e-19f288a495d5
+              - generic [ref=e196]: oss-lm-migration-Mar10thoracle
+          - gridcell [ref=e199]: 1.0.1-1773118386
+          - gridcell [ref=e202]:
+            - generic [ref=e205]: Active
+          - gridcell [ref=e208]:
+            - generic [ref=e209]: 2026-03-10 10:23
+          - gridcell [ref=e212]
+        - row [ref=e216]:
+          - gridcell [ref=e218]:
+            - link [ref=e219] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=06803059-7b62-4188-a692-9ebf1aa13eb3
+              - generic [ref=e220]: oss-lm-migration-Mar9thsanity
+          - gridcell [ref=e223]: 1.0.1-1773029941
+          - gridcell [ref=e226]:
+            - generic [ref=e229]: Active
+          - gridcell [ref=e232]:
+            - generic [ref=e233]: 2026-03-09 09:50
+          - gridcell [ref=e236]
+        - row [ref=e240]:
+          - gridcell [ref=e242]:
+            - link [ref=e243] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=f10b3837-970b-4275-91e3-2c9cf0cb9b67
+              - generic [ref=e244]: oss-lm-migration-21010-2747Retest
+          - gridcell [ref=e247]: 1.0.1-1772787917
+          - gridcell [ref=e250]:
+            - generic [ref=e253]: Active
+          - gridcell [ref=e256]:
+            - generic [ref=e257]: 2026-03-06 14:35
+          - gridcell [ref=e260]
+        - row [ref=e264]:
+          - gridcell [ref=e266]:
+            - link [ref=e267] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=540cf8cf-fb4e-4202-8427-bc8468f86a9a
+              - generic [ref=e268]: oss-lm-migration-anton-290226
+          - gridcell [ref=e271]: 1.0.1-1772537055
+          - gridcell [ref=e274]:
+            - generic [ref=e277]: Active
+          - gridcell [ref=e280]:
+            - generic [ref=e281]: 2026-03-03 16:54
+          - gridcell [ref=e284]
+        - row [ref=e288]:
+          - gridcell [ref=e290]:
+            - link [ref=e291] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=428763c8-510f-4607-8694-dbccc59893e3
+              - generic [ref=e292]: network-element-exercise-270226
+          - gridcell [ref=e295]: 1.0.1-1772519479
+          - gridcell [ref=e298]:
+            - generic [ref=e301]: Active
+          - gridcell [ref=e304]:
+            - generic [ref=e305]: 2026-03-03 12:01
+          - gridcell [ref=e308]
+        - row [ref=e312]:
+          - gridcell [ref=e314]:
+            - link [ref=e315] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=83f34252-ead3-4643-a742-2addd929e8ef
+              - generic [ref=e316]: network-element-exercise-020326
+          - gridcell [ref=e319]: 1.0.1-1772456674
+          - gridcell [ref=e322]:
+            - generic [ref=e325]: Active
+          - gridcell [ref=e328]:
+            - generic [ref=e329]: 2026-03-02 18:34
+          - gridcell [ref=e332]
+      - list [ref=e336]:
+        - listitem [ref=e337]: 174 items, 1-10 shown
+        - listitem [ref=e338] [cursor=pointer]:
+          - img [ref=e339]:
+            - img [ref=e340]
+        - listitem [ref=e342] [cursor=pointer]: "1"
+        - listitem [ref=e343] [cursor=pointer]: "2"
+        - listitem [ref=e344] [cursor=pointer]: "3"
+        - listitem [ref=e345] [cursor=pointer]: "4"
+        - listitem [ref=e346] [cursor=pointer]: "5"
+        - listitem: ...
+        - listitem [ref=e347] [cursor=pointer]: "18"
+        - listitem [ref=e348] [cursor=pointer]:
+          - img [ref=e349]:
+            - img [ref=e350]
+        - listitem [ref=e352]:
+          - generic [ref=e354] [cursor=pointer]:
+            - combobox [ref=e356]
+            - generic [ref=e357]: 10 per page
+  - dialog [ref=e360]:
+    - generic [ref=e362]:
+      - generic [ref=e363]:
+        - generic [ref=e364]: Upload Configuration
+        - button "Close" [active] [ref=e366] [cursor=pointer]:
+          - img [ref=e369]
+      - button "Drop files here to attach or browse" [ref=e376] [cursor=pointer]:
+        - generic [ref=e378]:
+          - img [ref=e379]:
+            - img [ref=e380]
+          - generic [ref=e383]:
+            - text: Drop files here to attach or
+            - button "browse" [ref=e384]:
+              - generic [ref=e386]: browse
+      - generic [ref=e388]:
+        - button "Upload" [ref=e389] [cursor=pointer]:
+          - generic [ref=e391]: Upload
+        - button "Cancel" [ref=e392] [cursor=pointer]:
+          - generic [ref=e394]: Cancel
+```
