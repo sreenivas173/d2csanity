@@ -1,0 +1,236 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e5]:
+    - generic [ref=e7]:
+      - img [ref=e9]
+      - generic [ref=e11]: MIGRATION HUB
+      - tablist [ref=e13]:
+        - generic [ref=e15]:
+          - tab [ref=e16] [cursor=pointer]: Sessions
+          - tab [selected] [ref=e17]: Configurations
+          - tab [ref=e18] [cursor=pointer]: Source Profiles
+          - tab [ref=e19] [cursor=pointer]: Monitoring
+      - generic [ref=e20]:
+        - img [ref=e25] [cursor=pointer]
+        - button [ref=e28] [cursor=pointer]:
+          - generic [ref=e30]: C
+    - generic [ref=e34]:
+      - generic [ref=e35]:
+        - generic [ref=e41]:
+          - textbox [ref=e42]:
+            - /placeholder: Search
+          - generic [ref=e43]:
+            - img:
+              - img
+        - generic [ref=e44]:
+          - button [ref=e45] [cursor=pointer]:
+            - generic [ref=e46]:
+              - img [ref=e48]
+              - generic [ref=e50]: Upload
+          - button [ref=e51] [cursor=pointer]:
+            - img [ref=e54]
+          - button [expanded] [ref=e57] [cursor=pointer]:
+            - img [ref=e60]
+      - table [ref=e64]:
+        - row [ref=e66]:
+          - gridcell [ref=e68] [cursor=pointer]:
+            - generic [ref=e69]: Configuration ID
+          - gridcell [ref=e72] [cursor=pointer]:
+            - generic [ref=e73]: Version
+          - gridcell [ref=e76] [cursor=pointer]:
+            - generic [ref=e77]: Status
+            - img [ref=e80]
+          - gridcell [ref=e84] [cursor=pointer]:
+            - generic [ref=e85]: Created When
+            - img [ref=e88]
+          - gridcell [ref=e92]:
+            - generic [ref=e93]: Description
+        - row [ref=e97]:
+          - gridcell [ref=e99]:
+            - link [ref=e100] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=2cacc695-891e-4775-8d92-28e09cb9bc56
+              - generic [ref=e101]: oss-lm-migration-21006
+          - gridcell [ref=e104]: 1.0.1-1775104037
+          - gridcell [ref=e107]:
+            - generic [ref=e110]: Active
+          - gridcell [ref=e113]:
+            - generic [ref=e114]: 2026-04-02 10:01
+          - gridcell [ref=e117]
+        - row [ref=e121]:
+          - gridcell [ref=e123]:
+            - link [ref=e124] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=1236acb1-16d0-418a-a63d-2c7499b336ea
+              - generic [ref=e125]: oss-lm-migration-April1stSanitytrail
+          - gridcell [ref=e128]: 1.0.1-1775026556
+          - gridcell [ref=e131]:
+            - generic [ref=e134]: Active
+          - gridcell [ref=e137]:
+            - generic [ref=e138]: 2026-04-01 12:26
+          - gridcell [ref=e141]
+        - row [ref=e145]:
+          - gridcell [ref=e147]:
+            - link [ref=e148] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=73e4f2a0-7a7e-4e9d-b32c-afd67b0e695e
+              - generic [ref=e149]: D2Cip_oss-sr-mig-21011_apr
+          - gridcell [ref=e152]: 1.0.1-1774871369
+          - gridcell [ref=e155]:
+            - generic [ref=e158]: Active
+          - gridcell [ref=e161]:
+            - generic [ref=e162]: 2026-04-01 10:55
+          - gridcell [ref=e165]
+        - row [ref=e169]:
+          - gridcell [ref=e171]:
+            - link [ref=e172] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=5650f895-1d25-4d91-a833-e7a9a551845e
+              - generic [ref=e173]: oss-lm-migration-April1stSanity
+          - gridcell [ref=e176]: 1.0.1-1775018361
+          - gridcell [ref=e179]:
+            - generic [ref=e182]: Active
+          - gridcell [ref=e185]:
+            - generic [ref=e186]: 2026-04-01 10:10
+          - gridcell [ref=e189]
+        - row [ref=e193]:
+          - gridcell [ref=e195]:
+            - link [ref=e196] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=f066af0c-1cbf-4fef-969f-1e8209d3c44d
+              - generic [ref=e197]: oss-lm-migration-Regression
+          - gridcell [ref=e200]: 1.0.1-1774949617
+          - gridcell [ref=e203]:
+            - generic [ref=e206]: Active
+          - gridcell [ref=e209]:
+            - generic [ref=e210]: 2026-03-31 15:15
+          - gridcell [ref=e213]
+        - row [ref=e217]:
+          - gridcell [ref=e219]:
+            - link [ref=e220] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=4f391af4-ac76-49c1-98a6-0dd34bd1cd3b
+              - generic [ref=e221]: oss-lm-migration-Mar31stSanity
+          - gridcell [ref=e224]: 1.0.1-1774930328
+          - gridcell [ref=e227]:
+            - generic [ref=e230]: Active
+          - gridcell [ref=e233]:
+            - generic [ref=e234]: 2026-03-31 09:43
+          - gridcell [ref=e237]
+        - row [ref=e241]:
+          - gridcell [ref=e243]:
+            - link [ref=e244] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=68d839d3-7758-4c5e-8e03-4c60d7c8935f
+              - generic [ref=e245]: oss-lm-migration-Mar12thsanity
+          - gridcell [ref=e248]: 1.0.1-1773290279
+          - gridcell [ref=e251]:
+            - generic [ref=e254]: Active
+          - gridcell [ref=e257]:
+            - generic [ref=e258]: 2026-03-30 18:17
+          - gridcell [ref=e261]
+        - row [ref=e265]:
+          - gridcell [ref=e267]:
+            - link [ref=e268] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=05bcbf6d-6416-44c2-b73f-a0fd04f6a2d6
+              - generic [ref=e269]: nrm-drop1-d2c-21004
+          - gridcell [ref=e272]: 1.0.0-1774854725
+          - gridcell [ref=e275]:
+            - generic [ref=e278]: Active
+          - gridcell [ref=e281]:
+            - generic [ref=e282]: 2026-03-30 12:42
+          - gridcell [ref=e285]
+        - row [ref=e289]:
+          - gridcell [ref=e291]:
+            - link [ref=e292] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=91350703-5f9a-4c1b-a1e1-b7b5e81b8fcc
+              - generic [ref=e293]: oss-lm-migration-Mar30thSanity
+          - gridcell [ref=e296]: 1.0.1-1774844445
+          - gridcell [ref=e299]:
+            - generic [ref=e302]: Active
+          - gridcell [ref=e305]:
+            - generic [ref=e306]: 2026-03-30 09:51
+          - gridcell [ref=e309]
+        - row [ref=e313]:
+          - gridcell [ref=e315]:
+            - link [ref=e316] [cursor=pointer]:
+              - /url: /fragment/migration-ui/configuration?objectId=7530f1a9-0dcb-4076-91fb-145dc88a3c79
+              - generic [ref=e317]: oss-lm-migration-Mar27thSanity
+          - gridcell [ref=e320]: 1.0.1-1774586151
+          - gridcell [ref=e323]:
+            - generic [ref=e326]: Active
+          - gridcell [ref=e329]:
+            - generic [ref=e330]: 2026-03-27 10:06
+          - gridcell [ref=e333]
+      - list [ref=e337]:
+        - listitem [ref=e338]: 13 items, 1-10 shown
+        - listitem [ref=e339] [cursor=pointer]:
+          - img [ref=e340]:
+            - img [ref=e341]
+        - listitem [ref=e343] [cursor=pointer]: "1"
+        - listitem [ref=e344] [cursor=pointer]: "2"
+        - listitem [ref=e345] [cursor=pointer]:
+          - img [ref=e346]:
+            - img [ref=e347]
+        - listitem [ref=e349]:
+          - generic [ref=e351] [cursor=pointer]:
+            - combobox [ref=e353]
+            - generic [ref=e354]: 10 per page
+  - dialog "Filters" [ref=e356]:
+    - generic [ref=e357]:
+      - generic [ref=e358]:
+        - generic [ref=e359]: Filters
+        - button [ref=e361] [cursor=pointer]:
+          - img [ref=e364]
+      - generic [ref=e367]:
+        - generic [ref=e368]:
+          - generic [ref=e369]:
+            - generic [ref=e370]:
+              - generic [ref=e373]:
+                - log [ref=e375]
+                - generic [ref=e376] [cursor=pointer]:
+                  - generic [ref=e377]:
+                    - generic [ref=e378]: Status
+                    - combobox
+                  - generic [ref=e380]:
+                    - img:
+                      - img
+              - generic [ref=e383]:
+                - log [ref=e385]
+                - generic [ref=e386] [cursor=pointer]:
+                  - generic [ref=e387]:
+                    - generic [ref=e388]: is
+                    - combobox
+                  - generic [ref=e390]:
+                    - img:
+                      - img
+              - generic [ref=e393]:
+                - log [ref=e395]: 4 results available.Use Up and Down to choose options, press Enter to select the currently focused option, press Escape to exit the menu.
+                - generic [ref=e396] [cursor=pointer]:
+                  - generic [ref=e397]:
+                    - generic [ref=e398]: Value
+                    - combobox [expanded] [active]
+                  - generic [ref=e400]:
+                    - img:
+                      - img
+            - button [ref=e401] [cursor=pointer]:
+              - img [ref=e404]
+          - generic [ref=e407]:
+            - button "Add Filter" [ref=e408] [cursor=pointer]:
+              - generic [ref=e409]:
+                - img [ref=e411]
+                - generic [ref=e413]: Add Filter
+            - button "Clear All" [ref=e414] [cursor=pointer]:
+              - generic [ref=e415]:
+                - img [ref=e417]
+                - generic [ref=e419]: Clear All
+        - generic [ref=e420]:
+          - button "Apply" [ref=e421] [cursor=pointer]:
+            - generic [ref=e423]: Apply
+          - button "Cancel" [ref=e424] [cursor=pointer]:
+            - generic [ref=e426]: Cancel
+  - listbox [ref=e429]:
+    - option "Active" [ref=e430] [cursor=pointer]:
+      - generic [ref=e431]: Active
+    - option "Activating" [ref=e432] [cursor=pointer]:
+      - generic [ref=e433]: Activating
+    - option "Not Active" [ref=e434] [cursor=pointer]:
+      - generic [ref=e435]: Not Active
+    - option "Failed" [ref=e436] [cursor=pointer]:
+      - generic [ref=e437]: Failed
+```
