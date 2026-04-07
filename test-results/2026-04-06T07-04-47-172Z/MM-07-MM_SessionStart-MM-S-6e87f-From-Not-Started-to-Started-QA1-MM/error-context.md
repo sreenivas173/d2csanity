@@ -1,0 +1,256 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e5]:
+  - generic [ref=e7]:
+    - img [ref=e9]
+    - generic [ref=e11]: MIGRATION HUB
+    - tablist [ref=e13]:
+      - generic [ref=e15]:
+        - tab "Sessions" [selected] [ref=e16]
+        - tab "Configurations" [ref=e17] [cursor=pointer]
+        - tab "Source Profiles" [ref=e18] [cursor=pointer]
+        - tab "Monitoring" [ref=e19] [cursor=pointer]
+    - generic [ref=e20]:
+      - img [ref=e25] [cursor=pointer]
+      - button "C" [ref=e28] [cursor=pointer]:
+        - generic [ref=e30]: C
+  - generic [ref=e34]:
+    - generic [ref=e35]:
+      - generic [ref=e41]:
+        - textbox "Search" [active] [ref=e42]: Srini_MM_AT_Newsession_20260406
+        - button [ref=e44] [cursor=pointer]
+      - generic [ref=e45]:
+        - button "Create Session" [ref=e46] [cursor=pointer]:
+          - generic [ref=e47]:
+            - img [ref=e49]
+            - generic [ref=e51]: Create Session
+        - button [ref=e52] [cursor=pointer]:
+          - img [ref=e55]
+        - button [ref=e58] [cursor=pointer]:
+          - img [ref=e61]
+    - table [ref=e64]:
+      - row "Session Name Configuration Configuration Version Status Start Time End Time Execution Time Created When Description" [ref=e66]:
+        - gridcell "Session Name" [ref=e68] [cursor=pointer]:
+          - generic [ref=e69]: Session Name
+        - gridcell "Configuration" [ref=e72] [cursor=pointer]:
+          - generic [ref=e73]: Configuration
+        - gridcell "Configuration Version" [ref=e76] [cursor=pointer]:
+          - generic [ref=e77]: Configuration Version
+        - gridcell "Status" [ref=e80] [cursor=pointer]:
+          - generic [ref=e81]: Status
+        - gridcell "Start Time" [ref=e84] [cursor=pointer]:
+          - generic [ref=e85]: Start Time
+        - gridcell "End Time" [ref=e88] [cursor=pointer]:
+          - generic [ref=e89]: End Time
+        - gridcell "Execution Time" [ref=e92]:
+          - generic [ref=e93]: Execution Time
+        - gridcell "Created When" [ref=e96] [cursor=pointer]:
+          - generic [ref=e97]: Created When
+          - img [ref=e100]
+        - gridcell "Description" [ref=e104]:
+          - generic [ref=e105]: Description
+      - row "Srini_MM_AT_Newsession_20260406 D2Cip_oss-sr-mig-21011_apr 1.0.1-1774871369 gray 2026-04-06 12:34 SRINI_MM_AT_2026-04-06_07-04-55" [ref=e109]:
+        - gridcell "Srini_MM_AT_Newsession_20260406" [ref=e111]:
+          - link "Srini_MM_AT_Newsession_20260406" [ref=e112] [cursor=pointer]:
+            - /url: /fragment/migration-ui/session/details?objectId=0f6eb9cc-d352-49dd-ba07-26e0f81d7244
+            - generic [ref=e113]: Srini_MM_AT_Newsession_20260406
+        - gridcell "D2Cip_oss-sr-mig-21011_apr" [ref=e116]: D2Cip_oss-sr-mig-21011_apr
+        - gridcell "1.0.1-1774871369" [ref=e119]: 1.0.1-1774871369
+        - gridcell "gray" [ref=e122]:
+          - generic "gray" [ref=e124]:
+            - generic [ref=e125]: Not Started
+        - gridcell [ref=e128]
+        - gridcell [ref=e131]
+        - gridcell [ref=e134]
+        - gridcell "2026-04-06 12:34" [ref=e137]:
+          - generic [ref=e138]: 2026-04-06 12:34
+        - gridcell "SRINI_MM_AT_2026-04-06_07-04-55" [ref=e141]:
+          - generic [ref=e143]: SRINI_MM_AT_2026-04-06_07-04-55
+      - row "Srini_MM_AT_Newsession_20260406 D2Cip_oss-sr-mig-21011_apr 1.0.1-1774871369 blue 2026-04-06 12:32 2 minutes 2026-04-06 12:32 SRINI_MM_AT_2026-04-06_07-02-41" [ref=e147]:
+        - gridcell "Srini_MM_AT_Newsession_20260406" [ref=e149]:
+          - link "Srini_MM_AT_Newsession_20260406" [ref=e150] [cursor=pointer]:
+            - /url: /fragment/migration-ui/session/summary?objectId=11499bd6-a1c5-4101-ba44-4ee53cd1d6da
+            - generic [ref=e151]: Srini_MM_AT_Newsession_20260406
+        - gridcell "D2Cip_oss-sr-mig-21011_apr" [ref=e154]: D2Cip_oss-sr-mig-21011_apr
+        - gridcell "1.0.1-1774871369" [ref=e157]: 1.0.1-1774871369
+        - gridcell "blue" [ref=e160]:
+          - generic "blue" [ref=e162]:
+            - generic [ref=e163]: In Progress
+        - gridcell "2026-04-06 12:32" [ref=e166]:
+          - generic [ref=e167]: 2026-04-06 12:32
+        - gridcell [ref=e170]
+        - gridcell "2 minutes" [ref=e173]:
+          - generic [ref=e174]: 2 minutes
+        - gridcell "2026-04-06 12:32" [ref=e177]:
+          - generic [ref=e178]: 2026-04-06 12:32
+        - gridcell "SRINI_MM_AT_2026-04-06_07-02-41" [ref=e181]:
+          - generic [ref=e183]: SRINI_MM_AT_2026-04-06_07-02-41
+      - row "swathi_april6thsanity-21009 oss-lm-migration-21009-sanity 1.0.1-1775449055 green 2026-04-06 09:50 2026-04-06 09:53 3 minutes 2026-04-06 09:50" [ref=e187]:
+        - gridcell "swathi_april6thsanity-21009" [ref=e189]:
+          - link "swathi_april6thsanity-21009" [ref=e190] [cursor=pointer]:
+            - /url: /fragment/migration-ui/session/summary?objectId=f916202e-ef38-412c-bae7-f745cc397b41
+            - generic [ref=e191]: swathi_april6thsanity-21009
+        - gridcell "oss-lm-migration-21009-sanity" [ref=e194]: oss-lm-migration-21009-sanity
+        - gridcell "1.0.1-1775449055" [ref=e197]: 1.0.1-1775449055
+        - gridcell "green" [ref=e200]:
+          - generic "green" [ref=e202]:
+            - generic [ref=e203]: Completed
+        - gridcell "2026-04-06 09:50" [ref=e206]:
+          - generic [ref=e207]: 2026-04-06 09:50
+        - gridcell "2026-04-06 09:53" [ref=e210]:
+          - generic [ref=e211]: 2026-04-06 09:53
+        - gridcell "3 minutes" [ref=e214]:
+          - generic [ref=e215]: 3 minutes
+        - gridcell "2026-04-06 09:50" [ref=e218]:
+          - generic [ref=e219]: 2026-04-06 09:50
+        - gridcell [ref=e222]
+      - 'row "swathi_paused oss-lm-migration-April1stSanitytrail 1.0.1-1775026556 #D8F2F7 2026-04-06 11:59 2026-04-06 12:06 7 minutes 2026-04-03 17:20" [ref=e226]':
+        - gridcell "swathi_paused" [ref=e228]:
+          - link "swathi_paused" [ref=e229] [cursor=pointer]:
+            - /url: /fragment/migration-ui/session/summary?objectId=a1d3e32b-ac7f-4124-a5ac-f62e938467a7
+            - generic [ref=e230]: swathi_paused
+        - gridcell "oss-lm-migration-April1stSanitytrail" [ref=e233]: oss-lm-migration-April1stSanitytrail
+        - gridcell "1.0.1-1775026556" [ref=e236]: 1.0.1-1775026556
+        - gridcell "#D8F2F7" [ref=e239]:
+          - generic "#D8F2F7" [ref=e241]:
+            - generic [ref=e242]: Cancelled
+        - gridcell "2026-04-06 11:59" [ref=e245]:
+          - generic [ref=e246]: 2026-04-06 11:59
+        - gridcell "2026-04-06 12:06" [ref=e249]:
+          - generic [ref=e250]: 2026-04-06 12:06
+        - gridcell "7 minutes" [ref=e253]:
+          - generic [ref=e254]: 7 minutes
+        - gridcell "2026-04-03 17:20" [ref=e257]:
+          - generic [ref=e258]: 2026-04-03 17:20
+        - gridcell [ref=e261]
+      - row "Nificheck-regression oss-lm-migration-April1stSanitytrail 1.0.1-1775026556 green 2026-04-03 11:55 2026-04-03 11:58 3 minutes 2026-04-03 11:25" [ref=e265]:
+        - gridcell "Nificheck-regression" [ref=e267]:
+          - link "Nificheck-regression" [ref=e268] [cursor=pointer]:
+            - /url: /fragment/migration-ui/session/summary?objectId=8743ddca-92b3-4879-9c5a-22e87984a91f
+            - generic [ref=e269]: Nificheck-regression
+        - gridcell "oss-lm-migration-April1stSanitytrail" [ref=e272]: oss-lm-migration-April1stSanitytrail
+        - gridcell "1.0.1-1775026556" [ref=e275]: 1.0.1-1775026556
+        - gridcell "green" [ref=e278]:
+          - generic "green" [ref=e280]:
+            - generic [ref=e281]: Completed
+        - gridcell "2026-04-03 11:55" [ref=e284]:
+          - generic [ref=e285]: 2026-04-03 11:55
+        - gridcell "2026-04-03 11:58" [ref=e288]:
+          - generic [ref=e289]: 2026-04-03 11:58
+        - gridcell "3 minutes" [ref=e292]:
+          - generic [ref=e293]: 3 minutes
+        - gridcell "2026-04-03 11:25" [ref=e296]:
+          - generic [ref=e297]: 2026-04-03 11:25
+        - gridcell [ref=e300]
+      - row "Sanity-21008 oss-lm-migration-21008-sanity 1.0.1-1775190430 green 2026-04-03 09:59 2026-04-03 10:03 3 minutes 2026-04-03 09:59" [ref=e304]:
+        - gridcell "Sanity-21008" [ref=e306]:
+          - link "Sanity-21008" [ref=e307] [cursor=pointer]:
+            - /url: /fragment/migration-ui/session/summary?objectId=ab3cc120-2f4f-4dd0-b0fd-21b19899e124
+            - generic [ref=e308]: Sanity-21008
+        - gridcell "oss-lm-migration-21008-sanity" [ref=e311]: oss-lm-migration-21008-sanity
+        - gridcell "1.0.1-1775190430" [ref=e314]: 1.0.1-1775190430
+        - gridcell "green" [ref=e317]:
+          - generic "green" [ref=e319]:
+            - generic [ref=e320]: Completed
+        - gridcell "2026-04-03 09:59" [ref=e323]:
+          - generic [ref=e324]: 2026-04-03 09:59
+        - gridcell "2026-04-03 10:03" [ref=e327]:
+          - generic [ref=e328]: 2026-04-03 10:03
+        - gridcell "3 minutes" [ref=e331]:
+          - generic [ref=e332]: 3 minutes
+        - gridcell "2026-04-03 09:59" [ref=e335]:
+          - generic [ref=e336]: 2026-04-03 09:59
+        - gridcell [ref=e339]
+      - row "Notstarted oss-lm-migration-April1stSanitytrail 1.0.1-1775026556 green 2026-04-03 08:55 2026-04-03 08:58 3 minutes 2026-04-03 08:52" [ref=e343]:
+        - gridcell "Notstarted" [ref=e345]:
+          - link "Notstarted" [ref=e346] [cursor=pointer]:
+            - /url: /fragment/migration-ui/session/summary?objectId=d72a2240-034b-4a17-b0f7-90163b0c4455
+            - generic [ref=e347]: Notstarted
+        - gridcell "oss-lm-migration-April1stSanitytrail" [ref=e350]: oss-lm-migration-April1stSanitytrail
+        - gridcell "1.0.1-1775026556" [ref=e353]: 1.0.1-1775026556
+        - gridcell "green" [ref=e356]:
+          - generic "green" [ref=e358]:
+            - generic [ref=e359]: Completed
+        - gridcell "2026-04-03 08:55" [ref=e362]:
+          - generic [ref=e363]: 2026-04-03 08:55
+        - gridcell "2026-04-03 08:58" [ref=e366]:
+          - generic [ref=e367]: 2026-04-03 08:58
+        - gridcell "3 minutes" [ref=e370]:
+          - generic [ref=e371]: 3 minutes
+        - gridcell "2026-04-03 08:52" [ref=e374]:
+          - generic [ref=e375]: 2026-04-03 08:52
+        - gridcell [ref=e378]
+      - row "omirzak-040226 oss-lm-migration-OMIRZAK-040226 1.0.1-1775112389 green 2026-04-02 12:30 2026-04-02 12:34 3 minutes 2026-04-02 12:29" [ref=e382]:
+        - gridcell "omirzak-040226" [ref=e384]:
+          - link "omirzak-040226" [ref=e385] [cursor=pointer]:
+            - /url: /fragment/migration-ui/session/summary?objectId=d93b2d4d-5a0a-4397-a75a-52fcae7f02f7
+            - generic [ref=e386]: omirzak-040226
+        - gridcell "oss-lm-migration-OMIRZAK-040226" [ref=e389]: oss-lm-migration-OMIRZAK-040226
+        - gridcell "1.0.1-1775112389" [ref=e392]: 1.0.1-1775112389
+        - gridcell "green" [ref=e395]:
+          - generic "green" [ref=e397]:
+            - generic [ref=e398]: Completed
+        - gridcell "2026-04-02 12:30" [ref=e401]:
+          - generic [ref=e402]: 2026-04-02 12:30
+        - gridcell "2026-04-02 12:34" [ref=e405]:
+          - generic [ref=e406]: 2026-04-02 12:34
+        - gridcell "3 minutes" [ref=e409]:
+          - generic [ref=e410]: 3 minutes
+        - gridcell "2026-04-02 12:29" [ref=e413]:
+          - generic [ref=e414]: 2026-04-02 12:29
+        - gridcell [ref=e417]
+      - row "april2ndSanity-21006 oss-lm-migration-21006 1.0.1-1775104037 green 2026-04-02 10:07 2026-04-02 10:10 2 minutes 2026-04-02 10:07" [ref=e421]:
+        - gridcell "april2ndSanity-21006" [ref=e423]:
+          - link "april2ndSanity-21006" [ref=e424] [cursor=pointer]:
+            - /url: /fragment/migration-ui/session/summary?objectId=83fad04b-07f4-45e6-a565-32ce1b80f022
+            - generic [ref=e425]: april2ndSanity-21006
+        - gridcell "oss-lm-migration-21006" [ref=e428]: oss-lm-migration-21006
+        - gridcell "1.0.1-1775104037" [ref=e431]: 1.0.1-1775104037
+        - gridcell "green" [ref=e434]:
+          - generic "green" [ref=e436]:
+            - generic [ref=e437]: Completed
+        - gridcell "2026-04-02 10:07" [ref=e440]:
+          - generic [ref=e441]: 2026-04-02 10:07
+        - gridcell "2026-04-02 10:10" [ref=e444]:
+          - generic [ref=e445]: 2026-04-02 10:10
+        - gridcell "2 minutes" [ref=e448]:
+          - generic [ref=e449]: 2 minutes
+        - gridcell "2026-04-02 10:07" [ref=e452]:
+          - generic [ref=e453]: 2026-04-02 10:07
+        - gridcell [ref=e456]
+      - row "swathi_regressionsession oss-lm-migration-April1stSanitytrail 1.0.1-1775026556 green 2026-04-01 20:22 2026-04-01 20:25 3 minutes 2026-04-01 20:17" [ref=e460]:
+        - gridcell "swathi_regressionsession" [ref=e462]:
+          - link "swathi_regressionsession" [ref=e463] [cursor=pointer]:
+            - /url: /fragment/migration-ui/session/summary?objectId=3e49615a-6133-42dd-8f18-e88dd1ad46d4
+            - generic [ref=e464]: swathi_regressionsession
+        - gridcell "oss-lm-migration-April1stSanitytrail" [ref=e467]: oss-lm-migration-April1stSanitytrail
+        - gridcell "1.0.1-1775026556" [ref=e470]: 1.0.1-1775026556
+        - gridcell "green" [ref=e473]:
+          - generic "green" [ref=e475]:
+            - generic [ref=e476]: Completed
+        - gridcell "2026-04-01 20:22" [ref=e479]:
+          - generic [ref=e480]: 2026-04-01 20:22
+        - gridcell "2026-04-01 20:25" [ref=e483]:
+          - generic [ref=e484]: 2026-04-01 20:25
+        - gridcell "3 minutes" [ref=e487]:
+          - generic [ref=e488]: 3 minutes
+        - gridcell "2026-04-01 20:17" [ref=e491]:
+          - generic [ref=e492]: 2026-04-01 20:17
+        - gridcell [ref=e495]
+    - list [ref=e499]:
+      - listitem [ref=e500]: 18 items, 1-10 shown
+      - listitem [ref=e501] [cursor=pointer]:
+        - img [ref=e502]:
+          - img [ref=e503]
+      - listitem [ref=e505] [cursor=pointer]: "1"
+      - listitem [ref=e506] [cursor=pointer]: "2"
+      - listitem [ref=e507] [cursor=pointer]:
+        - img [ref=e508]:
+          - img [ref=e509]
+      - listitem [ref=e511]:
+        - generic "Page Size" [ref=e512] [cursor=pointer]:
+          - generic [ref=e513]:
+            - combobox "Page Size" [ref=e515]
+            - generic "10 per page" [ref=e516]
+```

@@ -1,6 +1,7 @@
 /**
- * Author: Srinivasa Rao Allamsetti
- * This test file validates the pagination functionality on the MM SESSIONS page.
+ * 
+ * @author Srinivasa Rao Allamsetti
+ * @description This test file validates the pagination functionality on the MM SESSIONS page.
  * It includes tests for:
  * - Default page validation (page 1)
  * - Page number navigation

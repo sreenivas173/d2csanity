@@ -1,0 +1,183 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e5]:
+  - generic [ref=e7]:
+    - img [ref=e9]
+    - generic [ref=e11]: MIGRATION HUB
+    - tablist [ref=e13]:
+      - generic [ref=e15]:
+        - tab "Sessions" [ref=e16] [cursor=pointer]
+        - tab "Configurations" [selected] [ref=e17]
+        - tab "Source Profiles" [ref=e18] [cursor=pointer]
+        - tab "Monitoring" [ref=e19] [cursor=pointer]
+    - generic [ref=e20]:
+      - img [ref=e26] [cursor=pointer]
+      - button "C" [ref=e29] [cursor=pointer]:
+        - generic [ref=e31]: C
+  - generic [ref=e35]:
+    - generic [ref=e36]:
+      - generic [ref=e42]:
+        - textbox "Search" [ref=e43]
+        - generic [ref=e44]:
+          - img:
+            - img
+      - generic [ref=e45]:
+        - button "Upload" [ref=e46] [cursor=pointer]:
+          - generic [ref=e47]:
+            - img [ref=e49]
+            - generic [ref=e51]: Upload
+        - button [ref=e52] [cursor=pointer]:
+          - img [ref=e55]
+        - button [ref=e58] [cursor=pointer]:
+          - img [ref=e61]
+    - table [ref=e64]:
+      - row "Configuration ID Version Status Created When Description" [ref=e66]:
+        - gridcell "Configuration ID" [ref=e68] [cursor=pointer]:
+          - generic [ref=e69]: Configuration ID
+        - gridcell "Version" [ref=e72] [cursor=pointer]:
+          - generic [ref=e73]: Version
+        - gridcell "Status" [ref=e76] [cursor=pointer]:
+          - generic [ref=e77]: Status
+          - img [ref=e80]
+        - gridcell "Created When" [ref=e84] [cursor=pointer]:
+          - generic [ref=e85]: Created When
+          - img [ref=e88]
+        - gridcell "Description" [ref=e92]:
+          - generic [ref=e93]: Description
+      - row "oss-lm-migration-21012-sanity 1.0.1-1775539606 green 2026-04-07 10:57" [ref=e97]:
+        - gridcell "oss-lm-migration-21012-sanity" [ref=e99]:
+          - link "oss-lm-migration-21012-sanity" [ref=e100] [cursor=pointer]:
+            - /url: /fragment/migration-ui/configuration?objectId=f1548ef4-d98a-43b3-a704-b49f1bf7499a
+            - generic [ref=e101]: oss-lm-migration-21012-sanity
+        - gridcell "1.0.1-1775539606" [ref=e104]: 1.0.1-1775539606
+        - gridcell "green" [ref=e107]:
+          - generic "green" [ref=e109]:
+            - generic [ref=e110]: Active
+        - gridcell "2026-04-07 10:57" [ref=e113]:
+          - generic [ref=e114]: 2026-04-07 10:57
+        - gridcell [ref=e117]
+      - row "oss-lm-migration-21011-sanity 1.0.1-1775537442 green 2026-04-07 10:21" [ref=e121]:
+        - gridcell "oss-lm-migration-21011-sanity" [ref=e123]:
+          - link "oss-lm-migration-21011-sanity" [ref=e124] [cursor=pointer]:
+            - /url: /fragment/migration-ui/configuration?objectId=60513936-268d-46fe-b1d6-784f8ecb2e36
+            - generic [ref=e125]: oss-lm-migration-21011-sanity
+        - gridcell "1.0.1-1775537442" [ref=e128]: 1.0.1-1775537442
+        - gridcell "green" [ref=e131]:
+          - generic "green" [ref=e133]:
+            - generic [ref=e134]: Active
+        - gridcell "2026-04-07 10:21" [ref=e137]:
+          - generic [ref=e138]: 2026-04-07 10:21
+        - gridcell [ref=e141]
+      - row "oss-lm-migration-21010-sanity 1.0.1-1775535127 green 2026-04-07 09:43" [ref=e145]:
+        - gridcell "oss-lm-migration-21010-sanity" [ref=e147]:
+          - link "oss-lm-migration-21010-sanity" [ref=e148] [cursor=pointer]:
+            - /url: /fragment/migration-ui/configuration?objectId=905c227b-4faf-4a11-86f0-be3da3e754fb
+            - generic [ref=e149]: oss-lm-migration-21010-sanity
+        - gridcell "1.0.1-1775535127" [ref=e152]: 1.0.1-1775535127
+        - gridcell "green" [ref=e155]:
+          - generic "green" [ref=e157]:
+            - generic [ref=e158]: Active
+        - gridcell "2026-04-07 09:43" [ref=e161]:
+          - generic [ref=e162]: 2026-04-07 09:43
+        - gridcell [ref=e165]
+      - row "oss-lm-migration-21009-sanity 1.0.1-1775449055 green 2026-04-06 09:48" [ref=e169]:
+        - gridcell "oss-lm-migration-21009-sanity" [ref=e171]:
+          - link "oss-lm-migration-21009-sanity" [ref=e172] [cursor=pointer]:
+            - /url: /fragment/migration-ui/configuration?objectId=7fefcb4b-b272-4c98-9ca3-f910807582e7
+            - generic [ref=e173]: oss-lm-migration-21009-sanity
+        - gridcell "1.0.1-1775449055" [ref=e176]: 1.0.1-1775449055
+        - gridcell "green" [ref=e179]:
+          - generic "green" [ref=e181]:
+            - generic [ref=e182]: Active
+        - gridcell "2026-04-06 09:48" [ref=e185]:
+          - generic [ref=e186]: 2026-04-06 09:48
+        - gridcell [ref=e189]
+      - row "oss-lm-migration-21008-sanity 1.0.1-1775190430 green 2026-04-03 09:57" [ref=e193]:
+        - gridcell "oss-lm-migration-21008-sanity" [ref=e195]:
+          - link "oss-lm-migration-21008-sanity" [ref=e196] [cursor=pointer]:
+            - /url: /fragment/migration-ui/configuration?objectId=03bdb808-3fef-4887-86dd-ae32e3405320
+            - generic [ref=e197]: oss-lm-migration-21008-sanity
+        - gridcell "1.0.1-1775190430" [ref=e200]: 1.0.1-1775190430
+        - gridcell "green" [ref=e203]:
+          - generic "green" [ref=e205]:
+            - generic [ref=e206]: Active
+        - gridcell "2026-04-03 09:57" [ref=e209]:
+          - generic [ref=e210]: 2026-04-03 09:57
+        - gridcell [ref=e213]
+      - row "oss-lm-migration-21006configtest 1.0.1-1775125508 green 2026-04-02 15:55" [ref=e217]:
+        - gridcell "oss-lm-migration-21006configtest" [ref=e219]:
+          - link "oss-lm-migration-21006configtest" [ref=e220] [cursor=pointer]:
+            - /url: /fragment/migration-ui/configuration?objectId=673c19f7-309b-4f09-b971-5b5c91720861
+            - generic [ref=e221]: oss-lm-migration-21006configtest
+        - gridcell "1.0.1-1775125508" [ref=e224]: 1.0.1-1775125508
+        - gridcell "green" [ref=e227]:
+          - generic "green" [ref=e229]:
+            - generic [ref=e230]: Active
+        - gridcell "2026-04-02 15:55" [ref=e233]:
+          - generic [ref=e234]: 2026-04-02 15:55
+        - gridcell [ref=e237]
+      - row "oss-lm-migration-OMIRZAK-040226 1.0.1-1775112389 green 2026-04-02 12:24" [ref=e241]:
+        - gridcell "oss-lm-migration-OMIRZAK-040226" [ref=e243]:
+          - link "oss-lm-migration-OMIRZAK-040226" [ref=e244] [cursor=pointer]:
+            - /url: /fragment/migration-ui/configuration?objectId=0c1fcbdb-5ffe-4064-817a-9de97845e755
+            - generic [ref=e245]: oss-lm-migration-OMIRZAK-040226
+        - gridcell "1.0.1-1775112389" [ref=e248]: 1.0.1-1775112389
+        - gridcell "green" [ref=e251]:
+          - generic "green" [ref=e253]:
+            - generic [ref=e254]: Active
+        - gridcell "2026-04-02 12:24" [ref=e257]:
+          - generic [ref=e258]: 2026-04-02 12:24
+        - gridcell [ref=e261]
+      - row "oss-lm-migration-21006 1.0.1-1775104037 green 2026-04-02 10:01" [ref=e265]:
+        - gridcell "oss-lm-migration-21006" [ref=e267]:
+          - link "oss-lm-migration-21006" [ref=e268] [cursor=pointer]:
+            - /url: /fragment/migration-ui/configuration?objectId=2cacc695-891e-4775-8d92-28e09cb9bc56
+            - generic [ref=e269]: oss-lm-migration-21006
+        - gridcell "1.0.1-1775104037" [ref=e272]: 1.0.1-1775104037
+        - gridcell "green" [ref=e275]:
+          - generic "green" [ref=e277]:
+            - generic [ref=e278]: Active
+        - gridcell "2026-04-02 10:01" [ref=e281]:
+          - generic [ref=e282]: 2026-04-02 10:01
+        - gridcell [ref=e285]
+      - row "oss-lm-migration-April1stSanitytrail 1.0.1-1775026556 green 2026-04-01 12:26" [ref=e289]:
+        - gridcell "oss-lm-migration-April1stSanitytrail" [ref=e291]:
+          - link "oss-lm-migration-April1stSanitytrail" [ref=e292] [cursor=pointer]:
+            - /url: /fragment/migration-ui/configuration?objectId=1236acb1-16d0-418a-a63d-2c7499b336ea
+            - generic [ref=e293]: oss-lm-migration-April1stSanitytrail
+        - gridcell "1.0.1-1775026556" [ref=e296]: 1.0.1-1775026556
+        - gridcell "green" [ref=e299]:
+          - generic "green" [ref=e301]:
+            - generic [ref=e302]: Active
+        - gridcell "2026-04-01 12:26" [ref=e305]:
+          - generic [ref=e306]: 2026-04-01 12:26
+        - gridcell [ref=e309]
+      - row "D2Cip_oss-sr-mig-21011_apr 1.0.1-1774871369 green 2026-04-01 10:55" [ref=e313]:
+        - gridcell "D2Cip_oss-sr-mig-21011_apr" [ref=e315]:
+          - link "D2Cip_oss-sr-mig-21011_apr" [ref=e316] [cursor=pointer]:
+            - /url: /fragment/migration-ui/configuration?objectId=73e4f2a0-7a7e-4e9d-b32c-afd67b0e695e
+            - generic [ref=e317]: D2Cip_oss-sr-mig-21011_apr
+        - gridcell "1.0.1-1774871369" [ref=e320]: 1.0.1-1774871369
+        - gridcell "green" [ref=e323]:
+          - generic "green" [ref=e325]:
+            - generic [ref=e326]: Active
+        - gridcell "2026-04-01 10:55" [ref=e329]:
+          - generic [ref=e330]: 2026-04-01 10:55
+        - gridcell [ref=e333]
+    - list [ref=e337]:
+      - listitem [ref=e338]: 17 items, 1-10 shown
+      - listitem [ref=e339] [cursor=pointer]:
+        - img [ref=e340]:
+          - img [ref=e341]
+      - listitem [ref=e343] [cursor=pointer]: "1"
+      - listitem [ref=e344] [cursor=pointer]: "2"
+      - listitem [ref=e345] [cursor=pointer]:
+        - img [ref=e346]:
+          - img [ref=e347]
+      - listitem [ref=e349]:
+        - generic "Page Size" [ref=e350] [cursor=pointer]:
+          - generic [ref=e351]:
+            - combobox "Page Size" [ref=e353]
+            - generic "10 per page" [ref=e354]
+```

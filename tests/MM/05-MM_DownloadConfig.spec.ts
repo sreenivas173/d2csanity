@@ -1,11 +1,33 @@
+/**
+ * @author Srinivasa Rao Allamsetti
+ * @description Validates MM Configuration Download functionality for different status filters
+ * 
+ * Test Coverage:
+ * - Data-driven testing for Active/Failed/Not Active configs
+ * - Complete filter workflow (Status column → Add Filter → Apply)
+ * - Detail page navigation and download button validation
+ * - Automated file saving with status/timestamp prefix to test-results/
+ * - Graceful skip if no matching configs found
+ */
+
 import { test, expect } from '@playwright/test';
 import { MM_LoginPage } from '../../pages/MM_LoginPage';
 import { MM_ConfigPage } from '../../pages/MM_ConfigPage';
 
+/**
+ * Test Suite: MM Download Config (Data-Driven by Status)
+ * Downloads first available config matching each status filter
+ * Validates complete workflow and file save operation
+ */
 test.describe('MM Download Config', () => {
   let mmLoginPage: MM_LoginPage;
   let mmConfigPage: MM_ConfigPage;
 
+  /**
+   * Setup: Pre-login navigation to Configurations page
+   * - Authenticate with QA credentials
+   * - Navigate to MM Config page for each test
+   */
   test.beforeEach(async ({ page }) => {
     mmLoginPage = new MM_LoginPage(page);
     mmConfigPage = new MM_ConfigPage(page);
@@ -17,35 +39,41 @@ test.describe('MM Download Config', () => {
     await mmConfigPage.navigateToMMConfig();
   });
 
-  // 🔥 DATA-DRIVEN STATUSES
+  /**
+   * Data-Driven Download Tests by Config Status
+   * Iterates through ['Active', 'Failed', 'Not Active'] statuses
+   * Complete end-to-end download workflow for each available status
+  ['Active', 'Failed', 'Not Active'].forEach((status) => 
+   * 
+   */
   ['Active', 'Failed', 'Not Active'].forEach((status) => {
 
     test(`Download first ${status} configuration and save to test-results`, async ({ page }) => {
       test.setTimeout(120000);
 
-      // Validate dashboard
+      // Pre-filter validation: Dashboard/Migration Hub visibility check
       await expect(page.locator('text=MIGRATION HUB'))
         .toBeVisible({ timeout: 10000 })
         .catch(() => console.log('Dashboard loaded'));
 
-      // 1. Click Status column
+      // Step 1: Click Status column header to open filter menu
       await page.getByRole('gridcell', { name: 'Status' }).click();
 
-      // 2. Add Filter
+      // Step 2: Select 'Add Filter' from context menu
       const addFilter = page.getByRole('menuitem', { name: 'Add Filter' });
       await expect(addFilter).toBeVisible();
       await addFilter.click();
 
       const popup = page.getByRole('dialog', { name: 'Filters' });
 
-      // 3. Value dropdown
+      // Step 3: Click Value dropdown (3rd control)
       const controls = popup.locator('.ux-react-filters-item__control');
       const valueDropdown = controls.nth(2);
 
       await expect(valueDropdown).toBeVisible();
       await valueDropdown.click();
 
-      // 4. Select status dynamically
+      // Step 4: Select specific status from listbox options
       const listbox = page.locator('[role="listbox"]:visible');
 
       await listbox.getByRole('option', {
@@ -53,13 +81,16 @@ test.describe('MM Download Config', () => {
         exact: true
       }).click();
 
-      // 5. Apply filter
+      // Step 5: Apply filter to table
       await popup.getByRole('button', { name: 'Apply' }).click();
 
       // 6. Wait for table
       await expect(mmConfigPage.table).toBeVisible({ timeout: 10000 });
 
       // ⚠️ Handle no data case
+      /**
+       * Edge Case: Skip test if no configs match the status filter
+       */
       const rows = mmConfigPage.table.locator('[role="row"]');
       if ((await rows.count()) <= 1) {
         test.skip(`No ${status} configs available`);
@@ -76,7 +107,11 @@ test.describe('MM Download Config', () => {
       // 8. Wait for detail page
       await expect(mmConfigPage.downloadButton).toBeVisible();
 
-      // 9. Download
+      /**
+       * Step 9: Trigger download with Promise.all race condition handling
+       * - Wait for browser download event
+       * - Click download button simultaneously
+       */
       // -------------------------------Download
       const [download] = await Promise.all([
         page.waitForEvent('download'),
@@ -100,16 +135,21 @@ test.describe('MM Download Config', () => {
 
       const filePath = `test-results/${fileName}`;
 
+      /**
+       * Step 10: Save and validate downloaded ZIP file
+       * - Dynamic filename: STATUS_TIMESTAMP_ORIGINAL.zip
+       * - Save to test-results/ directory
+       * - Verify .zip extension
+       */
       // Save file
       await download.saveAs(filePath);
 
-      // Validate
+      // Validate file extension
       expect(filePath).toContain('.zip');
 
       console.log(`✅ File saved as: ${fileName}`);
 
-      //---------------------------------------
-      // 10. Validate
+      // Double validation (redundant for safety)
       expect(filePath).toContain('.zip');
 
       await page.screenshot({

@@ -1,24 +1,23 @@
+/**
+ * @author Srinivasa Rao Allamsetti
+ * @description Validates MM Configuration Upload functionality for both success and failure scenarios
+ * 
+ * Test Coverage:
+ * - Data-driven testing with valid/invalid ZIP config files
+ * - Upload dialog interaction and file selection
+ * - Success: New row appears with "Activating" status, table refresh validation
+ * - Failure: Error notification validation
+ * - Robust async handling with re-navigation and polling
+ * - Comprehensive logging and screenshots
+ */
+
 import { test, expect } from '@playwright/test';
 import { MM_LoginPage } from '../../pages/MM_LoginPage';
 import { MM_ConfigPage } from '../../pages/MM_ConfigPage';  
 import path from 'path';
 
-//const path = require('path');
-
-const filePath = path.join(__dirname, '../../test-data/Config1_SR_AT_21009_OP.zip');
-
+// Test data configuration - currently testing Invalid Config (others commented out)
 const uploadFiles = [
-  // {
-  //   name: 'Valid Config 1',
-  //   file: 'test-data/Config1_SR_AT_21009_OP.zip',
-  //   expected: 'success'
-  // }
-  // ,
-  // {
-  //   name: 'Valid Config 2',
-  //   file: 'test-data/Config2_SR_AT_21009_OP.zip',
-  //   expected: 'success'
-  // },
   {
     name: 'Invalid Config',
     file: 'test-data/Config3_SR_AT_21009_OP_FL.zip',
@@ -26,8 +25,12 @@ const uploadFiles = [
   }
 ];
 
-
-test.describe('DMTT CONFIGURATION Upload Validations', () => {
+/**
+ * Test Suite: MM Configuration Upload Validations (Data-Driven)
+ * Tests complete upload workflow from login → navigation → upload → validation
+ * Handles both success (new row + status) and failure (error notification) cases
+ */
+test.describe('MM CONFIGURATION Upload Validations', () => {
   // test('DMTT - Upload CONFIGURATION ZIP file to configurations and validate success', async ({ page }) => {
   //   test.setTimeout(300000);
     
@@ -132,41 +135,53 @@ test.describe('DMTT CONFIGURATION Upload Validations', () => {
   // });
 
 
+  /**
+   * Data-Driven Test Template: Config Upload Workflow
+   * Iterates through uploadFiles array testing each scenario
+   * 
+   * Steps:
+   * 1. Login with standard credentials
+   * 2. Navigate to Configurations page (/configurations)
+   * 3. Record initial table count
+   * 4. Trigger upload dialog via button click
+   * 5. Select and upload test file
+   * 6. Validate outcome based on expected result (success/failure)
+   * 
+   * Success Flow: Wait for "Activating"/"Active" status in first table row
+   * Failure Flow: Validate error notification appears
+   */
   uploadFiles.forEach(({ name, file, expected }) => {
 
   test(`Upload Config → ${name}`, async ({ page }) => {
     test.setTimeout(120000);
 
-      const filePath = path.resolve(file);
+    const filePath = path.resolve(file);
 
     const mmLoginPage = new MM_LoginPage(page);
     const mmConfigPage = new MM_ConfigPage(page);
 
-    // Login
+    // Step 1: Login with standard QA credentials
     await mmLoginPage.goto();
     await mmLoginPage.login('cpq-admin@netcracker.com', 'MARket1234!');
 
-    // Navigate
+    // Step 2: Navigate to MM Configurations page
     await mmConfigPage.navigateToMMConfig();
 
-// Record initial total count
+    // Step 3: Record initial table row count for delta validation
     const beforeCount = await mmConfigPage.getTotalItems();
     console.log(`Initial total items count: ${beforeCount}`);
-    
-  //   await page.screenshot({ path: `screenshots/dmtt-test-before-upload-${Date.now()}.png`, fullPage: true });
-    
 
-    // Click Upload button
+    // Step 4: Trigger upload dialog
     await mmConfigPage.uploadButton.click();
 
     const uploadDialog = page.getByRole('dialog');
     await expect(uploadDialog).toBeVisible();
 
-    // Upload file
+    // Step 5: Upload test file via hidden file input
     const fileInput = uploadDialog.locator('input[type="file"]');
     await fileInput.setInputFiles(file);
 
-    // Click Upload/Submit
+    // Step 6: Submit upload
     await uploadDialog.getByRole('button', { name: /upload/i }).click();
 
     //  Validation based on expected result
@@ -206,6 +221,9 @@ console.log('✅ PASS: New uploaded config detected');
     
      await page.screenshot({ path: `screenshots/dmtt-test-success-refresh-${Date.now()}.png`, fullPage: true });
     } else {
+     /**
+      * Failure Validation: Error notification with heading text 'Error'
+      */
      await expect(page.locator('.ux-react-notification__heading'))
                               .toHaveText('Error');
     }
@@ -214,5 +232,6 @@ console.log('✅ PASS: New uploaded config detected');
   });
 
 });
+
 });
 
