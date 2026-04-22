@@ -150,7 +150,7 @@ test.describe('D2C Templates page validations', () => {
      * - File should contain valid YAML content
      */
 
-test('Validate descriptor.yaml file download', async ({ page }) => {
+test('@Sanity Validate descriptor.yaml file download', async ({ page }) => {
 
   // Locate the main templates table element
   // This is the container that holds all template files and folders

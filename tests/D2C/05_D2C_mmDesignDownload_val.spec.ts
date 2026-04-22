@@ -12,6 +12,7 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/LoginPage';
 import { MMDesignPage } from '../../pages/MMDesignPage';
+import fs from 'fs';
 
 /**
  * Test Suite: MM Design Download Validation
@@ -20,7 +21,7 @@ import { MMDesignPage } from '../../pages/MMDesignPage';
  * Users can download their design files as ZIP archives for offline use.
  * The tests ensure the download process works correctly and files are saved properly.
  */
-test.describe('MM Design Download Validation', () => {
+test.describe('@Sanity MM Design Download Validation', () => {
   
   /**
    * Test: MM Design Download Validation
@@ -38,7 +39,7 @@ test.describe('MM Design Download Validation', () => {
    * 
    * Expected Result: A ZIP file should be downloaded successfully with a valid filename
    */
-  test('MM Design Download Validation', async ({ page }) => {
+test('MM Design Download Validation', async ({ page }) => {
     // Initialize the LoginPage object for authentication
     const loginPage = new LoginPage(page);
     const mmDesignPage = new MMDesignPage(page);
@@ -66,6 +67,9 @@ test.describe('MM Design Download Validation', () => {
     await firstDataRow.click();
     await page.waitForTimeout(2000); // Wait for the page to redirect
 
+    // ✅ VIDEO CAPTURE: Screenshot before download for video context
+    await page.screenshot({ path: 'screenshots/download-before.png' });
+
     // Wait for the 'Download ZIP' link to become visible on the page
     const downloadLink = page.locator('text=Download ZIP');
     await expect(downloadLink).toBeVisible();
@@ -79,11 +83,25 @@ test.describe('MM Design Download Validation', () => {
     // Wait for the download to start and retrieve the download object
     const download = await downloadPromise;
 
+    // ✅ VIDEO CAPTURE: Explicit delay to show download progress in video
+    await page.waitForTimeout(3000);
+
     // Assert that the download has a valid suggested filename
     expect(download.suggestedFilename()).toBeTruthy();
 
+    const filename = download.suggestedFilename();
+    console.log(`📥 Downloaded file: ${filename}`);
+
     // Save the downloaded file to the Resources directory with its suggested filename
-    const savePath = `Resources/${download.suggestedFilename()}`;
+    const savePath = `Resources/${filename}`;
     await download.saveAs(savePath);
+
+    // ✅ VIDEO CAPTURE: Screenshot after download success
+    await page.waitForTimeout(1000);
+    await page.screenshot({ path: 'screenshots/download-after.png' });
+
+    // ✅ VIDEO VALIDATION: Verify file saved (visible in traces)
+    expect(fs.existsSync(savePath)).toBeTruthy();
+    console.log(`💾 File saved successfully: ${savePath} (size: ${fs.statSync(savePath).size} bytes)`);
   });
 });

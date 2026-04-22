@@ -12,7 +12,7 @@ import { MMDesignPage } from '../../pages/MMDesignPage';
 test.describe('Filter Validations', () => {
   const filterConfigs = [
     { type: 'ID', value: 'oss', column: 'file-id', operator: 'contains' },
-    // { type: 'ID', value: 'oss', column: 'file-id', operator: 'is' },
+    { type: 'ID', value: 'oss', column: 'file-id', operator: 'is' },
     // { type: 'Design File', value: 'design', column: 'design-file', operator: 'contains' },
     // { type: 'Design File', value: 'design', column: 'design-file', operator: 'is' },
     // { type: 'Author', value: 'admin', column: 'author', operator: 'contains' },

@@ -2,15 +2,17 @@
 In some cases '.' (e.g.you can't use '.GetVariable' inside the range) in template unavailable. You can avoid it using variable '$d' or '$loadDataStep'
 */ -}}
 {{ $d := . -}}
+{{ $Data := .Data -}}
 {{ $loadDataStep := .GetVariable "load-data-step" -}}
 {{ $loadDataProc := .GetVariable "load-data-processor" -}}
+{{ $ParentRefField := "" -}}
 id: {{ .MigrationType | ToLower }}
 version: {{ .Version }}
 description: |
 {{ .Description | Indent 2 }}
 actions:
 {{- define "CustomScriptStep" }}
-      - id: custom-script 
+      - id: custom-script
         description: {{ .StepDescription }}
         processor: {{ .Processor }}
         config:
@@ -21,7 +23,6 @@ actions:
           {{- if ne .Processor "python" }}
           type: {{ .ProcessorMode }}
           {{- end }}
-        {{- if ne .Processor "python" }}
         {{- if .Input }}
         input:
             - name: {{.Input}}
@@ -29,7 +30,6 @@ actions:
         {{- if .Output}}
         output:
             - name: {{.Output}}
-        {{- end }}
         {{- end }}
 {{- end }}
 
@@ -49,6 +49,15 @@ actions:
           filename: declare_functions.sql
           source-system: {{ .SourceSystem }}
           type: execute
+          {{- if eq (.GetVariable "db-type") "oracle" }}
+          parameters:
+            - name: batch_size
+              value: $.params['batch-size']
+            - name: configuration_id
+              value: $.configuration
+            - name: descriptor_id
+              value: $.descriptor
+          {{- end }}
     {{- end }}
       - id: perform-batching-and-get-estimation
         description: divide scope into batches and calculate estimations
@@ -59,8 +68,10 @@ actions:
           type: select
         {{- if eq .BatchMode "built-in" }}
           parameters:
+            {{- if ne (.GetVariable "db-type") "oracle" }}
             - name: batch_size
               value: $.params['batch-size']
+            {{- end }}
             - name: configuration_id
               value: $.configuration
             - name: descriptor_id
@@ -71,20 +82,20 @@ actions:
         output:
           - name: batch-amount
 
-    {{- if gt (len .CustomScript) 0 }}  
+    {{- if gt (len .CustomScript) 0 }}
     {{- range .CustomScript }}
       {{- if eq .StepName "perform-batching-and-get-estimation" }}
       {{ template "CustomScriptStep" . }}
       {{- end }}
     {{- end }}
     {{- end }}
-    
-{{- if gt (len .CustomScript) 0 }}  
-{{- range .CustomScript }}
+
+{{- if gt (len .CustomScript) 0 }}
+  {{- range .CustomScript }}
     {{- if eq .StepName "prepare-batches" }}
     {{ template "CustomScriptStep" . }}
+    {{- end }}
   {{- end }}
-{{- end }}
 {{- end}}
 
 {{- $SourceSystem := .SourceSystem }}
@@ -110,12 +121,12 @@ actions:
 {{end}}
 
     {{- if gt (len .CustomScript) 0 }}
-    {{- range .CustomScript }}
+      {{- range .CustomScript }}
         {{- if eq .StepName "validate-source-data" }}
         {{ template "CustomScriptStep" . }}
+        {{- end }}
       {{- end }}
     {{- end }}
-     {{- end }}
 
   - id: migrate-batch
     description: action for performing batch migration
@@ -139,8 +150,13 @@ actions:
           type: select
           parameters:
             {{- if $item.AggregationRelation }}
+              {{- if ne $item.ParentRefField "" }}
+                {{- $ParentRefField = $item.ParentRefField }}
+              {{- else }}
+                {{- $ParentRefField = (index $Data (index $item.AggregationParentArray 0)).ExtractedObjectKey }}
+              {{- end }}
             - name: sourceid
-              value: $.resources['raw-{{ index $item.AggregationParentArray 0 }}'].data[*]["{{ $item.ChildRefField }}"]
+              value: $.resources['raw-{{ index $item.AggregationParentArray 0 }}'].data[*]["{{ $ParentRefField }}"]
               multiple: true
             {{- else }}
             - name: batch_id
@@ -178,9 +194,9 @@ actions:
   {{- range .CustomScript }}
     {{- if eq .StepName "extract" }}
     {{ template "CustomScriptStep" . }}
-      {{- end }}
-      {{- end }}
-        {{- end }}
+    {{- end }}
+  {{- end }}
+  {{- end }}
 
       - id: aggregate-data
         description: |
@@ -213,11 +229,11 @@ actions:
         {{- end }}
         output:
           - name: extracted-data
-     {{- if gt (len .CustomScript) 0 }}  
+     {{- if gt (len .CustomScript) 0 }}
      {{- range .CustomScript }}
         {{- if eq .StepName "aggregate-data" }}
         {{ template "CustomScriptStep" . }}
-      {{- end }}
+        {{- end }}
      {{- end }}
      {{- end }}
 
@@ -240,7 +256,7 @@ actions:
           - name: extracted-data-fallouts
       {{- end }}
 
-      {{- if gt (len .CustomScript) 0 }}  
+      {{- if gt (len .CustomScript) 0 }}
       {{- range .CustomScript }}
         {{- if eq .StepName "validate-extracted-data" }}
         {{ template "CustomScriptStep" . }}
@@ -266,7 +282,7 @@ actions:
           - name: failed-transformed-data
           - name: transformed-fallouts
 
-      {{- if gt (len .CustomScript) 0 }}  
+      {{- if gt (len .CustomScript) 0 }}
       {{- range .CustomScript }}
         {{- if eq .StepName "transform-data" }}
         {{ template "CustomScriptStep" . }}
@@ -292,8 +308,8 @@ actions:
           - name: failed-transformed-data
           - name: transformed-data-fallouts
       {{- end }}
-      
-      {{- if gt (len .CustomScript) 0 }}  
+
+      {{- if gt (len .CustomScript) 0 }}
       {{- range .CustomScript }}
         {{- if eq .StepName "validate-transformed-data" }}
         {{ template "CustomScriptStep" . }}
@@ -323,13 +339,13 @@ actions:
           context:
             {{- if ne (.GetVariable "oss-inventory") "" }}
             inventory: {{ .GetVariable "oss-inventory" }}
-            {{- end }}  
+            {{- end }}
           configuration:
             {{- if ne (.GetVariable "generate-names") "" }}
             generate-names: {{ .GetVariable "generate-names" }}
             {{- else }}
             generate-names: false
-            {{- end }} 
+            {{- end }}
             {{- if ne (.GetVariable "dl-enrichment") "" }}
             dl-enrichment: {{ .GetVariable "dl-enrichment" }}
             {{- else}}
@@ -348,7 +364,7 @@ actions:
       {{- end }}
     {{- end }}
 
-    {{- if gt (len .CustomScript) 0 }}  
+    {{- if gt (len .CustomScript) 0 }}
       {{- range .CustomScript }}
         {{- if eq .StepName "load-data" }}
         {{ template "CustomScriptStep" . }}
@@ -367,8 +383,8 @@ actions:
         filename: cleanup.py
         batch-size: {{ .RootType.BatchSize }}
 {{- end }}
-    
-    {{- if gt (len .CustomScript) 0 }}  
+
+    {{- if gt (len .CustomScript) 0 }}
       {{- range .CustomScript }}
         {{- if eq .StepName "cleanup" }}
         {{ template "CustomScriptStep" . }}
@@ -395,13 +411,13 @@ actions:
         output:
           - name: previously-missed-data
 
-      {{- if gt (len .CustomScript) 0 }}  
+    {{- if gt (len .CustomScript) 0 }}
     {{- range .CustomScript }}
       {{- if eq .StepName "get-transformed-missed" }}
         {{ template "CustomScriptStep" . }}
       {{- end }}
     {{- end }}
-      {{- end }}
+    {{- end }}
 
       - id: load-data
         description: "Upload previously unprocessed data into target system"
@@ -419,13 +435,13 @@ actions:
           context:
             {{- if ne (.GetVariable "oss-inventory") "" }}
             inventory: {{ .GetVariable "oss-inventory" }}
-            {{- end }}  
+            {{- end }}
           configuration:
             {{- if ne (.GetVariable "generate-names") "" }}
             generate-names: {{ .GetVariable "generate-names" }}
             {{- else }}
             generate-names: false
-            {{- end }} 
+            {{- end }}
             {{- if ne (.GetVariable "dl-enrichment") "" }}
             dl-enrichment: {{ .GetVariable "dl-enrichment" }}
             {{- else}}

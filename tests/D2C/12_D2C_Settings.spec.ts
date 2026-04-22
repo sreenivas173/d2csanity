@@ -38,7 +38,7 @@ import fs from 'fs';
  * 3. Perform specific validation actions
  * 4. Assert expected results
  */
-test.describe('D2C Settings page validations', () => {
+test.describe(' D2C Settings page validations', () => {
     let loginPage: LoginPage;
     let settingsPage: SettingsPage;
 
@@ -87,7 +87,7 @@ test.describe('D2C Settings page validations', () => {
      * 
      * Expected Result: Settings container should be visible with "Settings" text
      */
-    test('Settings page validation', async ({ page }) => {
+    test('@Sanity Settings page validation', async ({ page }) => {
         // Use SettingsPage method to validate
         await settingsPage.expectSettingsVisible();
     });
@@ -109,7 +109,7 @@ test.describe('D2C Settings page validations', () => {
      * 
      * Expected Result: A JSON settings file should be downloaded with a valid name
      */
-    test('Settings_Export button validation', async ({ page }) => {
+    test('@Sanity Settings_Export button validation', async ({ page }) => {
         // Verify Export button is visible
         const isExportVisible = await settingsPage.isExportButtonVisible();
         expect(isExportVisible).toBeTruthy();
@@ -165,7 +165,7 @@ test.describe('D2C Settings page validations', () => {
      * 
      * Expected Result: All settings should display "Default" status after reverting
      */
-    test('Revert All resets settings to Default', async ({ page }) => {
+    test('@Sanity Revert All resets settings to Default', async ({ page }) => {
         // Click Revert All button
         await settingsPage.clickRevertAll();
 
@@ -309,7 +309,7 @@ test.describe('D2C Settings page validations', () => {
      * 
      * Expected Result: All default configuration files should be present and match expected list
      */
-   test('Validate MM and DB Level Design config files', async ({ page }) => {
+   test('@Sanity   Validate MM and DB Level Design config files', async ({ page }) => {
 
   // Ensure we are on Settings page
   await settingsPage.navigateToSettings();

@@ -217,13 +217,44 @@ export class MMDesignPage {
     // Wait for file to be uploaded
     await this.page.waitForTimeout(1500);
   }
-
+//-------------------------------------------------------
+// Note: The "Proceed" button becomes enabled only after the file is fully processed by the server.
+// This method waits for the button to be enabled, clicks it, and then waits for the table to refresh by checking that the first row's content has changed.
+//------------------------------------------------------- 
   async clickProceed() {
     const proceedButton = this.uploadDialog.getByRole('button', { name: 'Proceed' });
-    await expect(proceedButton).toBeEnabled();
-    await proceedButton.click();
-    await expect(this.uploadDialog).toBeHidden();
-  }
+
+  await expect(proceedButton).toBeEnabled();
+
+  await proceedButton.click();
+
+  // ✅ Wait for dialog to disappear
+  await expect(this.uploadDialog).toBeHidden({ timeout: 15000 });
+
+  // Capture current state and poll for new row after upload
+  const rows = this.table.getByRole('row');
+  await expect.poll(async () => await rows.count()).toBeGreaterThan(1);
+
+  const firstRow = rows.nth(1);
+  await expect(firstRow).toBeVisible();
+
+  const oldFirstRow = await firstRow.innerText();
+  
+  // Additional wait for table refresh if needed
+  await this.page.waitForTimeout(3000);
+
+  // ✅ Wait for table refresh (REAL validation)
+  await expect(this.table.getByRole('row').nth(1))
+    .not.toHaveText(oldFirstRow!, { timeout: 20000 });
+
+  // ✅ Wait for dialog to disappear (optional but useful)
+  await expect(this.uploadDialog).toBeHidden({ timeout: 15000 });
+
+  // ✅ Wait for table refresh (REAL validation)
+  await expect(this.table.getByRole('row').nth(1))
+    .not.toHaveText(oldFirstRow!, { timeout: 20000 });
+}
+  
 
   async uploadDesignFile(filePath: string) {
     await this.openUploadDialog();

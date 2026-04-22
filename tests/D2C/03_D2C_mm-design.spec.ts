@@ -22,7 +22,7 @@ test.describe('MM Design Page Validations', () => {
   });
 
   /**1 Tests search text validation after successful login */
-  test('search text validation after successful login', async ({ page }) => {
+  test('@Sanity search text validation after successful login', async ({ page }) => {
     await loginPage.login('cpq-admin@netcracker.com', 'MARket1234!');
     await expect(page).toHaveURL(/design2code\/migration-management-design/);
     if (await mmDesignPage.isPage404()) {
@@ -61,7 +61,7 @@ test.describe('MM Design Page Validations', () => {
   });
 
   /**3 Tests filtering by ID containing "oss" and validates results */
-  test('filter by ID contains "oss" and validate results', async ({ page }) => {
+  test('@Sanity filter by ID contains "oss" and validate results', async ({ page }) => {
     await loginPage.login('cpq-admin@netcracker.com', 'MARket1234!');
     await expect(page).toHaveURL(/design2code\/migration-management-design/);
     if (await mmDesignPage.isPage404()) {

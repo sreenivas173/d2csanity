@@ -22,7 +22,7 @@ test.describe('DB Level Design Page Validations', () => {
   });
 
   /** Tests search text validation after successful login */
-  test('search text validation after successful login', async ({ page }) => {
+  test('@Sanity search text validation after successful login', async ({ page }) => {
     await loginPage.login('cpq-admin@netcracker.com', 'MARket1234!');
     await expect(page).toHaveURL(/design2code\/migration-management-design/);
     if (await dblPage.isPage404()) {
@@ -58,7 +58,7 @@ test.describe('DB Level Design Page Validations', () => {
   });
 
   /** Filter by ID contains "d2c_exam" and validate results */
-  test('filter by ID contains "d2c_exam" and validate results', async ({ page }) => {
+  test('@Sanity filter by ID contains "d2c_exam" and validate results', async ({ page }) => {
     await loginPage.login('cpq-admin@netcracker.com', 'MARket1234!');
     await expect(page).toHaveURL(/design2code\/migration-management-design/);
 

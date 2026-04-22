@@ -113,10 +113,12 @@ test.describe('MM Download Config', () => {
        * - Click download button simultaneously
        */
       // -------------------------------Download
-      const [download] = await Promise.all([
-        page.waitForEvent('download'),
-        mmConfigPage.downloadButton.click()
-      ]);
+   const [download] = await Promise.all([
+  page.waitForEvent('download', { timeout: 20000 }),
+  mmConfigPage.downloadButton.click()
+]);
+
+expect(download).toBeTruthy();
 
       // Get original filename
       const originalName = await download.suggestedFilename();
@@ -151,12 +153,19 @@ test.describe('MM Download Config', () => {
 
       // Double validation (redundant for safety)
       expect(filePath).toContain('.zip');
-
+      
+      //await page.waitForTimeout(3000);
+      
       await page.screenshot({
         path: `screenshots/${status}-detail-${Date.now()}.png`
       });
+      
 
+      await expect(page.locator('.ux-react-notification__heading'))
+  .toHaveText('Success', { timeout: 10000 });
+      //await page.waitForTimeout(3000);
       console.log(`✅ ${status} config downloaded: ${filePath}`);
+      console.log(`📁 Downloaded file: ${fileName}`);
     });
 
   });

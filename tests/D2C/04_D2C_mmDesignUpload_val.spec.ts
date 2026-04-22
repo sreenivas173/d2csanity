@@ -13,7 +13,7 @@ import { MMDesignPage } from '../../pages/MMDesignPage';
 import path from 'path';
 
 
-test.describe('MM Design Upload Validations', () => {
+test.describe('@Sanity MM Design Upload Validations', () => {
   /** Tests MM Design upload validations */
   test('MM Design Upload Validations', async ({ page }) => {
     const loginPage = new LoginPage(page);
@@ -32,10 +32,11 @@ test.describe('MM Design Upload Validations', () => {
     const initialCount = await mmDesignPage.getTotalItems();
 
     // Upload design file using the full upload flow
-    const folderPath = path.resolve('Resources/oss-lm-migration_pl.zip');
+    const folderPath = path.resolve('Resources/oss-lm-migration-21008.zip');
     
     // Open upload dialog
     await mmDesignPage.openUploadDialog();
+    
     
     // Upload file
     await mmDesignPage.uploadFile(folderPath);

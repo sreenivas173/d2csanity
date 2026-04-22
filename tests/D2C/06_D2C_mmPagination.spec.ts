@@ -54,7 +54,7 @@ test.describe('Pagination Validation on MM Design Page', () => {
    * This test ensures data changes when navigating between pages,
    * confirming proper pagination functionality.
    */
-  test('Clicking page number (2) updates table data', async ({ page }) => {
+  test('@Sanity Clicking page number (2) updates table data', async ({ page }) => {
     // Ensure the data table is visible on the page
     const table = mmDesignPage.table;
     await expect(table).toBeVisible();
@@ -102,7 +102,7 @@ test.describe('Pagination Validation on MM Design Page', () => {
    * This test ensures the pagination range text updates to reflect
    * the new page, confirming forward navigation works properly.
    */
-  test('Next arrow works', async ({ page }) => {
+  test('@Sanity Next arrow works', async ({ page }) => {
     // Ensure the data table is visible on the page
     const table = mmDesignPage.table;
     await expect(table).toBeVisible();
@@ -116,6 +116,7 @@ test.describe('Pagination Validation on MM Design Page', () => {
 
     // Click the next arrow button using POM method
     await mmDesignPage.clickNextArrow();
+    await page.waitForTimeout(2000); // Wait for pagination to update
 
     // Wait for the pagination range text to change, indicating page navigation
     await expect(rangeText).not.toHaveText(initialRange!);
@@ -157,7 +158,7 @@ test.describe('Pagination Validation on MM Design Page', () => {
   /**
    * Tests page-size dropdown validation
    */
-  test('Page-size dropdown validation', async ({ page }) => {
+  test('@Sanity Page-size dropdown validation', async ({ page }) => {
     const table = mmDesignPage.table;
     await expect(table).toBeVisible();
 

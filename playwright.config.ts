@@ -27,7 +27,7 @@ export default defineConfig({
   use: {
     trace: 'on-first-retry',
     screenshot: 'on',
-    video: 'off'
+    video: 'on'
   },
   projects: [
     {
@@ -59,5 +59,11 @@ export default defineConfig({
     // },
 
   ],
+
+
+reporter: [
+  ['html', { open: 'never' }],
+  ['json', { outputFile: 'report.json' }]
+],
 
 });
