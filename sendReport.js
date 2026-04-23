@@ -34,7 +34,9 @@ async function sendMail() {
   const summary = getSummary();
 
   const transporter = nodemailer.createTransport({
-    service: "outlook",
+    host: "smtp.office365.com",
+    port: 587,
+    secure: false,
     auth: {
       user: process.env.MAIL_USER,
       pass: process.env.MAIL_PASS
@@ -56,13 +58,6 @@ async function sendMail() {
         <td>${summary.skipped}</td>
       </tr>
     </table>
-
-    ${summary.failedTests.length > 0 ? `
-      <h3>Failed Tests:</h3>
-      <ul>
-        ${summary.failedTests.map(t => `<li>${t}</li>`).join("")}
-      </ul>
-    ` : ""}
   `;
 
   await transporter.sendMail({
