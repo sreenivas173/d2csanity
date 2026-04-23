@@ -39,3 +39,10 @@ jobs:
       env:
         MAIL_USER: ${{ secrets.MAIL_USER }}
         MAIL_PASS: ${{ secrets.MAIL_PASS }}
+
+    - name: Send Webex Notification
+      if: always()
+      run: node sendWebex.js
+      env:
+       WEBEX_TOKEN: ${{ secrets.WEBEX_TOKEN }}
+       WEBEX_ROOM_ID: ${{ secrets.WEBEX_ROOM_ID }}
