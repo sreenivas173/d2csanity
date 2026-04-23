@@ -37,5 +37,5 @@ jobs:
       if: always()
       run: node sendReport.js
       env:
-      MAIL_USER: ${{ secrets.MAIL_USER }}
-      MAIL_PASS: ${{ secrets.MAIL_PASS }}
+        MAIL_USER: ${{ secrets.MAIL_USER }}
+        MAIL_PASS: ${{ secrets.MAIL_PASS }}
