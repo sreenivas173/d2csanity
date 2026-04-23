@@ -33,12 +33,12 @@ jobs:
         name: playwright-report
         path: playwright-report/
 
-    - name: Send Email Report
-      if: always()
-      run: node sendReport.js
-      env:
-        MAIL_USER: ${{ secrets.MAIL_USER }}
-        MAIL_PASS: ${{ secrets.MAIL_PASS }}
+    # - name: Send Email Report
+    #   if: always()
+    #   run: node sendReport.js
+    #   env:
+    #     MAIL_USER: ${{ secrets.MAIL_USER }}
+    #     MAIL_PASS: ${{ secrets.MAIL_PASS }}
 
     - name: Send Webex Notification
       if: always()

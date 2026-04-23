@@ -54,7 +54,7 @@ test.describe('Pagination Validation on MM Design Page', () => {
    * This test ensures data changes when navigating between pages,
    * confirming proper pagination functionality.
    */
-  test('@Sanity Clicking page number (2) updates table data', async ({ page }) => {
+  test('Clicking page number (2) updates table data', async ({ page }) => {
     // Ensure the data table is visible on the page
     const table = mmDesignPage.table;
     await expect(table).toBeVisible();
