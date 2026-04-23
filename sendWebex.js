@@ -3,10 +3,8 @@ const https = require("https");
 
 // 🔍 Parse Playwright JSON report
 function getSummary() {
-  let total = 0;
-  let passed = 0;
-  let failed = 0;
-  let skipped = 0;
+  let total = 0, passed = 0, failed = 0, skipped = 0;
+  let passedTests = [];
   let failedTests = [];
 
   try {
@@ -18,12 +16,15 @@ function getSummary() {
           total++;
           const result = test.results[0];
 
-          if (result.status === "passed") passed++;
-          else if (result.status === "failed") {
+          if (result.status === "passed") {
+            passed++;
+            passedTests.push(spec.title);
+          } else if (result.status === "failed") {
             failed++;
             failedTests.push(spec.title);
+          } else if (result.status === "skipped") {
+            skipped++;
           }
-          else if (result.status === "skipped") skipped++;
         });
       });
 
@@ -33,17 +34,17 @@ function getSummary() {
     parseSuite(data);
 
   } catch (err) {
-    console.error("❌ Failed to read report.json:", err.message);
+    console.error("❌ Error reading report:", err.message);
   }
 
-  return { total, passed, failed, skipped, failedTests };
+  return { total, passed, failed, skipped, passedTests, failedTests };
 }
 
-// 📩 Send message to Webex
+// 📩 Send message
 function sendMessage(message) {
   const data = JSON.stringify({
     roomId: process.env.WEBEX_ROOM_ID,
-    markdown: message   // ✅ important (fixes 400 error)
+    markdown: message
   });
 
   const options = {
@@ -58,35 +59,38 @@ function sendMessage(message) {
   };
 
   const req = https.request(options, res => {
-    console.log(`📡 Webex Response Status: ${res.statusCode}`);
-
-    let responseBody = "";
-    res.on("data", chunk => responseBody += chunk);
-
-    res.on("end", () => {
-      if (res.statusCode !== 200) {
-        console.error("❌ Webex Error Response:", responseBody);
-      } else {
-        console.log("✅ Message sent to Webex successfully");
-      }
-    });
+    console.log(`📡 Status: ${res.statusCode}`);
   });
 
-  req.on("error", err => {
-    console.error("❌ Request Error:", err.message);
-  });
+  req.on("error", err => console.error("❌ Error:", err.message));
 
   req.write(data);
   req.end();
 }
 
-// 🚀 Main execution
+// 🚀 Build message
 const summary = getSummary();
 
-// 🔗 Optional: GitHub run link
 const runUrl = process.env.GITHUB_RUN_URL || "";
 
-// 📝 Build message
+// Limit long lists (avoid spam)
+const maxItems = 5;
+
+const failedList = summary.failedTests.slice(0, maxItems)
+  .map(t => `- ❌ ${t}`).join("\n");
+
+const passedList = summary.passedTests.slice(0, maxItems)
+  .map(t => `- ✅ ${t}`).join("\n");
+
+const moreFailed = summary.failedTests.length > maxItems
+  ? `\n...and ${summary.failedTests.length - maxItems} more`
+  : "";
+
+const morePassed = summary.passedTests.length > maxItems
+  ? `\n...and ${summary.passedTests.length - maxItems} more`
+  : "";
+
+// 📝 Final message
 const message = `
 🚀 **Playwright Sanity Report**
 
@@ -98,11 +102,15 @@ const message = `
 
 ${summary.failed > 0 ? `
 ❌ **Failed Tests**
-${summary.failedTests.map(t => `- ${t}`).join("\n")}
-` : "🎉 All tests passed successfully!"}
+${failedList}${moreFailed}
+` : "🎉 **All tests passed successfully!**"}
 
-${runUrl ? `🔗 [View Full Report](${runUrl})` : ""}
+${summary.passed > 0 ? `
+✅ **Sample Passed Tests**
+${passedList}${morePassed}
+` : ""}
+
+${runUrl ? `🔗 **View Full Report:** ${runUrl}` : ""}
 `;
 
-// 📤 Send message
 sendMessage(message);
