@@ -40,7 +40,7 @@ function getSummary() {
   return { total, passed, failed, skipped, passedTests, failedTests };
 }
 
-// 📩 Send message
+// 📩 Send message to Webex
 function sendMessage(message) {
   const data = JSON.stringify({
     roomId: process.env.WEBEX_ROOM_ID,
@@ -59,7 +59,7 @@ function sendMessage(message) {
   };
 
   const req = https.request(options, res => {
-    console.log(`📡 Status: ${res.statusCode}`);
+    console.log(`📡 Webex Status: ${res.statusCode}`);
   });
 
   req.on("error", err => console.error("❌ Error:", err.message));
@@ -68,30 +68,72 @@ function sendMessage(message) {
   req.end();
 }
 
-// 🚀 Build message
-const summary = getSummary();
+// 📦 Get artifact download link from GitHub
+async function getArtifactLink() {
+  return new Promise((resolve) => {
+    const repo = process.env.GITHUB_REPOSITORY;
+    const runId = process.env.GITHUB_RUN_ID;
 
-const runUrl = process.env.GITHUB_RUN_URL || "";
+    const options = {
+      hostname: "api.github.com",
+      path: `/repos/${repo}/actions/runs/${runId}/artifacts`,
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${process.env.GITHUB_TOKEN}`,
+        "User-Agent": "node"
+      }
+    };
 
-// Limit long lists (avoid spam)
-const maxItems = 5;
+    https.get(options, res => {
+      let data = "";
+      res.on("data", chunk => data += chunk);
 
-const failedList = summary.failedTests.slice(0, maxItems)
-  .map(t => `- ❌ ${t}`).join("\n");
+      res.on("end", () => {
+        try {
+          const json = JSON.parse(data);
+          const artifact = json.artifacts.find(a => a.name === "playwright-report");
 
-const passedList = summary.passedTests.slice(0, maxItems)
-  .map(t => `- ✅ ${t}`).join("\n");
+          if (artifact) {
+            resolve(artifact.archive_download_url);
+          } else {
+            resolve("");
+          }
+        } catch (err) {
+          console.error("❌ Error parsing artifact response");
+          resolve("");
+        }
+      });
+    }).on("error", err => {
+      console.error("❌ Artifact API error:", err.message);
+      resolve("");
+    });
+  });
+}
 
-const moreFailed = summary.failedTests.length > maxItems
-  ? `\n...and ${summary.failedTests.length - maxItems} more`
-  : "";
+// 🚀 Main execution
+(async () => {
+  const summary = getSummary();
 
-const morePassed = summary.passedTests.length > maxItems
-  ? `\n...and ${summary.passedTests.length - maxItems} more`
-  : "";
+  const runUrl = process.env.GITHUB_RUN_URL || "";
+  const artifactUrl = await getArtifactLink();
 
-// 📝 Final message
-const message = `
+  const maxItems = 5;
+
+  const failedList = summary.failedTests.slice(0, maxItems)
+    .map(t => `- ❌ ${t}`).join("\n");
+
+  const passedList = summary.passedTests.slice(0, maxItems)
+    .map(t => `- ✅ ${t}`).join("\n");
+
+  const moreFailed = summary.failedTests.length > maxItems
+    ? `\n...and ${summary.failedTests.length - maxItems} more`
+    : "";
+
+  const morePassed = summary.passedTests.length > maxItems
+    ? `\n...and ${summary.passedTests.length - maxItems} more`
+    : "";
+
+  const message = `
 🚀 **Playwright Sanity Report**
 
 📊 **Summary**
@@ -110,7 +152,11 @@ ${summary.passed > 0 ? `
 ${passedList}${morePassed}
 ` : ""}
 
-${runUrl ? `🔗 **View Full Report:** ${runUrl}` : ""}
+🔗 **View Run:** ${runUrl}
+
+📦 **Download Report ZIP:**
+${artifactUrl || "Check artifacts in run page"}
 `;
 
-sendMessage(message);
+  sendMessage(message);
+})();
