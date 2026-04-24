@@ -159,4 +159,6 @@ ${artifactUrl || "Check artifacts in run page"}
 `;
 
   sendMessage(message);
+  // ✅ Force job to exit cleanly
+process.exit(0);
 })();
