@@ -40,36 +40,52 @@ function getSummary() {
   return { total, passed, failed, skipped, passedTests, failedTests };
 }
 
-// 📩 Send message to Webex
+// 📩 Send message to Webex (Promise-based)
 function sendMessage(message) {
-  const data = JSON.stringify({
-    roomId: process.env.WEBEX_ROOM_ID,
-    markdown: message
+  return new Promise((resolve, reject) => {
+    const data = JSON.stringify({
+      roomId: process.env.WEBEX_ROOM_ID,
+      markdown: message
+    });
+
+    const options = {
+      hostname: "webexapis.com",
+      path: "/v1/messages",
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${process.env.WEBEX_TOKEN}`,
+        "Content-Type": "application/json",
+        "Content-Length": Buffer.byteLength(data)
+      }
+    };
+
+    const req = https.request(options, res => {
+      let responseBody = "";
+
+      res.on("data", chunk => responseBody += chunk);
+
+      res.on("end", () => {
+        console.log(`📡 Webex Status: ${res.statusCode}`);
+        if (res.statusCode === 200) resolve();
+        else {
+          console.error("❌ Webex Error:", responseBody);
+          reject(responseBody);
+        }
+      });
+    });
+
+    req.on("error", err => {
+      console.error("❌ Request Error:", err.message);
+      reject(err);
+    });
+
+    req.write(data);
+    req.end();
   });
-
-  const options = {
-    hostname: "webexapis.com",
-    path: "/v1/messages",
-    method: "POST",
-    headers: {
-      "Authorization": `Bearer ${process.env.WEBEX_TOKEN}`,
-      "Content-Type": "application/json",
-      "Content-Length": Buffer.byteLength(data)
-    }
-  };
-
-  const req = https.request(options, res => {
-    console.log(`📡 Webex Status: ${res.statusCode}`);
-  });
-
-  req.on("error", err => console.error("❌ Error:", err.message));
-
-  req.write(data);
-  req.end();
 }
 
 // 📦 Get artifact download link from GitHub
-async function getArtifactLink() {
+function getArtifactLink() {
   return new Promise((resolve) => {
     const repo = process.env.GITHUB_REPOSITORY;
     const runId = process.env.GITHUB_RUN_ID;
@@ -91,15 +107,15 @@ async function getArtifactLink() {
       res.on("end", () => {
         try {
           const json = JSON.parse(data);
-          const artifact = json.artifacts.find(a => a.name === "playwright-report");
 
-          if (artifact) {
-            resolve(artifact.archive_download_url);
+          if (json.artifacts && json.artifacts.length > 0) {
+            // Pick first artifact safely
+            resolve(json.artifacts[0].archive_download_url);
           } else {
             resolve("");
           }
         } catch (err) {
-          console.error("❌ Error parsing artifact response");
+          console.error("❌ Artifact parsing error");
           resolve("");
         }
       });
@@ -112,28 +128,29 @@ async function getArtifactLink() {
 
 // 🚀 Main execution
 (async () => {
-  const summary = getSummary();
+  try {
+    const summary = getSummary();
 
-  const runUrl = process.env.GITHUB_RUN_URL || "";
-  const artifactUrl = await getArtifactLink();
+    const runUrl = process.env.GITHUB_RUN_URL || "";
+    const artifactUrl = await getArtifactLink();
 
-  const maxItems = 5;
+    const maxItems = 5;
 
-  const failedList = summary.failedTests.slice(0, maxItems)
-    .map(t => `- ❌ ${t}`).join("\n");
+    const failedList = summary.failedTests.slice(0, maxItems)
+      .map(t => `- ❌ ${t}`).join("\n");
 
-  const passedList = summary.passedTests.slice(0, maxItems)
-    .map(t => `- ✅ ${t}`).join("\n");
+    const passedList = summary.passedTests.slice(0, maxItems)
+      .map(t => `- ✅ ${t}`).join("\n");
 
-  const moreFailed = summary.failedTests.length > maxItems
-    ? `\n...and ${summary.failedTests.length - maxItems} more`
-    : "";
+    const moreFailed = summary.failedTests.length > maxItems
+      ? `\n...and ${summary.failedTests.length - maxItems} more`
+      : "";
 
-  const morePassed = summary.passedTests.length > maxItems
-    ? `\n...and ${summary.passedTests.length - maxItems} more`
-    : "";
+    const morePassed = summary.passedTests.length > maxItems
+      ? `\n...and ${summary.passedTests.length - maxItems} more`
+      : "";
 
-  const message = `
+    const message = `
 🚀 **Playwright Sanity Report**
 
 📊 **Summary**
@@ -158,7 +175,10 @@ ${passedList}${morePassed}
 ${artifactUrl || "Check artifacts in run page"}
 `;
 
-  sendMessage(message);
-  // ✅ Force job to exit cleanly
-process.exit(0);
+    await sendMessage(message);
+
+  } catch (err) {
+    console.error("❌ Script failed:", err);
+    process.exit(1);
+  }
 })();
