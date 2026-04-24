@@ -27,36 +27,29 @@ jobs:
     - name: Run Sanity Tests
       run: npx playwright test -g "@sanity" --project=QA1_D2C
 
-    - name: Install dependencies for report
-      run: npm install -g gh-pages
+    # ✅ Upload report FIRST
+    - name: Upload Report
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-report
+        path: playwright-report/
 
+    # ✅ Deploy to GitHub Pages
     - name: Deploy Playwright Report to GitHub Pages
       if: always()
       run: |
         npm install -g gh-pages
         npx gh-pages -d playwright-report
       env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Upload Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: playwright-report
-        path: playwright-report/
-
-    # - name: Send Email Report
-    #   if: always()
-    #   run: node sendReport.js
-    #   env:
-    #     MAIL_USER: ${{ secrets.MAIL_USER }}
-    #     MAIL_PASS: ${{ secrets.MAIL_PASS }}
-
+    # ✅ Send Webex Notification LAST
     - name: Send Webex Notification
       if: always()
       run: node sendWebex.js
       env:
-       WEBEX_TOKEN: ${{ secrets.WEBEX_TOKEN }}
-       WEBEX_ROOM_ID: ${{ secrets.WEBEX_ROOM_ID }}
-       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-       GITHUB_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-
+        WEBEX_TOKEN: ${{ secrets.WEBEX_TOKEN }}
+        WEBEX_ROOM_ID: ${{ secrets.WEBEX_ROOM_ID }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
