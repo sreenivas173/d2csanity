@@ -62,7 +62,7 @@ export default defineConfig({
 
 
 reporter: [
-  ['html', { open: 'never' }],
+  ['html', { outputFolder: 'playwright-report', open: 'never' }],
   ['json', { outputFile: 'report.json' }]
 ],
 

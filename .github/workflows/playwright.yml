@@ -27,6 +27,17 @@ jobs:
     - name: Run Sanity Tests
       run: npx playwright test -g "@sanity" --project=QA1_D2C
 
+    - name: Install dependencies for report
+      run: npm install -g gh-pages
+
+    - name: Deploy Playwright Report to GitHub Pages
+      if: always()
+      run: |
+      npm install -g gh-pages
+      npx gh-pages -d playwright-report
+      env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Upload Report
       uses: actions/upload-artifact@v4
       with:
