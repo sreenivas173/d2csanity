@@ -33,8 +33,8 @@ jobs:
     - name: Deploy Playwright Report to GitHub Pages
       if: always()
       run: |
-      npm install -g gh-pages
-      npx gh-pages -d playwright-report
+        npm install -g gh-pages
+        npx gh-pages -d playwright-report
       env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
