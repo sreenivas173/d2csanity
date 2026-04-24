@@ -132,7 +132,10 @@ function getArtifactLink() {
     const summary = getSummary();
 
     const runUrl = process.env.GITHUB_RUN_URL || "";
-    const artifactUrl = await getArtifactLink();
+   // const artifactUrl = await getArtifactLink();
+   const artifactUrl = process.env.GITHUB_RUN_URL
+      ? `${process.env.GITHUB_RUN_URL}#artifacts`
+      : ""; 
 
     const maxItems = 5;
 
