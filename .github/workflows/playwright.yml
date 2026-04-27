@@ -39,7 +39,7 @@ jobs:
       if: always()
       uses: actions/upload-pages-artifact@v3
       with:
-          path: ./playwright-report
+          path: playwright-report
       shell: pwsh
 
     - name: Deploy to GitHub Pages
