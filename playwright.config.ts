@@ -11,7 +11,7 @@ const runTimestamp = getTimestamp();
 export default defineConfig({
   testDir: './tests',
   fullyParallel: false,
-  outputDir: `test-results/${runTimestamp}`,
+  outputDir: `results/${runTimestamp}`,
   // forbidOnly: !!process.env.CI,
   // retries: process.env.CI ? 2 : 0,
 
@@ -65,5 +65,7 @@ reporter: [
   ['html', { outputFolder: 'playwright-report', open: 'never' }],
   ['json', { outputFile: 'report.json' }]
 ],
+
+
 
 });
