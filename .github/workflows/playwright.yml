@@ -5,47 +5,78 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  pages: write
-  id-token: write
-  contents: read
-
 jobs:
   test:
     runs-on: self-hosted
 
     steps:
-    - uses: actions/checkout@v4
+    # Checkout code
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-    - uses: actions/setup-node@v4
+    # Setup Node
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       with:
         node-version: 22
 
-    - run: npm ci
+    # Install dependencies
+    - name: Install dependencies
+      run: npm ci
 
-    - run: npx playwright install --with-deps
+    # Install Playwright browsers
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
 
-    - run: npx playwright test -g "@sanity" --project=QA1_D2C
+    # Run tests
+    - name: Run Sanity Tests
+      run: npx playwright test -g "@sanity" --project=QA1_D2C
 
-    - name: Upload Report (artifact)
+    # Upload report (optional download)
+    - name: Upload Report Artifact
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: playwright-report
         path: playwright-report/
 
-    # ✅ NEW WAY (replaces gh-pages)
-    - name: Upload Pages Artifact
+    # ✅ Deploy HTML report to gh-pages (NO WSL, NO gh-pages npm)
+    - name: Deploy HTML Report to GitHub Pages
       if: always()
-      uses: actions/upload-pages-artifact@v3
-      with:
-          path: playwright-report
-      #shell: pwsh
+      run: |
+        git config --global user.name "github-actions"
+        git config --global user.email "github-actions@github.com"
 
-    - name: Deploy to GitHub Pages
-      if: always()
-      uses: actions/deploy-pages@v4
+        echo "Cloning repo..."
+        git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
 
+        cd gh-pages
+
+        echo "Switching branch..."
+        git checkout gh-pages || git checkout --orphan gh-pages
+
+        echo "Cleaning old files..."
+        git rm -rf . || echo "Nothing to clean"
+
+        cd ..
+
+        echo "Removing long-path folder..."
+        rmdir /s /q test-results || echo "No test-results folder"
+
+        echo "Copying report..."
+        xcopy playwright-report\* gh-pages\ /E /H /C /I
+
+        cd gh-pages
+
+        echo "Adding files..."
+        git add .
+
+        git commit -m "Update Playwright HTML report" || echo "No changes to commit"
+
+        echo "Pushing to gh-pages..."
+        git push origin gh-pages --force
+
+    # Send Webex notification
     - name: Send Webex Notification
       if: always()
       run: node sendWebex.js
