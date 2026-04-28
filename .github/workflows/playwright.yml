@@ -1,4 +1,4 @@
-name: Sanity Tests
+name: CMT Sanity Tests
 
 on:
   push:

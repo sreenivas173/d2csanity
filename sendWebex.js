@@ -92,7 +92,7 @@ function sendMessage(message) {
     const runUrl = process.env.GITHUB_RUN_URL || "";
 
     // 🌐 Static HTML report URL (GitHub Pages)
-    const htmlReportUrl = `https://sreenivas173.github.io/d2csanity/`;
+    const htmlReportUrl = `https://sreenivas173.github.io/CMTsanity/`;
 
     // 📦 Artifact link
     const artifactUrl = process.env.GITHUB_RUN_URL
