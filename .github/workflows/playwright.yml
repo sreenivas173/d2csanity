@@ -48,45 +48,25 @@ jobs:
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"
 
-        Write-Host "Cloning repo..."
-        git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
+        Write-Host "Preparing clean gh-pages folder..."
 
-        Set-Location gh-pages
+        # Create clean folder
+        New-Item -ItemType Directory -Force -Path deploy
 
-        Write-Host "Switching to gh-pages branch..."
-        if (git branch --list gh-pages) {
-          git checkout gh-pages
-        } else {
-          git checkout --orphan gh-pages
-        }
+        # Copy only HTML report
+        Copy-Item -Path "playwright-report\*" -Destination "deploy\" -Recurse -Force
 
-        Write-Host "Cleaning old files..."
-        try {
-          git rm -rf .
-        } catch {
-          Write-Host "Nothing to clean"
-        }
+        Set-Location deploy
 
-        Set-Location ..
-
-        Write-Host "Checking report folder..."
-        if (-Not (Test-Path "playwright-report")) {
-          Write-Error "playwright-report folder not found"
-          exit 1
-        }
-
-        Write-Host "Copying report..."
-        Copy-Item -Path "playwright-report\*" -Destination "gh-pages\" -Recurse -Force
-
-        Set-Location gh-pages
+        git init
+        git checkout -b gh-pages
 
         git add .
+        git commit -m "Deploy Playwright HTML Report"
 
-        Write-Host "Committing..."
-        git commit -m "Update Playwright HTML report" -ErrorAction SilentlyContinue
+        Write-Host "Pushing to GitHub..."
 
-        Write-Host "Pushing..."
-        git push origin gh-pages --force
+        git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages --force
 
     # Send Webex notification
     - name: Send Webex Notification
