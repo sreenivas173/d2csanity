@@ -43,37 +43,49 @@ jobs:
     # ✅ Deploy HTML report to gh-pages (NO WSL, NO gh-pages npm)
     - name: Deploy HTML Report to GitHub Pages
       if: always()
+      shell: pwsh
       run: |
         git config --global user.name "github-actions"
         git config --global user.email "github-actions@github.com"
 
-        echo "Cloning repo..."
+        Write-Host "Cloning repo..."
         git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git gh-pages
 
-        cd gh-pages
+        Set-Location gh-pages
 
-        echo "Switching branch..."
-        git checkout gh-pages || git checkout --orphan gh-pages
+        Write-Host "Switching to gh-pages branch..."
+        if (git branch --list gh-pages) {
+          git checkout gh-pages
+        } else {
+          git checkout --orphan gh-pages
+        }
 
-        echo "Cleaning old files..."
-        git rm -rf . || echo "Nothing to clean"
+        Write-Host "Cleaning old files..."
+        try {
+          git rm -rf .
+        } catch {
+          Write-Host "Nothing to clean"
+        }
 
-        cd ..
+        Set-Location ..
 
-        echo "Removing long-path folder..."
-        rmdir /s /q test-results || echo "No test-results folder"
+        Write-Host "Checking report folder..."
+        if (-Not (Test-Path "playwright-report")) {
+          Write-Error "playwright-report folder not found"
+          exit 1
+        }
 
-        echo "Copying report..."
-        xcopy playwright-report\* gh-pages\ /E /H /C /I
+        Write-Host "Copying report..."
+        Copy-Item -Path "playwright-report\*" -Destination "gh-pages\" -Recurse -Force
 
-        cd gh-pages
+        Set-Location gh-pages
 
-        echo "Adding files..."
         git add .
 
-        git commit -m "Update Playwright HTML report" || echo "No changes to commit"
+        Write-Host "Committing..."
+        git commit -m "Update Playwright HTML report" -ErrorAction SilentlyContinue
 
-        echo "Pushing to gh-pages..."
+        Write-Host "Pushing..."
         git push origin gh-pages --force
 
     # Send Webex notification
@@ -85,3 +97,5 @@ jobs:
         WEBEX_ROOM_ID: ${{ secrets.WEBEX_ROOM_ID }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+##--------UPDATED----##
