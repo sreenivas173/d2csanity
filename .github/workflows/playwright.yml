@@ -33,15 +33,15 @@ jobs:
 
     # Run D2C Sanity Tests
     - name: Run D2C Sanity Tests
-      run: npx playwright test -g "@sanity" --project=QA1_D2C
+      run: npx playwright test -g "@sanity" --project=QA1_D2C --reporter=html
       env:
-        PLAYWRIGHT_HTML_REPORT: d2c-report
+        PLAYWRIGHT_HTML_OUTPUT_DIR: d2c-report
 
     # Run MM Sanity Tests
     - name: Run MM Sanity Tests
-      run: npx playwright test -g "@MMsanity" --project=QA1_MM
+      run: npx playwright test -g "@MMsanity" --project=QA1_MM --reporter=html
       env:
-        PLAYWRIGHT_HTML_REPORT: mm-report
+        PLAYWRIGHT_HTML_OUTPUT_DIR: mm-report
 
     - name: Upload D2C Report
       if: always()
