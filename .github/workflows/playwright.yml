@@ -32,8 +32,11 @@ jobs:
       run: npx playwright install --with-deps
 
     # Run tests
-    - name: Run Sanity Tests
+    - name: Run D2C Sanity Tests
       run: npx playwright test -g "@sanity" --project=QA1_D2C
+    # Run tests
+    - name: Run MM Sanity Tests
+      run: npx playwright test -g "@MMsanity" --project=QA1_MM
 
     # Upload report (optional download)
     - name: Upload Report Artifact

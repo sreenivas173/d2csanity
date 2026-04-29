@@ -82,7 +82,7 @@ test.describe('MM Login Page Validations', () => {
    * - Validates success message appears after login
    * - Takes screenshot for visual verification
    */
-  test('successful login and validate message', async ({ page }, testInfo) => {
+  test('@MMsanity successful login and validate message', async ({ page }, testInfo) => {
     await loginPage.login('cpq-admin@netcracker.com', 'MARket1234!');
     const isVisible = await loginPage.isSuccessMessageVisible();
     expect(isVisible).toBe(true);
