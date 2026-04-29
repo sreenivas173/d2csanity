@@ -1,6 +1,9 @@
 const fs = require("fs");
 const https = require("https");
 
+const d2cReportUrl = `https://sreenivas173.github.io/CMTsanity/d2c/`;
+const mmReportUrl  = `https://sreenivas173.github.io/CMTsanity/mm/`;
+
 // 🔍 Parse Playwright JSON report
 function getSummary() {
   let total = 0, passed = 0, failed = 0, skipped = 0;
@@ -136,7 +139,11 @@ ${passedList}${morePassed}
 ` : ""}
 
 🌐 **View HTML Report (Recommended):**
-${htmlReportUrl}
+- 🔹 **D2C Report:**  
+${d2cReportUrl}
+
+- 🔹 **MM Report:**  
+${mmReportUrl}
 
 🔗 **View Run:**
 ${runUrl}
