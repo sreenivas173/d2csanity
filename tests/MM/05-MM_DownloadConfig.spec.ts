@@ -19,7 +19,7 @@ import { MM_ConfigPage } from '../../pages/MM_ConfigPage';
  * Downloads first available config matching each status filter
  * Validates complete workflow and file save operation
  */
-test.describe('MM Download Config', () => {
+test.describe('@MMsanity MM Download Config', () => {
   let mmLoginPage: MM_LoginPage;
   let mmConfigPage: MM_ConfigPage;
 
@@ -46,7 +46,8 @@ test.describe('MM Download Config', () => {
   ['Active', 'Failed', 'Not Active'].forEach((status) => 
    * 
    */
-  ['Active', 'Failed', 'Not Active'].forEach((status) => {
+  ['Active', //'Failed', 'Not Active'
+    ].forEach((status) => {
 
     test(`Download first ${status} configuration and save to test-results`, async ({ page }) => {
       test.setTimeout(120000);

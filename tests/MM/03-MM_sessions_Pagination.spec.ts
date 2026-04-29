@@ -57,7 +57,7 @@ test.describe('Pagination Validation on MM SESSION Page', () => {
   });
 
   /** Clicking page number (2) updates table data */
-  test('Clicking page number (2) updates table data', async ({ page }) => {
+  test('@MMsanity Clicking page number (2) updates table data', async ({ page }) => {
     const table = mmSessionsPage.table;
     await expect(table).toBeVisible();
 

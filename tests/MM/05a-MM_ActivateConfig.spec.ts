@@ -18,7 +18,7 @@ import { MM_ConfigPage } from '../../pages/MM_ConfigPage';
  * Test Suite: MM Activate Config (Target: Not Active Status)
  * Complete activation workflow from filtering through success notification
  */
-test.describe('MM Activate Config', () => {
+test.describe('@MMsanity MM Activate Config', () => {
   let mmLoginPage: MM_LoginPage;
   let mmConfigPage: MM_ConfigPage;
 
